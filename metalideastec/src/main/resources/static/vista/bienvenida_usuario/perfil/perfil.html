@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../../../img/Logo/logo-removebg-preview.png" type="image/x-icon" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <!-- Boxicons CSS -->
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+
+    <link rel="stylesheet" href="../../../style.css">
+
+
+
+
+    <title>Metalideas</title>
+
+</head>
+
+<body id="body">
+
+    <header id="header-usuario">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+                <a class="navbar-brand" href="../../bienvenida_usuario/index.html"><img class="logoMetalideas"
+                        src="../../../img/Metalideas.png" alt="Metalideas">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-link" href="../carrito/carritoUsuario.html">
+                            <i class='bx bx-cart'></i>
+                            carrito
+                        </a>
+                        <a class="nav-link" href="../../../index.html">
+                            <i class='bx bx-exit'></i>
+                            Salir
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <div class="container" style="padding-top: 90px;">
+        <div class="row">
+            <div class="col-5">
+                <div class="container-perfil">
+                    <div class="contenido-perfil">
+                        <h1>Bienvenido Cliente</h1>
+                        <img src="../../../img/perfil-admin/perfil en blanco.png" alt="perfil en blanco">
+                        <p>
+                            Correo: cliente@correo.com <br>
+                            Tel: 3022103311
+                        </p>
+                        <div class="opc-perfil">
+                            <a href="../../../index.html"><i class='link-icon bx bx-exit'></i> </a>
+                            <a href="" data-bs-toggle="modal" data-bs-target="#modalModificarPerfil"><i
+                                    class='link-icon bx bxs-cog'></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-7">
+                <div class="cont-historial">
+                    <div class="row compra">
+                        <div class="col">
+                            <h3>Compra 1</h3>
+                            <p>Fecha: dd/mm/aaaa <br>
+                            Productos: 10 unid. <br>
+                            Metodo de pago: Efectivo</p>
+                        </div>
+                        <div class="col">
+                            <h3>Total: $$$</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cont-historial">
+                    <div class="row compra">
+                        <div class="col">
+                            <h3>Compra 2</h3>
+                            <p>Fecha: dd/mm/aaaa <br>
+                            Productos: 10 unid. <br>
+                            Metodo de pago: Efectivo</p>
+                        </div>
+                        <div class="col">
+                            <h3>Total: $$$</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cont-historial">
+                    <div class="row compra">
+                        <div class="col">
+                            <h3>Compra 3</h3>
+                            <p>Fecha: dd/mm/aaaa <br>
+                            Productos: 10 unid. <br>
+                            Metodo de pago: Efectivo</p>
+                        </div>
+                        <div class="col">
+                            <h3>Total: $$$</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cont-historial">
+                    <div class="row compra">
+                        <div class="col">
+                            <h3>Compra 4</h3>
+                            <p>Fecha: dd/mm/aaaa <br>
+                            Productos: 10 unid. <br>
+                            Metodo de pago: Efectivo</p>
+                        </div>
+                        <div class="col">
+                            <h3>Total: $$$</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cont-historial">
+                    <div class="row compra">
+                        <div class="col">
+                            <h3>Compra 5</h3>
+                            <p>Fecha: dd/mm/aaaa <br>
+                            Productos: 10 unid. <br>
+                            Metodo de pago: Efectivo</p>
+                        </div>
+                        <div class="col">
+                            <h3>Total: $$$</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="contenedor-modal">
+        <div class="modal" tabindex="-1" id="modalModificarPerfil">
+            <div class="modal-dialog editperfil">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <i class="bx bx-x iconos btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            style="color:snow"></i>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <form action="" method="post" class="needs-validation" novalidate>
+                                <h2><i class='link-icon bx bxs-cog'></i></a>Modificar perfil</h2>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="mb-3">
+                                            <label for="nombreAdministradorr" class="form-label">Nombre</label>
+                                            <input type="text" class="form-control" id="nombreAdministrador"
+                                                name="nombreAdministrador" placeholder="Nombre">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="apellidoAdministradorr" class="form-label">Apellido</label>
+                                            <input type="text" class="form-control" id="apellidoAdministrador"
+                                                name="apellidoAdministrador" placeholder="Apellido ">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="telefonoAdministrador" class="form-label">Teléfono</label>
+                                            <input type="number" class="form-control" id="telefonoAdministrador"
+                                                name="telefonoAdministrador" placeholder="###-###-####">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="correoAdministradorr" class="form-label">Correo</label>
+                                            <input type="email" class="form-control" id="correoAdministrador"
+                                                name="correoAdministrador" placeholder="name@correo.com">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="mb-3">
+                                            <label for="claveoAdministrador" class="form-label">Clave actual*</label>
+                                            <input type="text" class="form-control" id="claveoAdministrador"
+                                                name="claveoAdministrador" placeholder="***********" required>
+                                            <div class="valid-feedback">
+                                                ¡Bien! Datos correctos.
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                ¡Error! Verifica los datos.
+                                            </div>
+                                        </div>
+                                        <div class="cambiar-clase">
+                                            <div class="mb-3">
+                                                <label for="claveoAdministrador" class="form-label">Nueva clave</label>
+                                                <input type="text" class="form-control" id="claveoAdministrador"
+                                                    name="claveoAdministrador" placeholder="***********">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="claveoAdministrador" class="form-label">Confirma nueva
+                                                    clave</label>
+                                                <input type="text" class="form-control" id="claveoAdministrador"
+                                                    name="claveoAdministrador" placeholder="***********">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="reg-siguiente">
+                                    <button type="submit" class="btn">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+    <script src="../../../JS.js"></script>    
+
+</body>
+
+</html>

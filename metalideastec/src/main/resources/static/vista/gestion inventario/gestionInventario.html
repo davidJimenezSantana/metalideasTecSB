@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../../img/Logo/logo-removebg-preview.png" type="image/x-icon" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <!-- Boxicons CSS -->
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+
+    <link rel="stylesheet" href="../../style.css">
+
+
+
+
+    <title>Metalideas</title>
+
+</head>
+
+<body id="body">
+
+    <header id="header-administrador">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+                <a class="navbar-brand" href="../../index.html"><img class="logoMetalideas"
+                        src="../../img/Metalideas.png" alt="Metalideas"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-link close__sidebar" href="#">
+                            <i class='bx bx-menu'></i>
+                            Menu
+                        </a>
+                        <a class="nav-link" aria-current="page" href="../bienvenida-administrador/inicio.html">
+                            <i class='bx bx-user'></i>
+                            Mi perfil
+                        </a>
+                        <a class="nav-link" href="../../index.html">
+                            <i class='bx bx-exit'></i>
+                            Salir
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="sidebar " id="sidebar">
+        <div class="logo close__sidebar">
+            <i class='bx bx-menu'></i>
+            <span class="logo__nombre">Menú</span>
+        </div>
+
+        <div class="contenedor-menu">
+            <div class="nav-menu1">
+                <ul class="nav-links">
+                    <li>
+                        <a href="../gestion de usuarios/gestionUsuarios.html">
+                            <i class='link-icon bx bx-user'></i>
+                            <span class="link-nombre">GESTIÓN DE USUARIOS</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="../gestion inventario/gestionInventario.html">
+                            <i class='link-icon bx bx-package'></i>
+                            <span class="link-nombre">GESTIÓN INVENTARIO</span>
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <div class="link-menu">
+                            <a href="../ventas/ventas.html">
+                                <i class='link-icon bx bx-spreadsheet'></i>
+                                <span class="link-nombre">VENTAS</span>
+                            </a>
+                            <i class='link-icon bx bxs-chevron-down flecha'></i>
+                        </div>
+
+                        <ul class="submenu">
+                            <li>
+                                <a class="link-nombre" href="#">Registrar</a>
+                            </li>
+
+                            <li>
+                                <a class="link-nombre icon-submenu" href="../ventas/carrito/carrito.html">
+                                    <i class='link-icon bx bx-cart-add'></i>
+                                    Carrito
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="nav-menu2">
+                <div class="sidebarUsuarios__titulo">
+                    <span>USUARIOS</span>
+                </div>
+                <ul class="nav-links">
+                    <li>
+                        <a href="../bienvenida-administrador/inicio.html">
+                            <i class='link-icon bx bxs-user-account'></i>
+                            <span class="link-nombre">VER PERFIL</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <i class='link-icon bx bx-user'></i>
+                            <span class="link-nombre">CAMBIO DE CONTRASEÑA</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="../../index.html">
+                            <i class='link-icon bx bx-exit'></i>
+                            <span class="link-nombre">SALIR</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container">
+        <div class="row titulo-Gestion">
+            <h1>Gestión de inventario</h1>
+        </div>
+        <div class="row form-Gestion">
+            <div class="col-2">
+                <input type="text" id="buscarProducto" name="buscarProducto" placeholder="Buscar por nombre">
+            </div>
+            <div class="col-2">
+                <select id="tipoProducto" name="tipoProducto">
+                    <option selected>Filtrar por categoria</option>
+                    <option value="herramienta">Herramientas</option>
+                    <option value="proteccion">Protección y vestuario</option>
+                    <option value="fontaneria">Baño y fontaneria</option>
+                    <option value="Alumbrado">Iluminación/Alumbrado</option>
+                    <option value="tornillería">Tornillería</option>
+                    <option value="tuberias">Tuberias</option>
+                </select>
+            </div>
+            <div class="col-4">
+                <div class="row">
+                    <div class="col-3 btn-form">
+                        <button><i class='bx bxs-file-png'></i>Exportar</button>
+                    </div>
+                    <div class="col-9">
+                        <div class="row">
+                            <div class="col-6 btn-form">
+                                <button href="" data-bs-toggle="modal" data-bs-target="#modalAgregar"><i
+                                        class='bx bxs-truck'></i>Agregar proveedor</button>
+                            </div>
+                            <div class="col-6 btn-form">
+                                <button class="abrirCerrarFormAdd"><i class='bx bxs-add-to-queue'></i>Agregar
+                                    producto</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row ">
+            <div class="col-8">
+                <div class="contenedor-tabla">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Ref.</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Categoria</th>
+                                <th scope="col">Existentes</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Imagen</th>
+                                <th scope="col">Marca</th>
+                                <th scope="col">Opc</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Taladro</td>
+                                <td>Herramienta</td>
+                                <td>25</td>
+                                <td>$1500000</td>
+                                <td valign="middle"><i class='bx bx-image'></i></td>
+                                <td>Dewalt</td>
+                                <td valign="middle">
+                                    <div class="opc-tabla">
+                                        <i class='bx bx-cog iconos abrirCerrarFormEdit' id="opc-form"></i>
+                                        <i class='bx bx-search-alt-2 iconos'></i>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Taladro</td>
+                                <td>Herramienta</td>
+                                <td>25</td>
+                                <td>$1500000</td>
+                                <td valign="middle"><i class='bx bx-image'></i></td>
+                                <td>Dewalt</td>
+                                <td valign="middle">
+                                    <div class="opc-tabla">
+                                        <i class='bx bx-cog'></i>
+                                        <i class='bx bx-search-alt-2'></i>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Taladro</td>
+                                <td>Herramienta</td>
+                                <td>25</td>
+                                <td>$1500000</td>
+                                <td valign="middle"><i class='bx bx-image'></i></td>
+                                <td>Dewalt</td>
+                                <td valign="middle">
+                                    <div class="opc-tabla">
+                                        <i class='bx bx-cog'></i>
+                                        <i class='bx bx-search-alt-2'></i>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-lateral" id="agregarForm">
+        <div class="form-gestion">
+            <div class="contenedor-formulario" id="contenedor-formulario">
+                <div class="row">
+                    <div class="cerrar-form">
+                        <i class='bx bx-x abrirCerrarFormAdd iconos'></i>
+                    </div>
+                </div>
+                <div class="row titulo-form">
+                    <h1><i class='bx bx-add-to-queue'></i>Agregar producto</h1>
+                </div>
+                <form action="" class="needs-validation" novalidate>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="campo-form">
+                                <label for="nombreProducto">Nombre producto*</label>
+                                <input type="text" name="nombreProducto" id="nombreProducto" required>
+                                <div class="valid-feedback">
+                                    ¡Bien! Datos correctos.
+                                </div>
+                                <div class="invalid-feedback">
+                                    ¡Error! Verifica los datos.
+                                </div>
+                            </div>
+                            <div class="campo-form">
+                                <label for="precioProducto">Precio venta*</label>
+                                <input type="number" name="precioProducto" id="precioProducto" placeholder="$$$$$"
+                                    required>
+                                <div class="valid-feedback">
+                                    ¡Bien! Datos correctos.
+                                </div>
+                                <div class="invalid-feedback">
+                                    ¡Error! Verifica los datos.
+                                </div>
+                            </div>
+                            <div class="campo-form">
+                                <select id="tipoProducto" name="tipoProducto" required>
+                                    <option value="">Categoria*</option>
+                                    <option value="herramienta">Herramientas</option>
+                                    <option value="proteccion">Protección y vestuario</option>
+                                    <option value="fontaneria">Baño y fontaneria</option>
+                                    <option value="Alumbrado">Iluminación/Alumbrado</option>
+                                    <option value="tornillería">Tornillería</option>
+                                    <option value="tuberias">Tuberias</option>
+                                </select>
+                                <div class="valid-feedback">
+                                    ¡Bien! Datos correctos.
+                                </div>
+                                <div class="invalid-feedback">
+                                    ¡Error! Verifica los datos.
+                                </div>
+                            </div>
+                            <div class="campo-form">
+                                <label for="proveedor">Proveedor*</label>
+                                <input class="form-control" list="listaproveedor" id="proveedor"
+                                    placeholder="Escriba para buscar..." required>
+                                <datalist id="listaproveedor">
+                                    <option value="proveedor1">
+                                    <option value="proveedor2">
+                                </datalist>
+                                <div class="valid-feedback">
+                                    ¡Bien! Datos correctos.
+                                </div>
+                                <div class="invalid-feedback">
+                                    ¡Error! Verifica los datos.
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-6">
+                            <div class="campo-form">
+                                <label for="cantidadProducto">Cantidad*</label>
+                                <input type="number" name="cantidadProducto" id="cantidadProducto" required>
+                                <div class="valid-feedback">
+                                    ¡Bien! Datos correctos.
+                                </div>
+                                <div class="invalid-feedback">
+                                    ¡Error! Verifica los datos.
+                                </div>
+                            </div>
+                            <div class="campo-form">
+                                <label for="preciocompraProducto">Precio compra*</label>
+                                <input type="number" name="preciocompraProducto" id="precioProducto" placeholder="$$$$$"
+                                    required>
+                                <div class="valid-feedback">
+                                    ¡Bien! Datos correctos.
+                                </div>
+                                <div class="invalid-feedback">
+                                    ¡Error! Verifica los datos.
+                                </div>
+                            </div>
+                            <div class="campo-form">
+                                <select id="marcaProducto" name="marcaProducto" required>
+                                    <option value="">Marca*</option>
+                                    <option value="Dewalt">Dewalt</option>
+                                    <option value="Dewalt">Dewalt</option>
+                                </select>
+                                <div class="valid-feedback">
+                                    ¡Bien! Datos correctos.
+                                </div>
+                                <div class="invalid-feedback">
+                                    ¡Error! Verifica los datos.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="campo-form">
+                            <label for="detalleProducto">Detalle u observaciones</label>
+                            <textarea class="form-control" type="text" name="detalleProducto"
+                                id="detalleProducto"></textarea>
+                        </div>
+                        <div class="campo-form">
+                            <label for="imagenProducto">Imagen del producto</label>
+                            <input type="file" name="imagenProducto" id="imagenProducto">
+                        </div>
+                    </div>
+                    <div class="row btn-formulario">
+                        <input type="submit" value="Agregar">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-lateral" id="editarForm">
+        <div class="form-gestion">
+            <div class="contenedor-formulario" id="contenedor-formulario">
+                <div class="row">
+                    <div class="cerrar-form">
+                        <i class='bx bx-x abrirCerrarFormEdit iconos'></i>
+                    </div>
+                </div>
+                <div class="row titulo-form">
+                    <h1><i class='bx bx-cog'></i>Editar producto</h1>
+                </div>
+                <form action="" class="needs-validation" novalidate>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="campo-form">
+                                <label for="nombreProducto">Nombre producto</label>
+                                <input type="text" name="nombreProducto" id="nombreProducto">
+                            </div>
+                            <div class="campo-form">
+                                <label for="precioProducto">Precio venta</label>
+                                <input type="number" name="precioProducto" id="precioProducto" placeholder="$$$$$">
+                            </div>
+                            <div class="campo-form">
+                                <select id="tipoProducto" name="tipoProducto">
+                                    <option value="">Categoria</option>
+                                    <option value="herramienta">Herramientas</option>
+                                    <option value="proteccion">Protección y vestuario</option>
+                                    <option value="fontaneria">Baño y fontaneria</option>
+                                    <option value="Alumbrado">Iluminación/Alumbrado</option>
+                                    <option value="tornillería">Tornillería</option>
+                                    <option value="tuberias">Tuberias</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="campo-form">
+                                <label for="cantidadProducto">Cantidad</label>
+                                <input type="number" name="cantidadProducto" id="cantidadProducto">
+                            </div>
+                            <div class="campo-form">
+                                <label for="preciocompraProducto">Precio compra</label>
+                                <input type="number" name="preciocompraProducto" id="precioProducto"
+                                    placeholder="$$$$$">
+                            </div>
+                            <div class="campo-form">
+                                <select id="marcaProducto" name="marcaProducto">
+                                    <option selected>Marca</option>
+                                    <option value="Dewalt">Dewalt</option>
+                                    <option value="Dewalt">Dewalt</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="campo-form">
+                            <label for="detalleProducto">Detalle u observaciones</label>
+                            <textarea class="form-control" type="text" name="detalleProducto"
+                                id="detalleProducto"></textarea>
+                        </div>
+                        <div class="campo-form">
+                            <label for="imagenProducto">Imagen del producto</label>
+                            <input type="file" name="imagenProducto" id="imagenProducto">
+                        </div>
+                    </div>
+                    <div class="row btn-formulario">
+                        <input type="submit" value="Agregar">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="contenedor-modal">
+        <div class="modal" tabindex="-1" id="modalAgregar">
+            <div class="modal-dialog proveedor">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <i class="bx bx-x iconos btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            style="color:snow"></i>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <form action="" method="post" class="needs-validation" novalidate>
+                                <h2> <i class='bx bxs-truck'></i> Agregar proveedor</h2>
+                                <div class="mb-3">
+                                    <label for="nombreProveedor" class="form-label">Nombre*</label>
+                                    <input type="text" class="form-control" id="nombreProveedor" name="nombreProveedor"
+                                        placeholder="Nombre proveedor" required>
+                                    <div class="valid-feedback">
+                                        ¡Bien! Datos correctos.
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        ¡Error! Verifica los datos.
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="correoProveedor" class="form-label">Correo</label>
+                                    <input type="email" class="form-control" id="correoProveedor" name="correoProveedor"
+                                        placeholder="name@correo.com">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="ubicaciónProveedor" class="form-label">Ubicación</label>
+                                    <input type="text" class="form-control" id="ubicaciónProveedor"
+                                        name="ubicaciónProveedor" placeholder="Dirección del proveedor">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="telefonoProveedor" class="form-label">Teléfono*</label>
+                                    <input type="number" class="form-control" id="telefonoProveedor"
+                                        name="telefonoProveedor" placeholder="###-###-####" required>
+                                    <div class="valid-feedback">
+                                        ¡Bien! Datos correctos.
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        ¡Error! Verifica los datos.
+                                    </div>
+                                </div>
+                                <div class="reg-siguiente">
+                                    <button type="submit" class="btn">Guardar</button>
+                                </div>
+                            </form>
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="datos-guardados">
+        <div class="row">
+            <div class="col-2 cont-alert">
+                <i class='bx bx-check'></i>
+            </div>
+            <div class="col-10 cont-alert">
+                <h5>Producto registrado.</h5>
+            </div>
+        </div>
+
+    </div>
+    <div class="error-guardar">
+        <div class="row">
+            <div class="col-2 cont-alert">
+                <i class='bx bxs-error-circle'></i>
+            </div>
+            <div class="col-10">
+                <h5>¡Error!</h5>
+                <p>No se pudo registrar el producto.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="datos-guardados">
+        <div class="row">
+            <div class="col-2 cont-alert">
+                <i class='bx bx-check'></i>
+            </div>
+            <div class="col-10 cont-alert">
+                <h5>Los cambios han sido guardados</h5>
+            </div>
+        </div>
+    </div>
+    <div class="error-guardar">
+        <div class="row">
+            <div class="col-2 cont-alert">
+                <i class='bx bxs-error-circle'></i>
+            </div>
+            <div class="col-10">
+                <h5>¡Error!</h5>
+                <p>No se guardaron cambios</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="datos-guardados">
+        <div class="row">
+            <div class="col-2 cont-alert">
+                <i class='bx bx-check'></i>
+            </div>
+            <div class="col-10 cont-alert">
+                <h5>Proveedor registrado.</h5>
+            </div>
+        </div>
+
+    </div>
+    <div class="error-guardar">
+        <div class="row">
+            <div class="col-2 cont-alert">
+                <i class='bx bxs-error-circle'></i>
+            </div>
+            <div class="col-10">
+                <h5>¡Error!</h5>
+                <p>No se pudo registrar al proveedor.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+    <script src="../../JS.js"></script>
+
+
+</body>
+
+</html>
+
+
