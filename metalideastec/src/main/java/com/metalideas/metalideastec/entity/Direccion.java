@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package persistencia.entity;
+package com.metalideas.metalideastec.entity;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -17,7 +17,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 
 /**
  *
@@ -37,7 +36,6 @@ public class Direccion implements Serializable {
     @Basic(optional = false)
     @Column(name = "iddireccion")
     private Integer iddireccion;
-    @Size(max = 20)
     @Column(name = "localizacion")
     private String localizacion;
     @JoinColumn(name = "usuario_idusuario", referencedColumnName = "idusuario")
@@ -84,7 +82,7 @@ public class Direccion implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+        // this method won't work in the case the id fields are not set
         if (!(object instanceof Direccion)) {
             return false;
         }

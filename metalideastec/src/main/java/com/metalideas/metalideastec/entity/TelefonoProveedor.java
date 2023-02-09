@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package persistencia.entity;
+package com.metalideas.metalideastec.entity;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -17,7 +17,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -38,7 +37,6 @@ public class TelefonoProveedor implements Serializable {
     @Column(name = "idtelefono")
     private Integer idtelefono;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "numero")
     private int numero;
     @JoinColumn(name = "proveedor_idproveedor", referencedColumnName = "idproveedor")
@@ -90,7 +88,7 @@ public class TelefonoProveedor implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+        //  this method won't work in the case the id fields are not set
         if (!(object instanceof TelefonoProveedor)) {
             return false;
         }

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package persistencia.entity;
+package com.metalideas.metalideastec.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -21,8 +21,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  *
@@ -45,17 +43,13 @@ public class ComprobanteDePago implements Serializable {
     @Column(name = "idcomprobante_de_pago")
     private Integer idcomprobanteDePago;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "fecha")
     @Temporal(TemporalType.DATE)
     private Date fecha;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 10)
     @Column(name = "hora")
     private String hora;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "total")
     private int total;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "comprobanteDePagoIdcomprobanteDePago", fetch = FetchType.LAZY)
@@ -124,7 +118,7 @@ public class ComprobanteDePago implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+        //this method won't work in the case the id fields are not set
         if (!(object instanceof ComprobanteDePago)) {
             return false;
         }

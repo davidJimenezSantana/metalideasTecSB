@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package persistencia.entity;
+package com.metalideas.metalideastec.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -23,8 +23,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  *
@@ -47,10 +45,8 @@ public class Venta implements Serializable {
     @Column(name = "idventa")
     private Integer idventa;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "total")
     private int total;
-    @Size(max = 25)
     @Column(name = "destino")
     private String destino;
     @Column(name = "fecha")
@@ -164,7 +160,7 @@ public class Venta implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+        // this method won't work in the case the id fields are not set
         if (!(object instanceof Venta)) {
             return false;
         }

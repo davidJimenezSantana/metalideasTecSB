@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package persistencia.entity;
+package com.metalideas.metalideastec.entity;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,8 +19,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  *
@@ -43,16 +41,12 @@ public class RegistroMovimientos implements Serializable {
     @Column(name = "idregistro_movimientos")
     private Integer idregistroMovimientos;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 30)
     @Column(name = "detalle")
     private String detalle;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "fecha_movimiento")
     private int fechaMovimiento;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "cantidad_prod")
     private int cantidadProd;
     @ManyToMany(mappedBy = "registroMovimientosList", fetch = FetchType.LAZY)
@@ -143,7 +137,7 @@ public class RegistroMovimientos implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+        // this method won't work in the case the id fields are not set
         if (!(object instanceof RegistroMovimientos)) {
             return false;
         }

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package persistencia.entity;
+package com.metalideas.metalideastec.entity;
 
 import java.io.Serializable;
 import java.util.List;
@@ -14,12 +14,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  *
@@ -27,10 +23,6 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "estado_usuario")
-@NamedQueries({
-    @NamedQuery(name = "EstadoUsuario.findAll", query = "SELECT e FROM EstadoUsuario e"),
-    @NamedQuery(name = "EstadoUsuario.findByIdestadoCliente", query = "SELECT e FROM EstadoUsuario e WHERE e.idestadoCliente = :idestadoCliente"),
-    @NamedQuery(name = "EstadoUsuario.findByNombreEstado", query = "SELECT e FROM EstadoUsuario e WHERE e.nombreEstado = :nombreEstado")})
 public class EstadoUsuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,8 +32,6 @@ public class EstadoUsuario implements Serializable {
     @Column(name = "idestado_cliente")
     private Integer idestadoCliente;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 10)
     @Column(name = "nombre_estado")
     private String nombreEstado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "estadoUsuarioIdestadoCliente", fetch = FetchType.LAZY)
@@ -92,7 +82,7 @@ public class EstadoUsuario implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+        // this method won't work in the case the id fields are not set
         if (!(object instanceof EstadoUsuario)) {
             return false;
         }
