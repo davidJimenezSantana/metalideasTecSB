@@ -4,15 +4,15 @@
  */
 package com.metalideas.metalideastec.entity;
 
-import java.util.List;
+/* import java.util.List; */
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
+/* import javax.persistence.CascadeType; */
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+/* import javax.persistence.FetchType; */
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+/* import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany; */
 import javax.persistence.Table;
 
 /**
@@ -24,17 +24,16 @@ import javax.persistence.Table;
 public class Rol{
 
     @Id
-    @Basic(optional = false)
     @Column(name = "idrol")
     private Integer idrol;
     @Basic(optional = false)
     @Column(name = "nombre")
-    private String nombre;
+    private String nombre;/* 
     @ManyToMany(mappedBy = "rolList", fetch = FetchType.LAZY)
     private List<Permiso> permisoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "rolIdrol", fetch = FetchType.LAZY)
     private List<Usuario> usuarioList;
-
+ */
     public Rol() {
     }
 
@@ -62,7 +61,7 @@ public class Rol{
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
+/* 
     public List<Permiso> getPermisoList() {
         return permisoList;
     }
@@ -77,7 +76,7 @@ public class Rol{
 
     public void setUsuarioList(List<Usuario> usuarioList) {
         this.usuarioList = usuarioList;
-    }
+    } */
 
     @Override
     public int hashCode() {

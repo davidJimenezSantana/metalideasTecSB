@@ -1,14 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.metalideas.metalideastec.entity;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+/* import javax.persistence.FetchType; */
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,8 +20,8 @@ import javax.persistence.Table;
 @Table(name = "usuario")
 public class Usuario implements Serializable {
 
-    private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idusuario")
     private Integer idusuario;
@@ -39,11 +37,13 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @Column(name = "correo")
     private String correo;
-    @JoinColumn(name = "estado_usuario_idestado_cliente", referencedColumnName = "idestado_cliente")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+
+    @ManyToOne()
+    @JoinColumn(name = "estado_usuario_idestado_cliente")    
     private EstadoUsuario estadoUsuarioIdestadoCliente;
-    @JoinColumn(name = "rol_idrol", referencedColumnName = "idrol")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+
+    @ManyToOne()
+    @JoinColumn(name = "rol_idrol")
     private Rol rolIdrol;
 
     public Usuario() {
@@ -131,7 +131,8 @@ public class Usuario implements Serializable {
             return false;
         }
         Usuario other = (Usuario) object;
-        if ((this.idusuario == null && other.idusuario != null) || (this.idusuario != null && !this.idusuario.equals(other.idusuario))) {
+        if ((this.idusuario == null && other.idusuario != null)
+                || (this.idusuario != null && !this.idusuario.equals(other.idusuario))) {
             return false;
         }
         return true;
@@ -141,5 +142,5 @@ public class Usuario implements Serializable {
     public String toString() {
         return "persistencia.entity.Usuario[ idusuario=" + idusuario + " ]";
     }
-    
+
 }
