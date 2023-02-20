@@ -1,4 +1,4 @@
-package com.metalideas.metalideastec.persistencia;
+package com.metalideas.metalideastec.persistencia.Repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

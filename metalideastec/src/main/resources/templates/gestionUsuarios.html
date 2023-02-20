@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -192,14 +192,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                            <tr th:each="usuarios : ${usuario}">
+                                <td th:text="$usuarios.nombre"></td>
+                                <td th:text="$usuarios.correo"></td>
+                                <td th:text="$usuarios.estadoUsuarioIdestadoCliente.nombreEstado"></td>
+                                <td th:text="$usuarios.rolIdrol.nombre"></td>
                                 <td valign="middle">
                                     <div class="opc-tabla">
-                                        <i class='bx bx-cog iconos abrirCerrarFormEdit' id="opc-form" onclick="cargar()"></i>
+                                        <i class='bx bx-cog iconos abrirCerrarFormEdit' id="opc-form"></i>
                                         <i class='bx bx-search-alt-2 iconos'></i>
                                     </div>
                                 </td>

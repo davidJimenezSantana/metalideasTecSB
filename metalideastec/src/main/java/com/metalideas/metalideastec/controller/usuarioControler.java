@@ -1,34 +1,26 @@
 package com.metalideas.metalideastec.controller;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 
-import com.metalideas.metalideastec.entity.Rol;
-import com.metalideas.metalideastec.entity.Usuario;
-import com.metalideas.metalideastec.persistencia.RolDAO;
-import com.metalideas.metalideastec.persistencia.UsuarioDAO;
 
-@RestController
+import com.metalideas.metalideastec.persistencia.serv.UsuarioServImp;
+
+@Controller
 public class usuarioControler {
     
     @Autowired
-    private UsuarioDAO usuarioDAO;
+    private UsuarioServImp usuarioServImp;
 
-    @Autowired
-    private RolDAO rolDAO;
-    
-
-    @RequestMapping(value = "/verRoles")
-    public List<Rol> verRoles(){
-        return rolDAO.findAll();
+    @GetMapping(value = "/verUsuarios")
+    public String verUsusarios(Model modelo){
+        modelo.addAttribute("usuario", usuarioServImp.listarUsuarios());
+        
+        return "index.html";
     }
 
-    @RequestMapping(value = "/verUsuarios")
-    public List<Usuario> verUsusario(){
-        return usuarioDAO.findAll();
-    }
 
 }
