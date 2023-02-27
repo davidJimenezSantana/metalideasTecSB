@@ -65,6 +65,7 @@ CREATE TABLE IF NOT EXISTS `dbmetalideas`.`usuario` (
   `rol_idrol` INT NOT NULL,
   `estado_usuario_idestado_cliente` INT NOT NULL,
   `correo` VARCHAR(45) NOT NULL,
+  `direccion` VARCHAR(45) NULL,
   PRIMARY KEY (`idusuario`),
   INDEX `fk_usuario_rol1_idx` (`rol_idrol` ASC) ,
   INDEX `fk_usuario_estado_usuario1_idx` (`estado_usuario_idestado_cliente` ASC) ,
@@ -77,22 +78,6 @@ CREATE TABLE IF NOT EXISTS `dbmetalideas`.`usuario` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
-
--- -----------------------------------------------------
--- Table `dbmetalideas`.`direccion`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dbmetalideas`.`direccion` (
-  `iddireccion` INT NOT NULL AUTO_INCREMENT,
-  `localizacion` VARCHAR(20) NULL DEFAULT NULL,
-  `usuario_idusuario` INT NOT NULL,
-  PRIMARY KEY (`iddireccion`),
-  INDEX `fk_direccion_usuario1_idx` (`usuario_idusuario` ASC) ,
-  CONSTRAINT `fk_direccion_usuario1`
-    FOREIGN KEY (`usuario_idusuario`)
-    REFERENCES `dbmetalideas`.`usuario` (`idusuario`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 27
-DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------

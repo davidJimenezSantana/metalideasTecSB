@@ -10,4 +10,6 @@ public class MetalideastecApplication {
 		SpringApplication.run(MetalideastecApplication.class, args);
 	}
 
+	
+
 }

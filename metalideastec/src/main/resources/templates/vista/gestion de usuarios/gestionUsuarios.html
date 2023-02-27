@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="../../img/Logo/logo-removebg-preview.png" type="image/x-icon" />
+    <link rel="icon" href="img/Logo/logo-removebg-preview.png" type="image/x-icon" />
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -14,7 +14,7 @@
     <!-- Boxicons CSS -->
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>    
 
-    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="style.css">
 
 
 
@@ -39,6 +39,7 @@
 
 <body id="body">
 
+    <!-- HEADER MENU -->
     <header id="header-administrador">
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container">
@@ -69,6 +70,7 @@
         </nav>
     </header>
 
+    <!-- MENU LATERAL -->
     <div class="sidebar " id="sidebar">
         <div class="logo close__sidebar">
             <i class='bx bx-menu'></i>
@@ -79,14 +81,14 @@
             <div class="nav-menu1">
                 <ul class="nav-links">
                     <li>
-                        <a href="../gestion de usuarios/gestionUsuarios.html">
+                        <a th:href="@{/verUsuarios}">
                             <i class='link-icon bx bx-user'></i>
                             <span class="link-nombre">GESTIÓN DE USUARIOS</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="../gestion inventario/gestionInventario.html">
+                        <a th:href="@{/verInventario}">
                             <i class='link-icon bx bx-package'></i>
                             <span class="link-nombre">GESTIÓN INVENTARIO</span>
                         </a>
@@ -191,21 +193,21 @@
                                 <th scope="col">Opc</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                       <tbody>
+                            <tr th:each="usuario : ${usuarios}">
+                                <td th:text="${usuario.nombre}"></td>
+                                <td th:text="${usuario.correo}"></td>
+                                <td th:text="${usuario.estadoUsuarioIdestadoCliente.nombreEstado}"></td>
+                                <td th:text="${usuario.rolIdrol.nombre}"></td>
                                 <td valign="middle">
                                     <div class="opc-tabla">
-                                        <i class='bx bx-cog iconos abrirCerrarFormEdit' id="opc-form" onclick="cargar()"></i>
+                                        <i class='bx bx-cog iconos abrirCerrarFormEdit' id="opc-form"></i>
                                         <i class='bx bx-search-alt-2 iconos'></i>
                                     </div>
                                 </td>
                             </tr>
 
-                        </tbody>
+                        </tbody> 
                     </table>
                 </div>
             </div>
@@ -213,7 +215,7 @@
     </div>
 
     <!-- FORMULARIO AGREGAR USUARIO -->
-    <div class="form-lateral" id="agregarForm">
+     <div class="form-lateral" id="agregarForm">
         <div class="form-gestion">
             <div class="contenedor-formulario" id="contenedor-formulario">
                 <div class="row">
@@ -224,12 +226,12 @@
                 <div class="row titulo-form">
                     <h1><i class='bx bxs-user-plus'></i>Agregar usuarios</h1>
                 </div>
-                <form action="" class="needs-validation" novalidate>
+                <form th:action="@{/agregarUsuario}" th:object="${nuevoUsuario}" class="needs-validation" novalidate>
                     <div class="row">
                         <div class="col-6">
                             <div class="campo-form">
                                 <label for="nombreCliente">Nombres*</label>
-                                <input type="text" name="nombreCliente" id="nombreCliente" required>
+                                <input type="text" name="nombreCliente" id="nombreCliente" th:field="*{nombre}" required>
                                 <div class="valid-feedback">
                                     ¡Bien! Datos correctos.
                                 </div>
@@ -239,7 +241,7 @@
                             </div>
                             <div class="campo-form">
                                 <label for="apellidoCliente">Apellidos</label>
-                                <input type="text" name="apellidoCliente" id="apellidoCliente">
+                                <input type="text" name="apellidoCliente" id="apellidoCliente" th:field="*{apellido}">
                             </div>
                             <div class="campo-form">
                                 <label for="direccion">Dirección</label>
@@ -247,7 +249,7 @@
                             </div>
                             <div class="campo-form">
                                 <label for="tipoCliente">Estado del usuario</label>
-                                <select id="tipoCliente" name="tipoCliente">
+                                <select id="tipoCliente" name="tipoCliente" >
                                     <option value="">Estado</option>
                                     <option value="valido">Activo</option>
                                     <option value="invalido">Inactivo</option>
@@ -295,7 +297,7 @@
 
             </div>
         </div>
-    </div>
+    </div> 
 
     <!-- FORMULARIO EDITAR USUARIO -->
     <div class="form-lateral" id="editarForm">

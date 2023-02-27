@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    cargarDatosTabla();
+    //cargarDatosTabla();
 
     $('#tabla_Usuarios').DataTable({
         dom: 'Bfrtip',

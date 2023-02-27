@@ -37,6 +37,17 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @Column(name = "correo")
     private String correo;
+    @Basic(optional = false)
+    @Column(name = "direccion")
+    private String direccion;
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
 
     @ManyToOne()
     @JoinColumn(name = "estado_usuario_idestado_cliente")    
@@ -53,12 +64,13 @@ public class Usuario implements Serializable {
         this.idusuario = idusuario;
     }
 
-    public Usuario(Integer idusuario, String nombre, String apellido, String clave, String correo) {
+    public Usuario(Integer idusuario, String nombre, String apellido, String clave, String correo, String direccion) {
         this.idusuario = idusuario;
         this.nombre = nombre;
         this.apellido = apellido;
         this.clave = clave;
         this.correo = correo;
+        this.direccion = direccion;
     }
 
     public Integer getIdusuario() {

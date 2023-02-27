@@ -64,6 +64,13 @@
 			<version>0.9.1</version>
 		</dependency>
 
+		<!-- devtools - Para no estar ejecutando-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>
