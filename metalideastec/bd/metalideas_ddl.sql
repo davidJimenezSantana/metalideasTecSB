@@ -47,7 +47,7 @@ DEFAULT CHARACTER SET = utf8mb3;
 -- Table `dbmetalideas`.`rol`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dbmetalideas`.`rol` (
-  `idrol` INT NOT NULL,
+  `idrol` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(15) NOT NULL,
   PRIMARY KEY (`idrol`))
 ENGINE = InnoDB
@@ -58,7 +58,7 @@ DEFAULT CHARACTER SET = utf8mb3;
 -- Table `dbmetalideas`.`usuario`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dbmetalideas`.`usuario` (
-  `idusuario` INT NOT NULL,
+  `idusuario` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(10) NOT NULL,
   `apellido` VARCHAR(10) NOT NULL,
   `clave` VARCHAR(300) NOT NULL,
@@ -137,7 +137,7 @@ DEFAULT CHARACTER SET = utf8mb3;
 -- Table `dbmetalideas`.`producto`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dbmetalideas`.`producto` (
-  `idproducto` INT NOT NULL,
+  `idproducto` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(60) NOT NULL,
   `precio_venta` INT NOT NULL,
   `precio_compra` INT NOT NULL,
@@ -369,3 +369,8 @@ CREATE TABLE IF NOT EXISTS `dbmetalideas`.`rol_has_permiso` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
+-- -----------------------------------------------------
+-- ALTERS --
+-- -----------------------------------------------------
+
+ALTER TABLE `producto` ADD `img` VARCHAR(40) NULL AFTER `descripcion`;

@@ -5,19 +5,17 @@
 package com.metalideas.metalideastec.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
+
+import javax.persistence.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -26,12 +24,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "proveedor")
-@NamedQueries({
-    @NamedQuery(name = "Proveedor.findAll", query = "SELECT p FROM Proveedor p"),
-    @NamedQuery(name = "Proveedor.findByIdproveedor", query = "SELECT p FROM Proveedor p WHERE p.idproveedor = :idproveedor"),
-    @NamedQuery(name = "Proveedor.findByNombre", query = "SELECT p FROM Proveedor p WHERE p.nombre = :nombre"),
-    @NamedQuery(name = "Proveedor.findByCorreo", query = "SELECT p FROM Proveedor p WHERE p.correo = :correo"),
-    @NamedQuery(name = "Proveedor.findByUbicacion", query = "SELECT p FROM Proveedor p WHERE p.ubicacion = :ubicacion")})
 public class Proveedor implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,10 +39,12 @@ public class Proveedor implements Serializable {
     private String correo;
     @Column(name = "ubicacion")
     private String ubicacion;
-    @ManyToMany(mappedBy = "proveedorList", fetch = FetchType.LAZY)
-    private List<Producto> productoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "proveedorIdproveedor", fetch = FetchType.LAZY)
-    private List<TelefonoProveedor> telefonoProveedorList;
+
+    @ManyToMany
+    @JoinTable(name = "proveedor_has_producto",
+        joinColumns = @JoinColumn(name = "proveedor_idproveedor", referencedColumnName = "idproveedor"),
+        inverseJoinColumns = @JoinColumn(name = "producto_idproducto", referencedColumnName = "idproducto"))
+    private List<Producto> productos = new ArrayList<>();
 
     public Proveedor() {
     }
@@ -96,20 +90,12 @@ public class Proveedor implements Serializable {
         this.ubicacion = ubicacion;
     }
 
-    public List<Producto> getProductoList() {
-        return productoList;
+    public List<Producto> getProductos() {
+        return productos;
     }
 
-    public void setProductoList(List<Producto> productoList) {
-        this.productoList = productoList;
-    }
-
-    public List<TelefonoProveedor> getTelefonoProveedorList() {
-        return telefonoProveedorList;
-    }
-
-    public void setTelefonoProveedorList(List<TelefonoProveedor> telefonoProveedorList) {
-        this.telefonoProveedorList = telefonoProveedorList;
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
     }
 
     @Override
@@ -135,6 +121,13 @@ public class Proveedor implements Serializable {
     @Override
     public String toString() {
         return "persistencia.entity.Proveedor[ idproveedor=" + idproveedor + " ]";
+    }
+
+    public void agregarProducto(Producto producto) {
+        if (!productos.contains(producto)) {
+            productos.add(producto);
+            producto.getProveedores().add(this);
+        }
     }
     
 }

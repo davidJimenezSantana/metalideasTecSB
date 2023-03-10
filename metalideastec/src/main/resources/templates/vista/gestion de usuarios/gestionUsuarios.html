@@ -17,11 +17,11 @@
     <link rel="stylesheet" href="style.css">
 
 
-
+    <!-- CSS DATATABLE-->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"></link>
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css"></link>
 
-
+    <!-- JavaScript DATATABLE -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
@@ -39,12 +39,12 @@
 
 <body id="body">
 
-    <!-- HEADER MENU -->
+    <!-- MENU HEADER -->
     <header id="header-administrador">
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container">
-                <a class="navbar-brand" href="../../index.html"><img class="logoMetalideas"
-                        src="../../img/Metalideas.png" alt="Metalideas"></a>
+                <a class="navbar-brand" href=""><img class="logoMetalideas" src="../../img/Metalideas.png"
+                        alt="Metalideas"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -56,7 +56,7 @@
                             <i class='bx bx-menu'></i>
                             Menu
                         </a>
-                        <a class="nav-link" aria-current="page" href="../bienvenida-administrador/inicio.html">
+                        <a class="nav-link" aria-current="page" href="#">
                             <i class='bx bx-user'></i>
                             Mi perfil
                         </a>
@@ -70,7 +70,7 @@
         </nav>
     </header>
 
-    <!-- MENU LATERAL -->
+    <!-- MENU SIDEBAR -->
     <div class="sidebar " id="sidebar">
         <div class="logo close__sidebar">
             <i class='bx bx-menu'></i>
@@ -88,15 +88,16 @@
                     </li>
 
                     <li>
-                        <a th:href="@{/verInventario}">
+                        <a th:href="@{/VerInventario}">
                             <i class='link-icon bx bx-package'></i>
                             <span class="link-nombre">GESTIÓN INVENTARIO</span>
                         </a>
                     </li>
-                    
+
+                    <!-- SUBMENU -->
                     <li>
                         <div class="link-menu">
-                            <a href="../ventas/ventas.html">
+                            <a href="#">
                                 <i class='link-icon bx bx-spreadsheet'></i>
                                 <span class="link-nombre">VENTAS</span>
                             </a>
@@ -109,7 +110,7 @@
                             </li>
 
                             <li>
-                                <a class="link-nombre icon-submenu" href="../ventas/carrito/carrito.html">
+                                <a class="link-nombre icon-submenu" href="#">
                                     <i class='link-icon bx bx-cart-add'></i>
                                     Carrito
                                 </a>
@@ -125,7 +126,7 @@
                 </div>
                 <ul class="nav-links">
                     <li>
-                        <a href="../bienvenida-administrador/inicio.html">
+                        <a href="#">
                             <i class='link-icon bx bxs-user-account'></i>
                             <span class="link-nombre">VER PERFIL</span>
                         </a>
@@ -139,7 +140,7 @@
                     </li>
 
                     <li>
-                        <a href="../../index.html">
+                        <a href="#">
                             <i class='link-icon bx bx-exit'></i>
                             <span class="link-nombre">SALIR</span>
                         </a>
@@ -157,14 +158,6 @@
         <div class="row form-Gestion">
             <div class="col-2">
                 <input type="text" id="buscarCliente" name="buscarCliente" placeholder="Buscar por nombre">
-            </div>
-            <div class="col-2">
-                <select id="tipoCliente" name="tipoCliente">
-                    <option selected>Filtrar por estado</option>
-                    <option value="valido">Activo</option>
-                    <option value="invalido">Inactivo</option>
-                    <option value="invalido">invalidado</option>
-                </select>
             </div>
             <div class="col-4">
                 <div class="row">

@@ -5,20 +5,18 @@
 package com.metalideas.metalideastec.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -27,18 +25,11 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "producto")
-@NamedQueries({
-    @NamedQuery(name = "Producto.findAll", query = "SELECT p FROM Producto p"),
-    @NamedQuery(name = "Producto.findByIdproducto", query = "SELECT p FROM Producto p WHERE p.idproducto = :idproducto"),
-    @NamedQuery(name = "Producto.findByNombre", query = "SELECT p FROM Producto p WHERE p.nombre = :nombre"),
-    @NamedQuery(name = "Producto.findByPrecioVenta", query = "SELECT p FROM Producto p WHERE p.precioVenta = :precioVenta"),
-    @NamedQuery(name = "Producto.findByPrecioCompra", query = "SELECT p FROM Producto p WHERE p.precioCompra = :precioCompra"),
-    @NamedQuery(name = "Producto.findByCantidad", query = "SELECT p FROM Producto p WHERE p.cantidad = :cantidad"),
-    @NamedQuery(name = "Producto.findByDescripcion", query = "SELECT p FROM Producto p WHERE p.descripcion = :descripcion")})
 public class Producto implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idproducto")
     private Integer idproducto;
@@ -57,24 +48,21 @@ public class Producto implements Serializable {
     @Basic(optional = false)
     @Column(name = "descripcion")
     private String descripcion;
-    @JoinTable(name = "producto_has_registro_movimientos", joinColumns = {
-        @JoinColumn(name = "producto_cod", referencedColumnName = "idproducto")}, inverseJoinColumns = {
-        @JoinColumn(name = "registro_movimientos_idregistro_movimientos", referencedColumnName = "idregistro_movimientos")})
-    @ManyToMany(fetch = FetchType.LAZY)
-    private List<RegistroMovimientos> registroMovimientosList;
-    @JoinTable(name = "proveedor_has_producto", joinColumns = {
-        @JoinColumn(name = "producto_idproducto", referencedColumnName = "idproducto")}, inverseJoinColumns = {
-        @JoinColumn(name = "proveedor_idproveedor", referencedColumnName = "idproveedor")})
-    @ManyToMany(fetch = FetchType.LAZY)
-    private List<Proveedor> proveedorList;
-    @JoinColumn(name = "marca_idmarca", referencedColumnName = "idmarca")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+
+    @Basic(optional = false)
+    @Column(name = "img")
+    private String img;
+
+    @JoinColumn(name = "marca_idmarca")
+    @ManyToOne()
     private Marca marcaIdmarca;
-    @JoinColumn(name = "tipo_idtipo", referencedColumnName = "idcategoria")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+
+    @JoinColumn(name = "tipo_idtipo")
+    @ManyToOne()
     private Categoria tipoIdtipo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "producto", fetch = FetchType.LAZY)
-    private List<ProductoHasVenta> productoHasVentaList;
+
+    @ManyToMany(mappedBy = "productos")
+    private List<Proveedor> proveedores = new ArrayList<>(); 
 
     public Producto() {
     }
@@ -83,13 +71,28 @@ public class Producto implements Serializable {
         this.idproducto = idproducto;
     }
 
-    public Producto(Integer idproducto, String nombre, int precioVenta, int precioCompra, int cantidad, String descripcion) {
+    public Producto(Integer idproducto, String nombre, int precioVenta, int precioCompra, int cantidad,
+            String descripcion) {
         this.idproducto = idproducto;
         this.nombre = nombre;
         this.precioVenta = precioVenta;
         this.precioCompra = precioCompra;
         this.cantidad = cantidad;
         this.descripcion = descripcion;
+    }
+
+    public Producto(Integer idproducto, String nombre, int precioVenta, int precioCompra, int cantidad,
+            String descripcion, String img, Marca marcaIdmarca, Categoria tipoIdtipo, List<Proveedor> proveedores) {
+        this.idproducto = idproducto;
+        this.nombre = nombre;
+        this.precioVenta = precioVenta;
+        this.precioCompra = precioCompra;
+        this.cantidad = cantidad;
+        this.descripcion = descripcion;
+        this.img = img;
+        this.marcaIdmarca = marcaIdmarca;
+        this.tipoIdtipo = tipoIdtipo;
+        this.proveedores = proveedores;
     }
 
     public Integer getIdproducto() {
@@ -140,22 +143,6 @@ public class Producto implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public List<RegistroMovimientos> getRegistroMovimientosList() {
-        return registroMovimientosList;
-    }
-
-    public void setRegistroMovimientosList(List<RegistroMovimientos> registroMovimientosList) {
-        this.registroMovimientosList = registroMovimientosList;
-    }
-
-    public List<Proveedor> getProveedorList() {
-        return proveedorList;
-    }
-
-    public void setProveedorList(List<Proveedor> proveedorList) {
-        this.proveedorList = proveedorList;
-    }
-
     public Marca getMarcaIdmarca() {
         return marcaIdmarca;
     }
@@ -172,12 +159,20 @@ public class Producto implements Serializable {
         this.tipoIdtipo = tipoIdtipo;
     }
 
-    public List<ProductoHasVenta> getProductoHasVentaList() {
-        return productoHasVentaList;
+    public String getImg() {
+        return img;
     }
 
-    public void setProductoHasVentaList(List<ProductoHasVenta> productoHasVentaList) {
-        this.productoHasVentaList = productoHasVentaList;
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public List<Proveedor> getProveedores() {
+        return proveedores;
+    }
+
+    public void setProveedores(List<Proveedor> proveedores) {
+        this.proveedores = proveedores;
     }
 
     @Override
@@ -194,7 +189,8 @@ public class Producto implements Serializable {
             return false;
         }
         Producto other = (Producto) object;
-        if ((this.idproducto == null && other.idproducto != null) || (this.idproducto != null && !this.idproducto.equals(other.idproducto))) {
+        if ((this.idproducto == null && other.idproducto != null)
+                || (this.idproducto != null && !this.idproducto.equals(other.idproducto))) {
             return false;
         }
         return true;
@@ -204,5 +200,13 @@ public class Producto implements Serializable {
     public String toString() {
         return "persistencia.entity.Producto[ idproducto=" + idproducto + " ]";
     }
-    
+
+    public void agregarProveedor(Proveedor proveedor) {
+        if (!this.proveedores.contains(proveedor)) {
+            proveedores.add(proveedor);
+            proveedor.getProductos().add(this);
+        }
+    }
+   
+
 }

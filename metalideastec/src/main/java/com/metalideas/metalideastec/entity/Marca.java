@@ -5,18 +5,18 @@
 package com.metalideas.metalideastec.entity;
 
 import java.io.Serializable;
-import java.util.List;
+/* import java.util.List; */
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
+/* import javax.persistence.CascadeType; */
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+/* import javax.persistence.FetchType; */
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+/* import javax.persistence.OneToMany; */
 import javax.persistence.Table;
 
 /**
@@ -40,8 +40,8 @@ public class Marca implements Serializable {
     @Basic(optional = false)
     @Column(name = "nombre")
     private String nombre;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "marcaIdmarca", fetch = FetchType.LAZY)
-    private List<Producto> productoList;
+    /* @OneToMany(cascade = CascadeType.ALL, mappedBy = "marcaIdmarca", fetch = FetchType.LAZY)
+    private List<Producto> productoList; */
 
     public Marca() {
     }
@@ -71,13 +71,13 @@ public class Marca implements Serializable {
         this.nombre = nombre;
     }
 
-    public List<Producto> getProductoList() {
+    /* public List<Producto> getProductoList() {
         return productoList;
     }
 
     public void setProductoList(List<Producto> productoList) {
         this.productoList = productoList;
-    }
+    } */
 
     @Override
     public int hashCode() {

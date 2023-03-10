@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -14,10 +14,24 @@
     <!-- Boxicons CSS -->
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 
-    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="style.css">
 
+    <!-- CSS DATATABLE-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    </link>
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
+    </link>
 
-
+    <!-- JavaScript DATATABLE -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <title>Metalideas</title>
 
@@ -25,11 +39,12 @@
 
 <body id="body">
 
+    <!-- MENU HEADER -->
     <header id="header-administrador">
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container">
-                <a class="navbar-brand" href="../../index.html"><img class="logoMetalideas"
-                        src="../../img/Metalideas.png" alt="Metalideas"></a>
+                <a class="navbar-brand" href=""><img class="logoMetalideas" src="../../img/Metalideas.png"
+                        alt="Metalideas"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -41,7 +56,7 @@
                             <i class='bx bx-menu'></i>
                             Menu
                         </a>
-                        <a class="nav-link" aria-current="page" href="../bienvenida-administrador/inicio.html">
+                        <a class="nav-link" aria-current="page" href="#">
                             <i class='bx bx-user'></i>
                             Mi perfil
                         </a>
@@ -55,6 +70,7 @@
         </nav>
     </header>
 
+    <!-- MENU SIDEBAR -->
     <div class="sidebar " id="sidebar">
         <div class="logo close__sidebar">
             <i class='bx bx-menu'></i>
@@ -65,23 +81,23 @@
             <div class="nav-menu1">
                 <ul class="nav-links">
                     <li>
-                        <a href="../gestion de usuarios/gestionUsuarios.html">
+                        <a th:href="@{/verUsuarios}">
                             <i class='link-icon bx bx-user'></i>
                             <span class="link-nombre">GESTIÓN DE USUARIOS</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="../gestion inventario/gestionInventario.html">
+                        <a th:href="@{/VerInventario}">
                             <i class='link-icon bx bx-package'></i>
                             <span class="link-nombre">GESTIÓN INVENTARIO</span>
                         </a>
                     </li>
 
-
+                    <!-- SUBMENU -->
                     <li>
                         <div class="link-menu">
-                            <a href="../ventas/ventas.html">
+                            <a href="#">
                                 <i class='link-icon bx bx-spreadsheet'></i>
                                 <span class="link-nombre">VENTAS</span>
                             </a>
@@ -94,7 +110,7 @@
                             </li>
 
                             <li>
-                                <a class="link-nombre icon-submenu" href="../ventas/carrito/carrito.html">
+                                <a class="link-nombre icon-submenu" href="#">
                                     <i class='link-icon bx bx-cart-add'></i>
                                     Carrito
                                 </a>
@@ -110,7 +126,7 @@
                 </div>
                 <ul class="nav-links">
                     <li>
-                        <a href="../bienvenida-administrador/inicio.html">
+                        <a href="#">
                             <i class='link-icon bx bxs-user-account'></i>
                             <span class="link-nombre">VER PERFIL</span>
                         </a>
@@ -124,7 +140,7 @@
                     </li>
 
                     <li>
-                        <a href="../../index.html">
+                        <a href="#">
                             <i class='link-icon bx bx-exit'></i>
                             <span class="link-nombre">SALIR</span>
                         </a>
@@ -135,31 +151,17 @@
 
     </div>
 
+    <!-- CONTENIDO MODULO INVENTARIO -->
     <div class="container">
         <div class="row titulo-Gestion">
             <h1>Gestión de inventario</h1>
         </div>
         <div class="row form-Gestion">
-            <div class="col-2">
-                <input type="text" id="buscarProducto" name="buscarProducto" placeholder="Buscar por nombre">
-            </div>
-            <div class="col-2">
-                <select id="tipoProducto" name="tipoProducto">
-                    <option selected>Filtrar por categoria</option>
-                    <option value="herramienta">Herramientas</option>
-                    <option value="proteccion">Protección y vestuario</option>
-                    <option value="fontaneria">Baño y fontaneria</option>
-                    <option value="Alumbrado">Iluminación/Alumbrado</option>
-                    <option value="tornillería">Tornillería</option>
-                    <option value="tuberias">Tuberias</option>
-                </select>
-            </div>
-            <div class="col-4">
+
+            <div class="col-8">
                 <div class="row">
-                    <div class="col-3 btn-form">
-                        <button><i class='bx bxs-file-png'></i>Exportar</button>
-                    </div>
-                    <div class="col-9">
+                    <div class="col-6"></div>
+                    <div class="col-6">
                         <div class="row">
                             <div class="col-6 btn-form">
                                 <button href="" data-bs-toggle="modal" data-bs-target="#modalAgregar"><i
@@ -178,62 +180,30 @@
         <div class="row ">
             <div class="col-8">
                 <div class="contenedor-tabla">
-                    <table class="table">
+                    <table class="table" id="tabla_Inventario">
                         <thead>
                             <tr>
                                 <th scope="col">Ref.</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Categoria</th>
-                                <th scope="col">Existentes</th>
+                                <th scope="col">Existentes</th><!-- 
                                 <th scope="col">Precio</th>
                                 <th scope="col">Imagen</th>
-                                <th scope="col">Marca</th>
+                                <th scope="col">Marca</th> -->
                                 <th scope="col">Opc</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Taladro</td>
-                                <td>Herramienta</td>
-                                <td>25</td>
-                                <td>$1500000</td>
-                                <td valign="middle"><i class='bx bx-image'></i></td>
-                                <td>Dewalt</td>
+                            <tr th:each="producto : ${Productos}">
+                                <td th:text="${producto.idproducto}"></td>
+                                <td th:text="${producto.nombre}"></td>
+                                <td th:text="${producto.tipoIdtipo.nombre}"></td>
+                                <td th:text="${producto.cantidad}"></td>
                                 <td valign="middle">
                                     <div class="opc-tabla">
-                                        <i class='bx bx-cog iconos abrirCerrarFormEdit' id="opc-form"></i>
+                                        <i class='bx bx-cog iconos abrirCerrarFormEdit' id="opc-form"
+                                        th:onclick="cargarEdit([[${producto.idproducto}]], [[${producto.nombre}]], [[${producto.precioVenta}]], [[${producto.precioCompra}]], [[${producto.cantidad}]], [[${producto.descripcion}]], [[${producto.marcaIdmarca.idmarca}]], [[${producto.tipoIdtipo.idcategoria}]])"></i>
                                         <i class='bx bx-search-alt-2 iconos'></i>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Taladro</td>
-                                <td>Herramienta</td>
-                                <td>25</td>
-                                <td>$1500000</td>
-                                <td valign="middle"><i class='bx bx-image'></i></td>
-                                <td>Dewalt</td>
-                                <td valign="middle">
-                                    <div class="opc-tabla">
-                                        <i class='bx bx-cog'></i>
-                                        <i class='bx bx-search-alt-2'></i>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Taladro</td>
-                                <td>Herramienta</td>
-                                <td>25</td>
-                                <td>$1500000</td>
-                                <td valign="middle"><i class='bx bx-image'></i></td>
-                                <td>Dewalt</td>
-                                <td valign="middle">
-                                    <div class="opc-tabla">
-                                        <i class='bx bx-cog'></i>
-                                        <i class='bx bx-search-alt-2'></i>
                                     </div>
                                 </td>
                             </tr>
@@ -245,6 +215,7 @@
     </div>
 
 
+    <!-- fORMULARIO AGREGAR -->
     <div class="form-lateral" id="agregarForm">
         <div class="form-gestion">
             <div class="contenedor-formulario" id="contenedor-formulario">
@@ -256,22 +227,13 @@
                 <div class="row titulo-form">
                     <h1><i class='bx bx-add-to-queue'></i>Agregar producto</h1>
                 </div>
-                <form action="" class="needs-validation" novalidate>
+                <form th:action="@{/agregarProducto}" th:object="${nuevoProducto}" class="needs-validation"
+                    method="post" novalidate>
                     <div class="row">
                         <div class="col-6">
                             <div class="campo-form">
                                 <label for="nombreProducto">Nombre producto*</label>
-                                <input type="text" name="nombreProducto" id="nombreProducto" required>
-                                <div class="valid-feedback">
-                                    ¡Bien! Datos correctos.
-                                </div>
-                                <div class="invalid-feedback">
-                                    ¡Error! Verifica los datos.
-                                </div>
-                            </div>
-                            <div class="campo-form">
-                                <label for="precioProducto">Precio venta*</label>
-                                <input type="number" name="precioProducto" id="precioProducto" placeholder="$$$$$"
+                                <input type="text" name="nombreProducto" id="nombre" th:field="*{nombre}"
                                     required>
                                 <div class="valid-feedback">
                                     ¡Bien! Datos correctos.
@@ -280,15 +242,25 @@
                                     ¡Error! Verifica los datos.
                                 </div>
                             </div>
+
                             <div class="campo-form">
-                                <select id="tipoProducto" name="tipoProducto" required>
+                                <label for="precioProducto">Precio venta*</label>
+                                <input type="number" min="0" name="precioProducto" id="precio"
+                                    placeholder="$$$$$" th:field="*{precioVenta}" required>
+                                <div class="valid-feedback">
+                                    ¡Bien! Datos correctos.
+                                </div>
+                                <div class="invalid-feedback">
+                                    ¡Error! Verifica los datos.
+                                </div>
+                            </div>
+
+                            <div class="campo-form">
+                                <select id="tipo" name="tipoProducto" th:field="*{tipoIdtipo}" required>
                                     <option value="">Categoria*</option>
-                                    <option value="herramienta">Herramientas</option>
-                                    <option value="proteccion">Protección y vestuario</option>
-                                    <option value="fontaneria">Baño y fontaneria</option>
-                                    <option value="Alumbrado">Iluminación/Alumbrado</option>
-                                    <option value="tornillería">Tornillería</option>
-                                    <option value="tuberias">Tuberias</option>
+                                    <option th:each="categoria : ${listaCategoria}" th:value="${categoria.idcategoria}"
+                                        th:text="${categoria.nombre}">
+                                    </option>
                                 </select>
                                 <div class="valid-feedback">
                                     ¡Bien! Datos correctos.
@@ -297,13 +269,20 @@
                                     ¡Error! Verifica los datos.
                                 </div>
                             </div>
+
                             <div class="campo-form">
                                 <label for="proveedor">Proveedor*</label>
                                 <input class="form-control" list="listaproveedor" id="proveedor"
-                                    placeholder="Escriba para buscar..." required>
+                                    placeholder="Escriba para buscar..." onchange="setProveedorId(this)" required>
+
+                                <input type="hidden" id="proveedorId" name="proveedorId">
+
                                 <datalist id="listaproveedor">
-                                    <option value="proveedor1">
-                                    <option value="proveedor2">
+                                    <option th:each="proveedor : ${listaProveedores}"
+                                        th:value="${proveedor.idproveedor}"
+                                        th:id="'proveedor-' + ${proveedor.idproveedor}">
+                                        <span th:text="${proveedor.nombre}"></span>
+                                    </option>
                                 </datalist>
                                 <div class="valid-feedback">
                                     ¡Bien! Datos correctos.
@@ -317,7 +296,8 @@
                         <div class="col-6">
                             <div class="campo-form">
                                 <label for="cantidadProducto">Cantidad*</label>
-                                <input type="number" name="cantidadProducto" id="cantidadProducto" required>
+                                <input type="number" name="cantidadProducto" id="cantidad"
+                                    th:field="*{cantidad}" required>
                                 <div class="valid-feedback">
                                     ¡Bien! Datos correctos.
                                 </div>
@@ -325,10 +305,11 @@
                                     ¡Error! Verifica los datos.
                                 </div>
                             </div>
+
                             <div class="campo-form">
                                 <label for="preciocompraProducto">Precio compra*</label>
-                                <input type="number" name="preciocompraProducto" id="precioProducto" placeholder="$$$$$"
-                                    required>
+                                <input type="number" name="preciocompraProducto" id="preciocompraProducto"
+                                    th:field="*{precioCompra}" placeholder="$precio" required>
                                 <div class="valid-feedback">
                                     ¡Bien! Datos correctos.
                                 </div>
@@ -336,11 +317,12 @@
                                     ¡Error! Verifica los datos.
                                 </div>
                             </div>
+
                             <div class="campo-form">
-                                <select id="marcaProducto" name="marcaProducto" required>
+                                <select id="Marca" name="marcaProducto" th:field="*{marcaIdmarca}" required>
                                     <option value="">Marca*</option>
-                                    <option value="Dewalt">Dewalt</option>
-                                    <option value="Dewalt">Dewalt</option>
+                                    <option th:each="marca : ${listaMarcas}" th:value="${marca.idmarca}"
+                                        th:text="${marca.nombre}">Dewalt</option>
                                 </select>
                                 <div class="valid-feedback">
                                     ¡Bien! Datos correctos.
@@ -352,12 +334,12 @@
                         </div>
                         <div class="campo-form">
                             <label for="detalleProducto">Detalle u observaciones</label>
-                            <textarea class="form-control" type="text" name="detalleProducto"
-                                id="detalleProducto"></textarea>
+                            <textarea class="form-control" type="text" th:field="*{descripcion}" name="detalleProducto"
+                                id="detalle"></textarea>
                         </div>
                         <div class="campo-form">
-                            <label for="imagenProducto">Imagen del producto</label>
-                            <input type="file" name="imagenProducto" id="imagenProducto">
+                            <label for="imagen">Imagen del producto</label>
+                            <input type="file" name="imagenProducto" th:field="*{img}" id="imagenProducto">
                         </div>
                     </div>
                     <div class="row btn-formulario">
@@ -368,6 +350,7 @@
         </div>
     </div>
 
+    <!-- fORMULARIO EDITAR -->
     <div class="form-lateral" id="editarForm">
         <div class="form-gestion">
             <div class="contenedor-formulario" id="contenedor-formulario">
@@ -382,24 +365,28 @@
                 <form action="" class="needs-validation" novalidate>
                     <div class="row">
                         <div class="col-6">
+                            <input type="hidden" name="nombreProducto" id="idProducto">
                             <div class="campo-form">
                                 <label for="nombreProducto">Nombre producto</label>
                                 <input type="text" name="nombreProducto" id="nombreProducto">
                             </div>
                             <div class="campo-form">
                                 <label for="precioProducto">Precio venta</label>
-                                <input type="number" name="precioProducto" id="precioProducto" placeholder="$$$$$">
+                                <input type="number" name="precioProducto" id="precioVentaProducto" placeholder="$$$$$">
                             </div>
                             <div class="campo-form">
-                                <select id="tipoProducto" name="tipoProducto">
-                                    <option value="">Categoria</option>
-                                    <option value="herramienta">Herramientas</option>
-                                    <option value="proteccion">Protección y vestuario</option>
-                                    <option value="fontaneria">Baño y fontaneria</option>
-                                    <option value="Alumbrado">Iluminación/Alumbrado</option>
-                                    <option value="tornillería">Tornillería</option>
-                                    <option value="tuberias">Tuberias</option>
+                                <select id="tipoProducto" name="tipoProducto" required>
+                                    <option value="">Categoria*</option>
+                                    <option th:each="categoria : ${listaCategoria}" th:value="${categoria.idcategoria}"
+                                        th:text="${categoria.nombre}">
+                                    </option>
                                 </select>
+                                <div class="valid-feedback">
+                                    ¡Bien! Datos correctos.
+                                </div>
+                                <div class="invalid-feedback">
+                                    ¡Error! Verifica los datos.
+                                </div>
                             </div>
                         </div>
                         <div class="col-6">
@@ -409,15 +396,21 @@
                             </div>
                             <div class="campo-form">
                                 <label for="preciocompraProducto">Precio compra</label>
-                                <input type="number" name="preciocompraProducto" id="precioProducto"
+                                <input type="number" name="preciocompraProducto" id="precioCompraProducto"
                                     placeholder="$$$$$">
                             </div>
                             <div class="campo-form">
-                                <select id="marcaProducto" name="marcaProducto">
-                                    <option selected>Marca</option>
-                                    <option value="Dewalt">Dewalt</option>
-                                    <option value="Dewalt">Dewalt</option>
+                                <select id="marcaProducto" name="marcaProducto" required>
+                                    <option value="">Marca*</option>
+                                    <option th:each="marca : ${listaMarcas}" th:value="${marca.idmarca}"
+                                        th:text="${marca.nombre}">Dewalt</option>
                                 </select>
+                                <div class="valid-feedback">
+                                    ¡Bien! Datos correctos.
+                                </div>
+                                <div class="invalid-feedback">
+                                    ¡Error! Verifica los datos.
+                                </div>
                             </div>
                         </div>
                         <div class="campo-form">
@@ -438,6 +431,7 @@
         </div>
     </div>
 
+    <!-- MODAL AGREGAR PROVEEDOR -->
     <div class="contenedor-modal">
         <div class="modal" tabindex="-1" id="modalAgregar">
             <div class="modal-dialog proveedor">
@@ -448,12 +442,13 @@
                     </div>
                     <div class="modal-body">
                         <div class="row">
-                            <form action="" method="post" class="needs-validation" novalidate>
+                            <form th:action="@{/agregarProveedor}" th:object="${nuevoProveedor}" method="post"
+                                class="needs-validation" novalidate>
                                 <h2> <i class='bx bxs-truck'></i> Agregar proveedor</h2>
                                 <div class="mb-3">
                                     <label for="nombreProveedor" class="form-label">Nombre*</label>
                                     <input type="text" class="form-control" id="nombreProveedor" name="nombreProveedor"
-                                        placeholder="Nombre proveedor" required>
+                                        placeholder="Nombre proveedor" th:field="*{nombre}" required>
                                     <div class="valid-feedback">
                                         ¡Bien! Datos correctos.
                                     </div>
@@ -464,12 +459,13 @@
                                 <div class="mb-3">
                                     <label for="correoProveedor" class="form-label">Correo</label>
                                     <input type="email" class="form-control" id="correoProveedor" name="correoProveedor"
-                                        placeholder="name@correo.com">
+                                        placeholder="name@correo.com" th:field="*{correo}">
                                 </div>
                                 <div class="mb-3">
                                     <label for="ubicaciónProveedor" class="form-label">Ubicación</label>
                                     <input type="text" class="form-control" id="ubicaciónProveedor"
-                                        name="ubicaciónProveedor" placeholder="Dirección del proveedor">
+                                        name="ubicaciónProveedor" placeholder="Dirección del proveedor"
+                                        th:field="*{ubicacion}">
                                 </div>
                                 <div class="mb-3">
                                     <label for="telefonoProveedor" class="form-label">Teléfono*</label>
@@ -570,11 +566,12 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 
-    <script src="../../JS.js"></script>
+    
+
+    <script src="../../JS/JS.js"></script>
+    <script src="../../JS/inventarioJS.js"></script>
 
 
 </body>
 
 </html>
-
-

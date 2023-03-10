@@ -5,19 +5,14 @@
 package com.metalideas.metalideastec.entity;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -26,12 +21,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "registro_movimientos")
-@NamedQueries({
-    @NamedQuery(name = "RegistroMovimientos.findAll", query = "SELECT r FROM RegistroMovimientos r"),
-    @NamedQuery(name = "RegistroMovimientos.findByIdregistroMovimientos", query = "SELECT r FROM RegistroMovimientos r WHERE r.idregistroMovimientos = :idregistroMovimientos"),
-    @NamedQuery(name = "RegistroMovimientos.findByDetalle", query = "SELECT r FROM RegistroMovimientos r WHERE r.detalle = :detalle"),
-    @NamedQuery(name = "RegistroMovimientos.findByFechaMovimiento", query = "SELECT r FROM RegistroMovimientos r WHERE r.fechaMovimiento = :fechaMovimiento"),
-    @NamedQuery(name = "RegistroMovimientos.findByCantidadProd", query = "SELECT r FROM RegistroMovimientos r WHERE r.cantidadProd = :cantidadProd")})
 public class RegistroMovimientos implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,13 +38,13 @@ public class RegistroMovimientos implements Serializable {
     @Basic(optional = false)
     @Column(name = "cantidad_prod")
     private int cantidadProd;
-    @ManyToMany(mappedBy = "registroMovimientosList", fetch = FetchType.LAZY)
-    private List<Producto> productoList;
-    @JoinColumn(name = "tipo_movimiento_idtipo_movimiento", referencedColumnName = "idtipo_movimiento")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+
+    @JoinColumn(name = "tipo_movimiento_idtipo_movimiento")
+    @ManyToOne()
     private TipoMovimiento tipoMovimientoIdtipoMovimiento;
-    @JoinColumn(name = "usuario_idusuario", referencedColumnName = "idusuario")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    
+    @JoinColumn(name = "usuario_idusuario")
+    @ManyToOne()
     private Usuario usuarioIdusuario;
 
     public RegistroMovimientos() {
@@ -104,13 +93,6 @@ public class RegistroMovimientos implements Serializable {
         this.cantidadProd = cantidadProd;
     }
 
-    public List<Producto> getProductoList() {
-        return productoList;
-    }
-
-    public void setProductoList(List<Producto> productoList) {
-        this.productoList = productoList;
-    }
 
     public TipoMovimiento getTipoMovimientoIdtipoMovimiento() {
         return tipoMovimientoIdtipoMovimiento;

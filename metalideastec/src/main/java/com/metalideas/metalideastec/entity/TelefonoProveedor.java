@@ -14,8 +14,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -24,10 +22,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "telefono_proveedor")
-@NamedQueries({
-    @NamedQuery(name = "TelefonoProveedor.findAll", query = "SELECT t FROM TelefonoProveedor t"),
-    @NamedQuery(name = "TelefonoProveedor.findByIdtelefono", query = "SELECT t FROM TelefonoProveedor t WHERE t.idtelefono = :idtelefono"),
-    @NamedQuery(name = "TelefonoProveedor.findByNumero", query = "SELECT t FROM TelefonoProveedor t WHERE t.numero = :numero")})
 public class TelefonoProveedor implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -39,6 +33,7 @@ public class TelefonoProveedor implements Serializable {
     @Basic(optional = false)
     @Column(name = "numero")
     private int numero;
+
     @JoinColumn(name = "proveedor_idproveedor", referencedColumnName = "idproveedor")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Proveedor proveedorIdproveedor;
