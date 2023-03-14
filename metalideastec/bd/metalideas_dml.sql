@@ -191,18 +191,14 @@ VALUES (1,'Ingreso'),
 
 
 INSERT INTO `registro_movimientos` VALUES
- (1,'Venta del producto(prueba)',2,2022,10,1),
- (2,'Venta del producto(prueba)',2,2022,15,3),
- (3,'Venta del producto(prueba)',2,2022,20,1),
- (4,'Venta del producto(prueba)',2,2022,25,2),
- (5,'Venta del producto(prueba)',2,2022,30,3),
- (6,'Venta del producto(prueba)',2,2022,35,1),
- (7,'Venta del producto(prueba)',2,2022,40,2);
+ (1,'Venta del producto(prueba)',2,2022,10,1,2),
+ (2,'Venta del producto(prueba)',2,2022,15,3,5),
+ (3,'Venta del producto(prueba)',2,2022,20,1,7),
+ (4,'Venta del producto(prueba)',2,2022,25,2,9),
+ (5,'Venta del producto(prueba)',2,2022,30,3,12),
+ (6,'Venta del producto(prueba)',2,2022,35,1,1),
+ (7,'Venta del producto(prueba)',2,2022,40,2,3);
 
-
-INSERT INTO `producto_has_registro_movimientos`
-VALUES 
-(2,1),(5,2),(7,3),(9,4),(12,5),(1,6),(3,7);
 
 
 INSERT INTO `venta` VALUES
@@ -244,11 +240,11 @@ INSERT INTO `producto_has_venta` (`producto_cod`, `venta_idventa`, `cantidad`) V
 (12, 13, 3);
 
 INSERT INTO `proveedor` VALUES 
-(1,'proveedor1',NULL,NULL),
-(2,'proveedor2',NULL,NULL),
-(3,'proveedor3',NULL,NULL),
-(4,'proveedor4',NULL,NULL),
-(5,'proveedor5',NULL,NULL);
+(1,'proveedor1','proveedor1@correo.com','calle 10 #12-45',2147483647),
+(2,'proveedor2','proveedor2@correo.com','calle 45 #14-74',362458791),
+(3,'proveedor3','proveedor3@correo.com','calle 85 #25-58',325415426),
+(4,'proveedor4','proveedor4@correo.com','calle 65 #35-68',321456841),
+(5,'proveedor5','proveedor5@correo.com','calle 14 #14-67',345871214);
 
 
 INSERT INTO `proveedor_has_producto` VALUES 
@@ -262,14 +258,6 @@ INSERT INTO `proveedor_has_producto` VALUES
 (4,9),
 (1,10),
 (5,11);
-
-
-INSERT INTO `telefono_proveedor` VALUES 
-(1,2147483647,1),
-(2,362458791,2),
-(3,2147483647,3),
-(4,325642164,4),
-(5,325421564,5);
 
 
 INSERT INTO `usuario_has_metodo_pago` VALUES
@@ -293,3 +281,12 @@ INSERT INTO `usuario_has_metodo_pago` VALUES
 (15,2),
 (17,2),
 (19,2);
+
+
+UPDATE `registro_movimientos` SET `fecha_movimiento` = '2017-03-23 19:01:14' WHERE `registro_movimientos`.`idregistro_movimientos` = 1;
+UPDATE `registro_movimientos` SET `fecha_movimiento` = '2014-03-19 20:14:50' WHERE `registro_movimientos`.`idregistro_movimientos` = 2;
+UPDATE `registro_movimientos` SET `fecha_movimiento` = '2015-12-22 20:20:39' WHERE `registro_movimientos`.`idregistro_movimientos` = 3;
+UPDATE `registro_movimientos` SET `fecha_movimiento` = '2019-12-18 20:21:06' WHERE `registro_movimientos`.`idregistro_movimientos` = 4;
+UPDATE `registro_movimientos` SET `fecha_movimiento` = '2020-08-13 19:03:13' WHERE `registro_movimientos`.`idregistro_movimientos` = 5;
+UPDATE `registro_movimientos` SET `fecha_movimiento` = '2020-12-17 19:04:27' WHERE `registro_movimientos`.`idregistro_movimientos` = 6;
+UPDATE `registro_movimientos` SET `fecha_movimiento` = '2018-12-20 12:04:44' WHERE `registro_movimientos`.`idregistro_movimientos` = 7;

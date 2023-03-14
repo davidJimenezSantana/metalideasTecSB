@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -62,7 +63,10 @@ public class Producto implements Serializable {
     private Categoria tipoIdtipo;
 
     @ManyToMany(mappedBy = "productos")
-    private List<Proveedor> proveedores = new ArrayList<>(); 
+    private List<Proveedor> proveedores = new ArrayList<>();
+
+    @OneToOne(mappedBy = "producto")
+    private RegistroMovimientos registroMovimientos;
 
     public Producto() {
     }
@@ -175,6 +179,16 @@ public class Producto implements Serializable {
         this.proveedores = proveedores;
     }
 
+    
+
+    public RegistroMovimientos getRegistroMovimientos() {
+        return registroMovimientos;
+    }
+
+    public void setRegistroMovimientos(RegistroMovimientos registroMovimientos) {
+        this.registroMovimientos = registroMovimientos;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -207,6 +221,5 @@ public class Producto implements Serializable {
             proveedor.getProductos().add(this);
         }
     }
-   
 
 }

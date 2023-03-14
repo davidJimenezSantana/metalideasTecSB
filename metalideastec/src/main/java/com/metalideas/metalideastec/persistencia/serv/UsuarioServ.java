@@ -7,5 +7,6 @@ import com.metalideas.metalideastec.entity.Usuario;
 public interface UsuarioServ {
 
     public List<Usuario> listarUsuarios();
+    public Usuario buscarUsuario(int id);
     
 }

@@ -18,5 +18,10 @@ public class UsuarioServImp implements UsuarioServ {
     public List<Usuario> listarUsuarios() {        
         return usuarioDAO.findAll();
     }
+
+    @Override
+    public Usuario buscarUsuario(int id) {
+        return usuarioDAO.findById(id).get();
+    }
     
 }

@@ -164,8 +164,9 @@
                     <div class="col-6">
                         <div class="row">
                             <div class="col-6 btn-form">
-                                <button href="" data-bs-toggle="modal" data-bs-target="#modalAgregar"><i
-                                        class='bx bxs-truck'></i>Agregar proveedor</button>
+                                <a th:href="@{/Proveedores}">
+                                    <button><i class='bx bxs-truck'></i>Proveedores</button>
+                                </a>
                             </div>
                             <div class="col-6 btn-form">
                                 <button class="abrirCerrarFormAdd"><i class='bx bxs-add-to-queue'></i>Agregar
@@ -202,7 +203,7 @@
                                 <td valign="middle">
                                     <div class="opc-tabla">
                                         <i class='bx bx-cog iconos abrirCerrarFormEdit' id="opc-form"
-                                        th:onclick="cargarEdit([[${producto.idproducto}]], [[${producto.nombre}]], [[${producto.precioVenta}]], [[${producto.precioCompra}]], [[${producto.cantidad}]], [[${producto.descripcion}]], [[${producto.marcaIdmarca.idmarca}]], [[${producto.tipoIdtipo.idcategoria}]])"></i>
+                                            th:onclick="cargarEdit([[${producto.idproducto}]], [[${producto.nombre}]], [[${producto.precioVenta}]], [[${producto.precioCompra}]], [[${producto.cantidad}]], [[${producto.descripcion}]], [[${producto.marcaIdmarca.idmarca}]], [[${producto.tipoIdtipo.idcategoria}]])"></i>
                                         <i class='bx bx-search-alt-2 iconos'></i>
                                     </div>
                                 </td>
@@ -227,14 +228,13 @@
                 <div class="row titulo-form">
                     <h1><i class='bx bx-add-to-queue'></i>Agregar producto</h1>
                 </div>
-                <form th:action="@{/agregarProducto}" th:object="${nuevoProducto}" class="needs-validation"
-                    method="post" novalidate>
+                <form th:action="@{/agregarProducto}" th:object="${Producto}" class="needs-validation" method="post"
+                    novalidate>
                     <div class="row">
                         <div class="col-6">
                             <div class="campo-form">
                                 <label for="nombreProducto">Nombre producto*</label>
-                                <input type="text" name="nombreProducto" id="nombre" th:field="*{nombre}"
-                                    required>
+                                <input type="text" name="nombreProducto" id="nombre" th:field="*{nombre}" required>
                                 <div class="valid-feedback">
                                     ¡Bien! Datos correctos.
                                 </div>
@@ -245,8 +245,8 @@
 
                             <div class="campo-form">
                                 <label for="precioProducto">Precio venta*</label>
-                                <input type="number" min="0" name="precioProducto" id="precio"
-                                    placeholder="$$$$$" th:field="*{precioVenta}" required>
+                                <input type="number" min="0" name="precioProducto" id="precio" placeholder="$$$$$"
+                                    th:field="*{precioVenta}" required>
                                 <div class="valid-feedback">
                                     ¡Bien! Datos correctos.
                                 </div>
@@ -296,8 +296,8 @@
                         <div class="col-6">
                             <div class="campo-form">
                                 <label for="cantidadProducto">Cantidad*</label>
-                                <input type="number" name="cantidadProducto" id="cantidad"
-                                    th:field="*{cantidad}" required>
+                                <input type="number" name="cantidadProducto" id="cantidad" th:field="*{cantidad}"
+                                    required>
                                 <div class="valid-feedback">
                                     ¡Bien! Datos correctos.
                                 </div>
@@ -338,6 +338,10 @@
                                 id="detalle"></textarea>
                         </div>
                         <div class="campo-form">
+                            <label for="obsProducto">Observaciones de entrada de producto</label>
+                            <textarea class="form-control" type="text" name="obsProducto" id="obsProducto"></textarea>
+                        </div>
+                        <div class="campo-form">
                             <label for="imagen">Imagen del producto</label>
                             <input type="file" name="imagenProducto" th:field="*{img}" id="imagenProducto">
                         </div>
@@ -362,20 +366,22 @@
                 <div class="row titulo-form">
                     <h1><i class='bx bx-cog'></i>Editar producto</h1>
                 </div>
-                <form action="" class="needs-validation" novalidate>
+                <form th:action="@{/actualizarProducto}" th:object="${Producto}" method="post" class="needs-validation"
+                    novalidate>
                     <div class="row">
                         <div class="col-6">
-                            <input type="hidden" name="nombreProducto" id="idProducto">
+                            <input type="hidden" name="nombreProducto" id="idProducto" th:field="*{idproducto}">
                             <div class="campo-form">
                                 <label for="nombreProducto">Nombre producto</label>
-                                <input type="text" name="nombreProducto" id="nombreProducto">
+                                <input type="text" name="nombreProducto" id="nombreProducto" th:field="*{nombre}">
                             </div>
                             <div class="campo-form">
                                 <label for="precioProducto">Precio venta</label>
-                                <input type="number" name="precioProducto" id="precioVentaProducto" placeholder="$$$$$">
+                                <input type="number" name="precioProducto" id="precioVentaProducto" placeholder="$$$$$"
+                                    th:field="*{precioVenta}">
                             </div>
                             <div class="campo-form">
-                                <select id="tipoProducto" name="tipoProducto" required>
+                                <select id="tipoProducto" name="tipoProducto" th:field="*{tipoIdtipo}" required>
                                     <option value="">Categoria*</option>
                                     <option th:each="categoria : ${listaCategoria}" th:value="${categoria.idcategoria}"
                                         th:text="${categoria.nombre}">
@@ -392,15 +398,16 @@
                         <div class="col-6">
                             <div class="campo-form">
                                 <label for="cantidadProducto">Cantidad</label>
-                                <input type="number" name="cantidadProducto" id="cantidadProducto">
+                                <input type="number" name="cantidadProducto" id="cantidadProducto"
+                                    th:field="*{cantidad}">
                             </div>
                             <div class="campo-form">
                                 <label for="preciocompraProducto">Precio compra</label>
                                 <input type="number" name="preciocompraProducto" id="precioCompraProducto"
-                                    placeholder="$$$$$">
+                                    th:field="*{precioCompra}" placeholder="$$$$$">
                             </div>
                             <div class="campo-form">
-                                <select id="marcaProducto" name="marcaProducto" required>
+                                <select id="marcaProducto" name="marcaProducto" th:field="*{marcaIdmarca}" required>
                                     <option value="">Marca*</option>
                                     <option th:each="marca : ${listaMarcas}" th:value="${marca.idmarca}"
                                         th:text="${marca.nombre}">Dewalt</option>
@@ -415,12 +422,12 @@
                         </div>
                         <div class="campo-form">
                             <label for="detalleProducto">Detalle u observaciones</label>
-                            <textarea class="form-control" type="text" name="detalleProducto"
-                                id="detalleProducto"></textarea>
+                            <textarea class="form-control" type="text" name="detalleProducto" id="detalleProducto"
+                                th:field="*{descripcion}"></textarea>
                         </div>
                         <div class="campo-form">
                             <label for="imagenProducto">Imagen del producto</label>
-                            <input type="file" name="imagenProducto" id="imagenProducto">
+                            <input type="file" name="imagenProducto" id="imagenProducto" th:field="*{img}">
                         </div>
                     </div>
                     <div class="row btn-formulario">
@@ -566,7 +573,7 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 
-    
+
 
     <script src="../../JS/JS.js"></script>
     <script src="../../JS/inventarioJS.js"></script>

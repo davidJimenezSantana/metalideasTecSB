@@ -5,6 +5,8 @@
 package com.metalideas.metalideastec.entity;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -23,7 +26,6 @@ import javax.persistence.Table;
 @Table(name = "registro_movimientos")
 public class RegistroMovimientos implements Serializable {
 
-    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -34,7 +36,7 @@ public class RegistroMovimientos implements Serializable {
     private String detalle;
     @Basic(optional = false)
     @Column(name = "fecha_movimiento")
-    private int fechaMovimiento;
+    private Timestamp fechaMovimiento;
     @Basic(optional = false)
     @Column(name = "cantidad_prod")
     private int cantidadProd;
@@ -42,10 +44,14 @@ public class RegistroMovimientos implements Serializable {
     @JoinColumn(name = "tipo_movimiento_idtipo_movimiento")
     @ManyToOne()
     private TipoMovimiento tipoMovimientoIdtipoMovimiento;
-    
+
     @JoinColumn(name = "usuario_idusuario")
     @ManyToOne()
     private Usuario usuarioIdusuario;
+
+    @OneToOne
+    @JoinColumn(name = "producto_idproducto", referencedColumnName = "idproducto")
+    private Producto producto;
 
     public RegistroMovimientos() {
     }
@@ -54,11 +60,24 @@ public class RegistroMovimientos implements Serializable {
         this.idregistroMovimientos = idregistroMovimientos;
     }
 
-    public RegistroMovimientos(Integer idregistroMovimientos, String detalle, int fechaMovimiento, int cantidadProd) {
+    public RegistroMovimientos(Integer idregistroMovimientos, String detalle, Timestamp fechaMovimiento,
+            int cantidadProd) {
         this.idregistroMovimientos = idregistroMovimientos;
         this.detalle = detalle;
         this.fechaMovimiento = fechaMovimiento;
         this.cantidadProd = cantidadProd;
+    }
+
+    
+
+    public RegistroMovimientos(String detalle, Timestamp fechaMovimiento, int cantidadProd,
+            TipoMovimiento tipoMovimientoIdtipoMovimiento, Usuario usuarioIdusuario, Producto producto) {
+        this.detalle = detalle;
+        this.fechaMovimiento = fechaMovimiento;
+        this.cantidadProd = cantidadProd;
+        this.tipoMovimientoIdtipoMovimiento = tipoMovimientoIdtipoMovimiento;
+        this.usuarioIdusuario = usuarioIdusuario;
+        this.producto = producto;
     }
 
     public Integer getIdregistroMovimientos() {
@@ -77,11 +96,11 @@ public class RegistroMovimientos implements Serializable {
         this.detalle = detalle;
     }
 
-    public int getFechaMovimiento() {
+    public Timestamp getFechaMovimiento() {
         return fechaMovimiento;
     }
 
-    public void setFechaMovimiento(int fechaMovimiento) {
+    public void setFechaMovimiento(Timestamp fechaMovimiento) {
         this.fechaMovimiento = fechaMovimiento;
     }
 
@@ -92,7 +111,6 @@ public class RegistroMovimientos implements Serializable {
     public void setCantidadProd(int cantidadProd) {
         this.cantidadProd = cantidadProd;
     }
-
 
     public TipoMovimiento getTipoMovimientoIdtipoMovimiento() {
         return tipoMovimientoIdtipoMovimiento;
@@ -110,6 +128,16 @@ public class RegistroMovimientos implements Serializable {
         this.usuarioIdusuario = usuarioIdusuario;
     }
 
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
+
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -124,7 +152,9 @@ public class RegistroMovimientos implements Serializable {
             return false;
         }
         RegistroMovimientos other = (RegistroMovimientos) object;
-        if ((this.idregistroMovimientos == null && other.idregistroMovimientos != null) || (this.idregistroMovimientos != null && !this.idregistroMovimientos.equals(other.idregistroMovimientos))) {
+        if ((this.idregistroMovimientos == null && other.idregistroMovimientos != null)
+                || (this.idregistroMovimientos != null
+                        && !this.idregistroMovimientos.equals(other.idregistroMovimientos))) {
             return false;
         }
         return true;
@@ -134,5 +164,5 @@ public class RegistroMovimientos implements Serializable {
     public String toString() {
         return "persistencia.entity.RegistroMovimientos[ idregistroMovimientos=" + idregistroMovimientos + " ]";
     }
-    
+
 }

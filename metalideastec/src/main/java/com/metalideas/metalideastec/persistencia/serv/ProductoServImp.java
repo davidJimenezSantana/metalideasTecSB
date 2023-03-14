@@ -20,8 +20,8 @@ public class ProductoServImp implements ProductoServ {
     }
 
     @Override
-    public void agregar(Producto producto) {
-        productoDAO.save(producto);
+    public Producto agregar(Producto producto) {
+        return productoDAO.saveAndFlush(producto);
     }
 
     @Override
@@ -33,6 +33,11 @@ public class ProductoServImp implements ProductoServ {
     public void borrar(Producto producto) {
         productoDAO.delete(producto);
     }
-    
 
+    @Override
+    public Producto buscarProductoId(int id) {
+        return productoDAO.findById(id).get();
+    }
+    
+    
 }

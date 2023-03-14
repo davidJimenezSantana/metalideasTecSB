@@ -5,18 +5,12 @@
 package com.metalideas.metalideastec.entity;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -25,10 +19,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "tipo_movimiento")
-@NamedQueries({
-    @NamedQuery(name = "TipoMovimiento.findAll", query = "SELECT t FROM TipoMovimiento t"),
-    @NamedQuery(name = "TipoMovimiento.findByIdtipoMovimiento", query = "SELECT t FROM TipoMovimiento t WHERE t.idtipoMovimiento = :idtipoMovimiento"),
-    @NamedQuery(name = "TipoMovimiento.findByNombreMovimiento", query = "SELECT t FROM TipoMovimiento t WHERE t.nombreMovimiento = :nombreMovimiento")})
 public class TipoMovimiento implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,8 +30,6 @@ public class TipoMovimiento implements Serializable {
     @Basic(optional = false)
     @Column(name = "nombre_movimiento")
     private String nombreMovimiento;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoMovimientoIdtipoMovimiento", fetch = FetchType.LAZY)
-    private List<RegistroMovimientos> registroMovimientosList;
 
     public TipoMovimiento() {
     }
@@ -71,13 +59,6 @@ public class TipoMovimiento implements Serializable {
         this.nombreMovimiento = nombreMovimiento;
     }
 
-    public List<RegistroMovimientos> getRegistroMovimientosList() {
-        return registroMovimientosList;
-    }
-
-    public void setRegistroMovimientosList(List<RegistroMovimientos> registroMovimientosList) {
-        this.registroMovimientosList = registroMovimientosList;
-    }
 
     @Override
     public int hashCode() {
