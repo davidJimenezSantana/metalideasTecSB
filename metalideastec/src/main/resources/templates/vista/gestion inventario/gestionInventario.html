@@ -160,15 +160,20 @@
 
             <div class="col-8">
                 <div class="row">
-                    <div class="col-6"></div>
-                    <div class="col-6">
+                    <div class="col-5"></div>
+                    <div class="col-7">
                         <div class="row">
-                            <div class="col-6 btn-form">
+                            <div class="col-4 btn-form">
                                 <a th:href="@{/Proveedores}">
                                     <button><i class='bx bxs-truck'></i>Proveedores</button>
                                 </a>
                             </div>
-                            <div class="col-6 btn-form">
+                            <div class="col-4 btn-form">
+                                <a th:href="@{/verRegistro}">
+                                    <button><i class='bx bxs-food-menu'></i>Registros movimientos</button>
+                                </a>
+                            </div>
+                            <div class="col-4 btn-form">
                                 <button class="abrirCerrarFormAdd"><i class='bx bxs-add-to-queue'></i>Agregar
                                     producto</button>
                             </div>
@@ -187,10 +192,10 @@
                                 <th scope="col">Ref.</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Categoria</th>
-                                <th scope="col">Existentes</th><!-- 
-                                <th scope="col">Precio</th>
-                                <th scope="col">Imagen</th>
-                                <th scope="col">Marca</th> -->
+                                <th scope="col">Existentes</th>
+                                <!--<th scope="col">Precio</th>-->
+                                <!-- <th style="display:none;" scope="col">Imagen</th> -->
+                                <!--<th scope="col">Marca</th> -->
                                 <th scope="col">Opc</th>
                             </tr>
                         </thead>
@@ -200,11 +205,16 @@
                                 <td th:text="${producto.nombre}"></td>
                                 <td th:text="${producto.tipoIdtipo.nombre}"></td>
                                 <td th:text="${producto.cantidad}"></td>
+                                <div style="display:none;" th:if="${producto.img != null}"><img
+                                        th:src="@{/producto/imagen/{id}(id=${producto.idproducto})}" alt=""></div>
                                 <td valign="middle">
                                     <div class="opc-tabla">
                                         <i class='bx bx-cog iconos abrirCerrarFormEdit' id="opc-form"
                                             th:onclick="cargarEdit([[${producto.idproducto}]], [[${producto.nombre}]], [[${producto.precioVenta}]], [[${producto.precioCompra}]], [[${producto.cantidad}]], [[${producto.descripcion}]], [[${producto.marcaIdmarca.idmarca}]], [[${producto.tipoIdtipo.idcategoria}]])"></i>
-                                        <i class='bx bx-search-alt-2 iconos'></i>
+
+                                        <a href="" data-bs-toggle="modal" data-bs-target="#modalEntrar"><i
+                                                class='bx bx-search-alt-2 iconos'
+                                                th:onclick="cargarDetalles([[${producto.idproducto}]], [[${producto.nombre}]], [[${producto.precioVenta}]], [[${producto.precioCompra}]], [[${producto.cantidad}]], [[${producto.descripcion}]],  [[${producto.imgProducto()}]], [[${producto.marcaIdmarca.nombre}]], [[${producto.tipoIdtipo.nombre}]])"></i></a>
                                     </div>
                                 </td>
                             </tr>
@@ -228,8 +238,8 @@
                 <div class="row titulo-form">
                     <h1><i class='bx bx-add-to-queue'></i>Agregar producto</h1>
                 </div>
-                <form th:action="@{/agregarProducto}" th:object="${Producto}" class="needs-validation" method="post"
-                    novalidate>
+                <form th:action="@{/agregarProducto}" th:object="${Producto}" class="needs-validation"
+                    enctype="multipart/form-data" method="post" novalidate>
                     <div class="row">
                         <div class="col-6">
                             <div class="campo-form">
@@ -343,7 +353,7 @@
                         </div>
                         <div class="campo-form">
                             <label for="imagen">Imagen del producto</label>
-                            <input type="file" name="imagenProducto" th:field="*{img}" id="imagenProducto">
+                            <input type="file" name="imagenProducto" id="imagenProducto">
                         </div>
                     </div>
                     <div class="row btn-formulario">
@@ -366,8 +376,8 @@
                 <div class="row titulo-form">
                     <h1><i class='bx bx-cog'></i>Editar producto</h1>
                 </div>
-                <form th:action="@{/actualizarProducto}" th:object="${Producto}" method="post" class="needs-validation"
-                    novalidate>
+                <form th:action="@{/actualizarProducto}" th:object="${Producto}" method="post"
+                    enctype="multipart/form-data" class="needs-validation" novalidate>
                     <div class="row">
                         <div class="col-6">
                             <input type="hidden" name="nombreProducto" id="idProducto" th:field="*{idproducto}">
@@ -426,8 +436,8 @@
                                 th:field="*{descripcion}"></textarea>
                         </div>
                         <div class="campo-form">
-                            <label for="imagenProducto">Imagen del producto</label>
-                            <input type="file" name="imagenProducto" id="imagenProducto" th:field="*{img}">
+                            <label for="imagen">Imagen del producto</label>
+                            <input type="file" name="imagen" id="imagen">
                         </div>
                     </div>
                     <div class="row btn-formulario">
@@ -438,10 +448,12 @@
         </div>
     </div>
 
-    <!-- MODAL AGREGAR PROVEEDOR -->
+
+
+    <!--MODAL DETALLES PRODUCTO-->
     <div class="contenedor-modal">
-        <div class="modal" tabindex="-1" id="modalAgregar">
-            <div class="modal-dialog proveedor">
+        <div class="modal" tabindex="-1" id="modalEntrar">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <i class="bx bx-x iconos btn-close" data-bs-dismiss="modal" aria-label="Close"
@@ -449,123 +461,163 @@
                     </div>
                     <div class="modal-body">
                         <div class="row">
-                            <form th:action="@{/agregarProveedor}" th:object="${nuevoProveedor}" method="post"
-                                class="needs-validation" novalidate>
-                                <h2> <i class='bx bxs-truck'></i> Agregar proveedor</h2>
-                                <div class="mb-3">
-                                    <label for="nombreProveedor" class="form-label">Nombre*</label>
-                                    <input type="text" class="form-control" id="nombreProveedor" name="nombreProveedor"
-                                        placeholder="Nombre proveedor" th:field="*{nombre}" required>
-                                    <div class="valid-feedback">
-                                        ¡Bien! Datos correctos.
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        ¡Error! Verifica los datos.
-                                    </div>
+                            <div class="col modal-detalle-producto">
+                                <div class="row">
+                                    <h2>Detalles del producto</h2>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="correoProveedor" class="form-label">Correo</label>
-                                    <input type="email" class="form-control" id="correoProveedor" name="correoProveedor"
-                                        placeholder="name@correo.com" th:field="*{correo}">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="ubicaciónProveedor" class="form-label">Ubicación</label>
-                                    <input type="text" class="form-control" id="ubicaciónProveedor"
-                                        name="ubicaciónProveedor" placeholder="Dirección del proveedor"
-                                        th:field="*{ubicacion}">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="telefonoProveedor" class="form-label">Teléfono*</label>
-                                    <input type="number" class="form-control" id="telefonoProveedor"
-                                        name="telefonoProveedor" placeholder="###-###-####" required>
-                                    <div class="valid-feedback">
-                                        ¡Bien! Datos correctos.
+                                <div class="row">
+                                    <div class="col-5" style="padding-right: 35px;">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <label for="idProductoModal" class="form-label">Ref.</label>
+                                                <h5 id="idProductoModal"></h5>
+                                            </div>
+                                            <div class="col-9">
+                                                <label for="nombreProductoModal" class="form-label">Nombre</label>
+                                                <h5 id="nombreProductoModal"></h5>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="mb-2">
+                                            <label for="cantidadProductoModal" class="form-label">Existentes:
+                                            </label>
+                                            <h5 id="cantidadProductoModal"></h5>
+                                        </div>
+                                        <hr>
+
+                                        <div class="mb-2">
+                                            <label for="detalleProductoModal" class="form-label">Detalle</label>
+                                            <h5 id="detalleProductoModal"></h5>
+                                        </div>
+                                        <hr>
+
                                     </div>
-                                    <div class="invalid-feedback">
-                                        ¡Error! Verifica los datos.
+                                    <div class="col-7">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label for="apellido" class="form-label">Categoria</label>
+                                                <h5 id="tipoProductoModal"></h5>
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="telefono" class="form-label">Marca </label>
+                                                <h5 id="marcaProductoModal"></h5>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label for="apellido" class="form-label">Precio de venta</label>
+                                                <h5 id="precioVentaProductoModal"></h5>
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="telefono" class="form-label">Precio de compra</label>
+                                                <h5 id="precioCompraProductoModal"></h5>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <label for="imgProductoModal">Imagen del producto</label>
+                                            <div id="imgProductoModal" class="img-modalProducto"></div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="reg-siguiente">
-                                    <button type="submit" class="btn">Guardar</button>
+                                    <button class="btn" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
                                 </div>
-                            </form>
 
-
-                            </form>
+                            </div>
                         </div>
+
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
 
-    <div class="datos-guardados">
-        <div class="row">
-            <div class="col-2 cont-alert">
-                <i class='bx bx-check'></i>
-            </div>
-            <div class="col-10 cont-alert">
-                <h5>Producto registrado.</h5>
-            </div>
-        </div>
 
-    </div>
-    <div class="error-guardar">
-        <div class="row">
-            <div class="col-2 cont-alert">
-                <i class='bx bxs-error-circle'></i>
-            </div>
-            <div class="col-10">
-                <h5>¡Error!</h5>
-                <p>No se pudo registrar el producto.</p>
-            </div>
-        </div>
-    </div>
+    <div th:if="${param.agregarProductoFalse}">
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'bottom-start',
+                showConfirmButton: false,
+                timer: 5000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
 
-    <div class="datos-guardados">
-        <div class="row">
-            <div class="col-2 cont-alert">
-                <i class='bx bx-check'></i>
-            </div>
-            <div class="col-10 cont-alert">
-                <h5>Los cambios han sido guardados</h5>
-            </div>
-        </div>
-    </div>
-    <div class="error-guardar">
-        <div class="row">
-            <div class="col-2 cont-alert">
-                <i class='bx bxs-error-circle'></i>
-            </div>
-            <div class="col-10">
-                <h5>¡Error!</h5>
-                <p>No se guardaron cambios</p>
-            </div>
-        </div>
-    </div>
+            Toast.fire({
+                icon: 'error',
+                title: 'Error al insertar el producto! <br> verifique los datos.'
+            })
+        </script>
 
-    <div class="datos-guardados">
-        <div class="row">
-            <div class="col-2 cont-alert">
-                <i class='bx bx-check'></i>
-            </div>
-            <div class="col-10 cont-alert">
-                <h5>Proveedor registrado.</h5>
-            </div>
-        </div>
-
+        </script>
     </div>
-    <div class="error-guardar">
-        <div class="row">
-            <div class="col-2 cont-alert">
-                <i class='bx bxs-error-circle'></i>
-            </div>
-            <div class="col-10">
-                <h5>¡Error!</h5>
-                <p>No se pudo registrar al proveedor.</p>
-            </div>
-        </div>
+    <div th:if="${param.actualizarFalse}">
+        <script>
+            const Toast2 = Swal.mixin({
+                toast: true,
+                position: 'bottom-start',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast2.fire({
+                icon: 'error',
+                title: 'Error al actualizar el producto! <br> verifique los datos.'
+            })
+        </script>
+    </div>
+    <div th:if="${param.agregarProductoTrue}">
+        <script>
+            const Toast3 = Swal.mixin({
+                toast: true,
+                position: 'bottom-start',
+                showConfirmButton: false,
+                timer: 5000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast3.fire({
+                icon: 'success',
+                title: 'Registro de producto exitoso'
+            })
+        </script>
+
+        </script>
+    </div>
+    <div th:if="${param.actualizarTrue}">
+        <script>
+            const Toast4 = Swal.mixin({
+                toast: true,
+                position: 'bottom-start',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast4.fire({
+                icon: 'success',
+                title: 'Actualizacion exitosa.'
+            })
+        </script>
     </div>
 
 

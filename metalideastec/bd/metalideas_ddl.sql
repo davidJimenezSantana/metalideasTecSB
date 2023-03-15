@@ -274,6 +274,7 @@ CREATE TABLE IF NOT EXISTS `dbmetalideas`.`registro_movimientos` (
     REFERENCES `dbmetalideas`.`tipo_movimiento` (`idtipo_movimiento`),
   CONSTRAINT `fk_registro_movimientos_usuario1`
     FOREIGN KEY (`usuario_idusuario`)
+    REFERENCES `dbmetalideas`.`usuario` (`idusuario`),
   CONSTRAINT `fk_registro_movimientos_producto1`
     FOREIGN KEY (`producto_idproducto`)
     REFERENCES `dbmetalideas`.`producto` (`idproducto`)
@@ -344,5 +345,6 @@ DEFAULT CHARACTER SET = utf8mb3;
 
 ALTER TABLE `producto` ADD `img` VARCHAR(40) NULL AFTER `descripcion`;
 ALTER TABLE `registro_movimientos` CHANGE `fecha_movimiento` `fecha_movimiento` TIMESTAMP NOT NULL;
-
+ALTER TABLE `proveedor` CHANGE `correo` `correo` VARCHAR(35) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+ALTER TABLE `producto` CHANGE `img` `img` MEDIUMBLOB NULL DEFAULT NULL;
 

@@ -6,10 +6,14 @@ import java.util.List;
 
 import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.metalideas.metalideastec.entity.Categoria;
 import com.metalideas.metalideastec.entity.Marca;
@@ -27,11 +31,11 @@ import com.metalideas.metalideastec.persistencia.serv.TipoMovimientoServ;
 import com.metalideas.metalideastec.persistencia.serv.UsuarioServ;
 
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
-public class ProductoController {
+public class InventarioController {
 
     @Autowired
     private ProductoServ productoServ;
@@ -40,7 +44,7 @@ public class ProductoController {
     @Autowired
     private CategoriaServ categoriaServ;
     @Autowired
-    private ProveedorServ proveedorServ;    
+    private ProveedorServ proveedorServ;
     @Autowired
     private RegistroMovimientosServ registroMovimientosServ;
     @Autowired
@@ -73,33 +77,65 @@ public class ProductoController {
     @PostMapping(value = "/agregarProducto")
     public String agregarProducto(@ModelAttribute("Producto") Producto producto,
             @RequestParam("proveedorId") Integer proveedorId,
-            @RequestParam("obsProducto") String obsRegistro) {
+            @RequestParam("obsProducto") String obsRegistro,
+            @RequestParam("imagenProducto") MultipartFile imagen) {
 
-        Proveedor proveedor = proveedorServ.BuscarProveedor(proveedorId);
+        String url = "";
+        if (!imagen.isEmpty()) {
+            try {
+                byte[] bytesImagen = imagen.getBytes();
+                producto.setImg(bytesImagen);
+            } catch (Exception e) {
+                url = "?error=img";
+            }
+        } else {
+            producto.setImg(null);
+        }
 
-        producto.agregarProveedor(proveedor);
-        Producto productoNuevo = productoServ.agregar(producto);
+        try {
+            Proveedor proveedor = proveedorServ.BuscarProveedor(proveedorId);
 
-        proveedor.agregarProducto(producto);
-        proveedorServ.actualizar(proveedor);
+            producto.agregarProveedor(proveedor);
+            Producto productoNuevo = productoServ.agregar(producto);
 
-        TipoMovimiento tipoMovimiento = tipoMovimientoServ.buscarTipoMovimiento(2);
-        Usuario usuario = usuarioServ.buscarUsuario(3);// usuario temporal
-        Date fechaActual = new Date();
-        Timestamp timestamp = new Timestamp(fechaActual.getTime());
-        RegistroMovimientos registro = new RegistroMovimientos(obsRegistro, timestamp,
-                productoNuevo.getCantidad(), tipoMovimiento, usuario, productoNuevo);
-        registroMovimientosServ.agregarRegistroMovimientos(registro);
+            proveedor.agregarProducto(producto);
+            proveedorServ.actualizar(proveedor);
 
-        return "redirect:/VerInventario";
+            TipoMovimiento tipoMovimiento = tipoMovimientoServ.buscarTipoMovimiento(1);
+            Date fechaActual = new Date();
+            Timestamp timestamp = new Timestamp(fechaActual.getTime());
+
+            Usuario usuario = usuarioServ.buscarUsuario(3);// usuario temporal
+
+            RegistroMovimientos registro = new RegistroMovimientos(obsRegistro, timestamp,
+                    productoNuevo.getCantidad(), tipoMovimiento, usuario, productoNuevo);
+            registroMovimientosServ.agregarRegistroMovimientos(registro);
+            url = "?agregarProductoTrue";
+        } catch (Exception e) {
+            url = "?agregarProductoFalse";
+        }
+
+        return "redirect:/VerInventario" + url;
     }
 
     // Actualizar producto
     @PostMapping(value = "/actualizarProducto")
-    public String actualizarProducto(@ModelAttribute("Producto") Producto producto) {
+    public String actualizarProducto(@ModelAttribute("Producto") Producto producto,
+            @RequestParam("imagen") MultipartFile imagen) {
 
         Producto productoActualiza = productoServ.buscarProductoId(producto.getIdproducto());
-
+        String url = "";
+        if (!imagen.isEmpty()) {
+            try {
+                byte[] bytesImagen = imagen.getBytes();
+                productoActualiza.setImg(bytesImagen);
+            } catch (Exception e) {
+                url = "?error=img";
+            }
+        } else {
+            productoActualiza.setImg(null);
+        }
+        try {
         productoActualiza.setNombre(producto.getNombre());
         productoActualiza.setPrecioVenta(producto.getPrecioVenta());
         productoActualiza.setTipoIdtipo(producto.getTipoIdtipo());
@@ -107,16 +143,28 @@ public class ProductoController {
         productoActualiza.setPrecioCompra(producto.getPrecioCompra());
         productoActualiza.setMarcaIdmarca(producto.getMarcaIdmarca());
         productoActualiza.setDescripcion(producto.getDescripcion());
-        productoActualiza.setImg(producto.getImg());
+        
+            productoServ.actualizar(productoActualiza);
+            url = "?actualizarTrue";
+        } catch (Exception e) {
+            url = "?actualizarFalse";
+        }
 
-        productoServ.actualizar(productoActualiza);
-        return "redirect:/VerInventario";
+        return "redirect:/VerInventario" + url;
+    }
+   
+
+    @GetMapping("/producto/imagen/{id}")
+    public ResponseEntity<byte[]> getImage(@PathVariable Integer id) {
+        Producto producto = productoServ.buscarProductoId(id);
+
+        if (producto != null && producto.getImg() != null) {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.IMAGE_JPEG);
+            return new ResponseEntity<>(producto.getImg(), headers, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 
-    // Ver lista de productos
-    @DeleteMapping(value = "/eliminarProducto")
-    public void eliminarProducto(@RequestBody Producto producto) {
-        productoServ.borrar(producto);
-    }
-    
 }

@@ -15,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -50,9 +51,10 @@ public class Producto implements Serializable {
     @Column(name = "descripcion")
     private String descripcion;
 
+    @Lob
     @Basic(optional = false)
-    @Column(name = "img")
-    private String img;
+    @Column(name = "img")    
+    private byte[] img;
 
     @JoinColumn(name = "marca_idmarca")
     @ManyToOne()
@@ -86,7 +88,7 @@ public class Producto implements Serializable {
     }
 
     public Producto(Integer idproducto, String nombre, int precioVenta, int precioCompra, int cantidad,
-            String descripcion, String img, Marca marcaIdmarca, Categoria tipoIdtipo, List<Proveedor> proveedores) {
+            String descripcion, byte[] img, Marca marcaIdmarca, Categoria tipoIdtipo, List<Proveedor> proveedores) {
         this.idproducto = idproducto;
         this.nombre = nombre;
         this.precioVenta = precioVenta;
@@ -163,11 +165,11 @@ public class Producto implements Serializable {
         this.tipoIdtipo = tipoIdtipo;
     }
 
-    public String getImg() {
+    public byte[] getImg() {
         return img;
     }
 
-    public void setImg(String img) {
+    public void setImg(byte[] img) {
         this.img = img;
     }
 
@@ -220,6 +222,13 @@ public class Producto implements Serializable {
             proveedores.add(proveedor);
             proveedor.getProductos().add(this);
         }
+    }
+
+    public String imgProducto(){
+        if (this.img == null){
+            return "";
+        }
+        return "<img src='/producto/imagen/"+ this.idproducto +"'/>";
     }
 
 }

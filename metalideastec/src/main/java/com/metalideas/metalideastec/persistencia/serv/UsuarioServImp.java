@@ -24,4 +24,5 @@ public class UsuarioServImp implements UsuarioServ {
         return usuarioDAO.findById(id).get();
     }
     
+    
 }

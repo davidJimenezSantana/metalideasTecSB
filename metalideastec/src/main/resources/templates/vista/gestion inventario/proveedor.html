@@ -151,21 +151,27 @@
 
     </div>
 
-    <!-- CONTENIDO MODULO INVENTARIO -->
-    <div class="container">
-        <div class="row titulo-Gestion">
+    <!-- CONTENIDO MODULO Proveedores -->
+    <div class="container">       
+        <div class="row titulo-Gestion">  
+            <div class="row">
+                <div class="col btn-form justify-content-start">   
+                    <a th:href="@{/VerInventario}">
+                        <button href=""><i class='bx bxs-left-arrow-circle'></i> Volver</button>
+                    </a>
+                </div>
+            </div>          
             <h1>Proveedores</h1>
         </div>
         <div class="row form-Gestion">
 
             <div class="col-8">
                 <div class="row">
-                    <div class="col-6"></div>
-                    <div class="col-6">
+                    <div class="col">
                         <div class="row">
-                            <div class="col-6 btn-form">
+                            <div class="col btn-form justify-content-end">
                                 <button href="" data-bs-toggle="modal" data-bs-target="#modalAgregar"><i
-                                        class='bx bxs-truck'></i>Agregar proveedor</button>
+                                        class='bx bxs-truck'></i> Agregar proveedor</button>
                             </div>
                         </div>
                     </div>
@@ -198,7 +204,6 @@
                                     <div class="opc-tabla">
                                         <i class='bx bx-cog iconos abrirCerrarFormEdit' id="opc-form"
                                         th:onclick="cargarEdit([[${proveedor.idproveedor}]], [[${proveedor.nombre}]], [[${proveedor.correo}]], [[${proveedor.ubicacion}]], [[${proveedor.tel}]])"></i>
-                                        <i class='bx bx-search-alt-2 iconos'></i>
                                     </div>
                                 </td>
                             </tr>

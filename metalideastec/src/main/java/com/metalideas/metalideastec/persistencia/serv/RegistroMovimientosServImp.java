@@ -12,6 +12,7 @@ public class RegistroMovimientosServImp implements RegistroMovimientosServ {
 
     @Autowired
     private RegistroMovimientosDAO registroMovimientosDAO;
+    
     public List<RegistroMovimientos> listarRegistroMovimientos() {
         return registroMovimientosDAO.findAll();
     }

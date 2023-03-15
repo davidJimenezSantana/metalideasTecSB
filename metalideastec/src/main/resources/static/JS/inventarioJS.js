@@ -24,6 +24,18 @@ function cargarEdit(id,nombre,precioVenta,precioCompra,cantidad,descripcion,idma
     $("#marcaProducto").val(idmarca); 
     $("#tipoProducto").val(idcategoria); 
 }
+function cargarDetalles(id,nombre,precioVenta,precioCompra,cantidad,descripcion,img,idmarca,idcategoria) {
+    $("#idProductoModal").html(id); 
+    $("#nombreProductoModal").html(nombre);
+     $("#precioVentaProductoModal").html(precioVenta);
+    $("#precioCompraProductoModal").html(precioCompra);
+    $("#cantidadProductoModal").html(cantidad);
+    $("#detalleProductoModal").html(descripcion);
+    $("#imgProductoModal").html(img)
+    $("#marcaProductoModal").html(idmarca); 
+    $("#tipoProductoModal").html(idcategoria);  
+}
+
 
 function setProveedorId(input) {
     var proveedorId = input.value;
