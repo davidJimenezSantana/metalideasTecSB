@@ -347,4 +347,6 @@ ALTER TABLE `producto` ADD `img` VARCHAR(40) NULL AFTER `descripcion`;
 ALTER TABLE `registro_movimientos` CHANGE `fecha_movimiento` `fecha_movimiento` TIMESTAMP NOT NULL;
 ALTER TABLE `proveedor` CHANGE `correo` `correo` VARCHAR(35) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
 ALTER TABLE `producto` CHANGE `img` `img` MEDIUMBLOB NULL DEFAULT NULL;
-
+ALTER TABLE `venta` CHANGE `fecha` `fecha` TIMESTAMP NULL DEFAULT NULL;
+ALTER TABLE `comprobante_de_pago` DROP `hora`;
+ALTER TABLE `comprobante_de_pago` CHANGE `fecha` `fecha` TIMESTAMP NOT NULL;

@@ -1,8 +1,5 @@
 $(document).ready(function () {
-
-    //cargarDatosTabla();
-
-    $('#tabla_Inventario').DataTable({
+    $('#tabla_ventas').DataTable({
         dom: 'Bfrtip',
         paging: false,
         scrollY: 400,
@@ -14,17 +11,12 @@ $(document).ready(function () {
     });
 })
 
-function cargarEdit(id,nombre,precioVenta,precioCompra,cantidad,descripcion,idmarca,idcategoria) {
-    $("#idProducto").val(id);
-    $("#nombreProducto").val(nombre);
-    $("#precioVentaProducto").val(precioVenta);
-    $("#precioCompraProducto").val(precioCompra);
-    $("#cantidadProducto").val(cantidad);
-    $("#detalleProducto").val(descripcion);
-    $("#marcaProducto").val(idmarca); 
-    $("#tipoProducto").val(idcategoria); 
+ function cargarEdit(id,estado,destino) {
+    $("#idVentaEdit").val(id);
+    $("#estadoVentaEdit").val(estado);
+    $("#destinoVentaEdit").val(destino);
 }
-function cargarDetalles(id,nombre,precioVenta,precioCompra,cantidad,descripcion,img,idmarca,idcategoria) {
+/*function cargarDetalles(id,nombre,precioVenta,precioCompra,cantidad,descripcion,img,idmarca,idcategoria) {
     $("#idProductoModal").html(id); 
     $("#nombreProductoModal").html(nombre);
      $("#precioVentaProductoModal").html(precioVenta);
@@ -35,7 +27,7 @@ function cargarDetalles(id,nombre,precioVenta,precioCompra,cantidad,descripcion,
     $("#marcaProductoModal").html(idmarca); 
     $("#tipoProductoModal").html(idcategoria);  
 }
-
+ */
 
 function setProveedorId(input) {
     var proveedorId = input.value;

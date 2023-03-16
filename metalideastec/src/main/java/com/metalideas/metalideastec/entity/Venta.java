@@ -5,7 +5,7 @@
 package com.metalideas.metalideastec.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -21,8 +21,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -50,8 +48,7 @@ public class Venta implements Serializable {
     @Column(name = "destino")
     private String destino;
     @Column(name = "fecha")
-    @Temporal(TemporalType.DATE)
-    private Date fecha;
+    private Timestamp fecha;
     @JoinColumn(name = "comprobante_de_pago_idcomprobante_de_pago", referencedColumnName = "idcomprobante_de_pago")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private ComprobanteDePago comprobanteDePagoIdcomprobanteDePago;
@@ -103,11 +100,11 @@ public class Venta implements Serializable {
         this.destino = destino;
     }
 
-    public Date getFecha() {
+    public Timestamp getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(Timestamp fecha) {
         this.fecha = fecha;
     }
 

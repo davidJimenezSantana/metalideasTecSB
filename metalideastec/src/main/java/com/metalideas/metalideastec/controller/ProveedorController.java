@@ -12,12 +12,12 @@ import com.metalideas.metalideastec.persistencia.serv.ProveedorServ;
 
 @Controller
 public class ProveedorController {
-    
+
     @Autowired
     private ProveedorServ proveedorServ;
 
     @GetMapping(value = "/Proveedores")
-    public String verProveedores(Model model){
+    public String verProveedores(Model model) {
 
         Proveedor nuevoProveedor = new Proveedor();
 
@@ -29,21 +29,30 @@ public class ProveedorController {
 
     // agregar proveedor
     @PostMapping(value = "/agregarProveedor")
-    public String agregarProveedor(@ModelAttribute("Proveedor") Proveedor proveedor){
+    public String agregarProveedor(@ModelAttribute("Proveedor") Proveedor proveedor) {
+        String var = "";
+        try {
+            proveedorServ.agregar(proveedor);
+            var = "?agregarTrue";
+        } catch (Exception e) {
+            var = "?agregarFalse";
+        }
 
-        proveedorServ.agregar(proveedor);
-        return "redirect:/Proveedores";
+        return "redirect:/Proveedores" + var;
     }
 
     // Actualizar proveedor
     @PostMapping(value = "/editaProveedor")
-    public String editaProveedor(@ModelAttribute("Proveedor") Proveedor proveedor){
+    public String editaProveedor(@ModelAttribute("Proveedor") Proveedor proveedor) {
 
-        proveedorServ.actualizar(proveedor);
-        return "redirect:/Proveedores";
+        String var = "";
+        try {
+            proveedorServ.actualizar(proveedor);
+            var = "?actualizarTrue";
+        } catch (Exception e) {
+            var = "?actualizarFalse";
+        }        
+        return "redirect:/Proveedores" + var;
     }
 
-
-
-    
 }

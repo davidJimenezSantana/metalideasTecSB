@@ -97,7 +97,7 @@
                     <!-- SUBMENU -->
                     <li>
                         <div class="link-menu">
-                            <a href="#">
+                            <a th:href="@{/gestionVentas}">
                                 <i class='link-icon bx bx-spreadsheet'></i>
                                 <span class="link-nombre">VENTAS</span>
                             </a>
@@ -182,7 +182,7 @@
         <div class="row ">
             <div class="col-8">
                 <div class="contenedor-tabla">
-                    <table class="table" id="tabla_Proveedores">
+                    <table class="table table-hover" id="tabla_Proveedores">
                         <thead>
                             <tr>
                                 <th scope="col">Ref.</th>
@@ -227,7 +227,7 @@
                 <div class="row titulo-form">
                     <h1><i class='bx bx-cog'></i>Editar proveedor</h1>
                 </div>
-                <form th:action="@{/agregarProveedor}" th:object="${Proveedor}" method="post" class="needs-validation"
+                <form th:action="@{/editaProveedor}" th:object="${Proveedor}" method="post" class="needs-validation"
                     novalidate>
                     <div class="row">
                         <div class="col">
@@ -319,73 +319,90 @@
         </div>
     </div>
 
-    <div class="datos-guardados">
-        <div class="row">
-            <div class="col-2 cont-alert">
-                <i class='bx bx-check'></i>
-            </div>
-            <div class="col-10 cont-alert">
-                <h5>Producto registrado.</h5>
-            </div>
-        </div>
+    <!--ALERTAS Y NOTIFICACIONES-->
+    <div th:if="${param.agregarTrue}">
+        <script>
+            const Toast3 = Swal.mixin({
+                toast: true,
+                position: 'bottom-start',
+                showConfirmButton: false,
+                timer: 5000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
 
+            Toast3.fire({
+                icon: 'success',
+                title: 'Registro de proveedor exitoso'
+            })
+        </script>
     </div>
-    <div class="error-guardar">
-        <div class="row">
-            <div class="col-2 cont-alert">
-                <i class='bx bxs-error-circle'></i>
-            </div>
-            <div class="col-10">
-                <h5>¡Error!</h5>
-                <p>No se pudo registrar el producto.</p>
-            </div>
-        </div>
-    </div>
+    <div th:if="${param.agregarFalse}">
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'bottom-start',
+                showConfirmButton: false,
+                timer: 5000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
 
-    <div class="datos-guardados">
-        <div class="row">
-            <div class="col-2 cont-alert">
-                <i class='bx bx-check'></i>
-            </div>
-            <div class="col-10 cont-alert">
-                <h5>Los cambios han sido guardados</h5>
-            </div>
-        </div>
+            Toast.fire({
+                icon: 'error',
+                title: 'Error al agregar proveedor<br> verifique los datos.'
+            })
+        </script>
     </div>
-    <div class="error-guardar">
-        <div class="row">
-            <div class="col-2 cont-alert">
-                <i class='bx bxs-error-circle'></i>
-            </div>
-            <div class="col-10">
-                <h5>¡Error!</h5>
-                <p>No se guardaron cambios</p>
-            </div>
-        </div>
-    </div>
+    <div th:if="${param.actualizarTrue}">
+        <script>
+            const Toast4 = Swal.mixin({
+                toast: true,
+                position: 'bottom-start',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
 
-    <div class="datos-guardados">
-        <div class="row">
-            <div class="col-2 cont-alert">
-                <i class='bx bx-check'></i>
-            </div>
-            <div class="col-10 cont-alert">
-                <h5>Proveedor registrado.</h5>
-            </div>
-        </div>
+            Toast4.fire({
+                icon: 'success',
+                title: 'Actualizacion exitosa.'
+            })
+        </script>
+    </div>
+    <div th:if="${param.actualizarFalse}">
+        <script>
+            const Toast2 = Swal.mixin({
+                toast: true,
+                position: 'bottom-start',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
 
+            Toast2.fire({
+                icon: 'error',
+                title: 'Error al actualizar los datos del proveedor! <br> verifique los datos.'
+            })
+        </script>
     </div>
-    <div class="error-guardar">
-        <div class="row">
-            <div class="col-2 cont-alert">
-                <i class='bx bxs-error-circle'></i>
-            </div>
-            <div class="col-10">
-                <h5>¡Error!</h5>
-                <p>No se pudo registrar al proveedor.</p>
-            </div>
-        </div>
-    </div>
+    
+    
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

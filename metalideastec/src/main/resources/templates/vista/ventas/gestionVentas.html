@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -14,7 +14,25 @@
     <!-- Boxicons CSS -->
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 
-    <link rel="stylesheet" href="../../style.css">
+
+    <!-- CSS DATATABLE-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    </link>
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
+    </link>
+
+    <!-- JavaScript DATATABLE -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <link rel="stylesheet" href="style.css">
 
 
 
@@ -28,8 +46,8 @@
     <header id="header-administrador">
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container">
-                <a class="navbar-brand" href="../../index.html"><img class="logoMetalideas" src="../../img/Metalideas.png"
-                        alt="Metalideas"></a>
+                <a class="navbar-brand" href="../../index.html"><img class="logoMetalideas"
+                        src="../../img/Metalideas.png" alt="Metalideas"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -55,6 +73,7 @@
         </nav>
     </header>
 
+    <!-- MENU SIDEBAR -->
     <div class="sidebar " id="sidebar">
         <div class="logo close__sidebar">
             <i class='bx bx-menu'></i>
@@ -65,29 +84,23 @@
             <div class="nav-menu1">
                 <ul class="nav-links">
                     <li>
-                        <a href="../gestion de usuarios/gestionUsuarios.html">
+                        <a th:href="@{/verUsuarios}">
                             <i class='link-icon bx bx-user'></i>
                             <span class="link-nombre">GESTIÓN DE USUARIOS</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="../gestion inventario/gestionInventario.html">
+                        <a th:href="@{/VerInventario}">
                             <i class='link-icon bx bx-package'></i>
                             <span class="link-nombre">GESTIÓN INVENTARIO</span>
                         </a>
                     </li>
 
-                    <li>
-                        <a href="../carrito/carrito.html">
-                            <i class='link-icon bx bx-cart-add'></i>
-                            <span class="link-nombre">CARRITO</span>
-                        </a>
-                    </li>
-
+                    <!-- SUBMENU -->
                     <li>
                         <div class="link-menu">
-                            <a href="../ventas/ventas.html">
+                            <a th:href="@{/gestionVentas}">
                                 <i class='link-icon bx bx-spreadsheet'></i>
                                 <span class="link-nombre">VENTAS</span>
                             </a>
@@ -100,7 +113,7 @@
                             </li>
 
                             <li>
-                                <a class="link-nombre icon-submenu" href="../ventas/carrito/carrito.html">
+                                <a class="link-nombre icon-submenu" href="#">
                                     <i class='link-icon bx bx-cart-add'></i>
                                     Carrito
                                 </a>
@@ -116,7 +129,7 @@
                 </div>
                 <ul class="nav-links">
                     <li>
-                        <a href="../bienvenida-administrador/inicio.html">
+                        <a href="#">
                             <i class='link-icon bx bxs-user-account'></i>
                             <span class="link-nombre">VER PERFIL</span>
                         </a>
@@ -130,7 +143,7 @@
                     </li>
 
                     <li>
-                        <a href="../../index.html">
+                        <a href="#">
                             <i class='link-icon bx bx-exit'></i>
                             <span class="link-nombre">SALIR</span>
                         </a>
@@ -146,40 +159,19 @@
             <h1>Ventas</h1>
         </div>
         <div class="row form-Gestion">
-            <div class="col-2">
-                <input type="date" id="buscarVenta" name="buscarVenta" placeholder="Buscar Ventas por fecha">
-            </div>
-            <div class="col-2">
-                <select id="tipoVenta" name="tipoVenta">
-                    <option selected>Estado</option>
-                    <option value="pedidio">Pedidio</option>
-                    <option value="cancelada">Cancelada</option>
-                    <option value="finalizada">Finalizada</option>
-                </select>
-            </div>
-            <div class="col-4">
-                <div class="row">
-                    <div class="col-3">
-
-                    </div>
-                    <div class="col-4 btn-form">
-                        <button><i class='bx bxs-file-png'></i>Exportar</button>
-                    </div>
-                    <div class="col-5 btn-form">
-                        <button class="abrirCerrarFormAdd"><i class='bx bxs-shopping-bag' ></i></i>Registrar venta</button>
-                    </div>
-                </div>
+            <div class="col-8 btn-form justify-content-end">
+                <button class="abrirCerrarFormAdd"><i class='bx bxs-shopping-bag'></i></i>Registrar
+                    venta</button>
             </div>
         </div>
         <div class="row ">
             <div class="col-8">
                 <div class="contenedor-tabla">
-                    <table class="table">
+                    <table class="table table-hover" id="tabla_ventas">
                         <thead>
                             <tr>
                                 <th scope="col">venta</th>
                                 <th scope="col">Fecha</th>
-                                <th scope="col">Hora</th>
                                 <th scope="col">Estado</th>
                                 <th scope="col">Cliente</th>
                                 <th scope="col">Total</th>
@@ -187,49 +179,20 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>dd/mm/aaaa</td>
-                                <td>12:00</td>
-                                <td>Finalizado</td>
-                                <td>Frailejon Ernesto</td>
-                                <td>$100000</td>
+                            <tr th:each="venta : ${ventas}">
+                                <th scope="row" th:text="${venta.idventa}"></th>
+                                <td th:text="${venta.fecha}"></td>
+                                <td th:text="${venta.estadoIdestado.nombre}"></td>
+                                <td th:text="${venta.usuarioIdusuario.nombre}"></td>
+                                <td th:text="${venta.total}"></td>
                                 <td valign="middle">
                                     <div class="opc-tabla">
-                                        <i class='bx bx-cog iconos abrirCerrarFormEdit' id="opc-form"></i>
+                                        <i class='bx bx-cog iconos abrirCerrarFormEdit' id="opc-form"
+                                            th:onclick="cargarEdit([[${venta.idventa}]], [[${venta.estadoIdestado.idestado}]], [[${venta.destino}]])"></i>
                                         <i class='bx bx-search-alt-2 iconos'></i>
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>dd/mm/aaaa</td>
-                                <td>12:00</td>
-                                <td>Finalizado</td>
-                                <td>Frailejon Ernesto</td>
-                                <td>$100000</td>
-                                <td valign="middle">
-                                    <div class="opc-tabla">
-                                        <i class='bx bx-cog'></i>
-                                        <i class='bx bx-search-alt-2'></i>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>dd/mm/aaaa</td>
-                                <td>12:00</td>
-                                <td>Finalizado</td>
-                                <td>Frailejon Ernesto</td>
-                                <td>$100000</td>
-                                <td valign="middle">
-                                    <div class="opc-tabla">
-                                        <i class='bx bx-cog'></i>
-                                        <i class='bx bx-search-alt-2'></i>
-                                    </div>
-                                </td>
-                            </tr>
-
                         </tbody>
                     </table>
                 </div>
@@ -238,7 +201,7 @@
         </div>
     </div>
 
-
+    <!--FORMULARIO AGREGAR-->
     <div class="form-lateral" id="agregarForm">
         <div class="form-gestion">
             <div class="contenedor-formulario" id="contenedor-formulario">
@@ -248,63 +211,70 @@
                     </div>
                 </div>
                 <div class="row titulo-form">
-                    <h1><i class='bx bxs-shopping-bag' ></i>Registrar venta</h1>
+                    <h1><i class='bx bxs-shopping-bag'></i>Registrar venta</h1>
                 </div>
-                <form action="" class="needs-validation" novalidate>
+                <form th:action="@{/registrarVenta}" th:object="${venta}" class="needs-validation" method="post"
+                    novalidate>
                     <div class="row">
                         <div class="col-6">
                             <div class="campo-form">
-                                <label for="identificacionCliente">N° Identificación del cliente*</label>
-                                <input type="number" name="identificacionCliente" id="identificacionCliente" required>
-                                <div class="valid-feedback">
-                                    ¡Bien! Datos correctos.
-                                </div>
-                                <div class="invalid-feedback">
-                                    ¡Error! Verifica los datos.
-                                </div>
+                                <label for="destinoVenta">Destino venta</label>
+                                <input type="text" name="destinoVenta" id="destinoVenta" th:field="*{destino}">
                             </div>
                             <div class="campo-form">
                                 <label for="estadoVenta">Estado de la venta*</label>
-                                <select id="estadoVenta" name="estadoVenta" required>
-                                    <option value="">Estado</option>
-                                    <option value="Pedido">Pedido</option>
-                                    <option value="Completada">Completada</option>
-                                    <option value="Cancelada">Cancelada</option>
+                                <select th:field="*{estadoIdestado}">
+                                    <th:block th:each="estado : ${estadosVenta}">
+                                        <option th:value="${estado.idestado}" th:text="${estado.nombre}"></option>
+                                    </th:block>
                                 </select>
-                                <div class="valid-feedback">
-                                    ¡Bien! Datos correctos.
-                                </div>
-                                <div class="invalid-feedback">
-                                    ¡Error! Verifica los datos.
-                                </div>
+                            </div>
+                            <div class="valid-feedback">
+                                ¡Bien! Datos correctos.
+                            </div>
+                            <div class="invalid-feedback">
+                                ¡Error! Verifica los datos.
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="campo-form">
-                                <label for="destinoVenta">Destino venta</label>
-                                <input type="text" name="destinoVenta" id="destinoVenta">
-                            </div>
-                            <div class="campo-form">
                                 <label for="totalVenta">Total*</label>
-                                <input type="number" name="totalVenta" id="totalVenta" required>
+                                <input type="number" name="totalVenta" id="totalVenta" th:field="*{total}" required>
                                 <div class="valid-feedback">
                                     ¡Bien! Datos correctos.
                                 </div>
                                 <div class="invalid-feedback">
                                     ¡Error! Verifica los datos.
                                 </div>
-                            </div>                            
+                            </div>
+                            <div class="campo-form">
+                                <label for="estadoVenta">Metodo de pago*</label>
+                                <select th:field="*{metodoPagoIdmetodoPago}">
+                                    <th:block th:each="metodo : ${metodosPago}">
+                                        <option th:value="${metodo.idmetodoPago}" th:text="${metodo.nombre}"></option>
+                                    </th:block>
+                                </select>
+                            </div>
+                            <div class="valid-feedback">
+                                ¡Bien! Datos correctos.
+                            </div>
+                            <div class="invalid-feedback">
+                                ¡Error! Verifica los datos.
+                            </div>
                         </div>
                     </div>
-                    <div class="row btn-formulario">
-                        <input type="submit" value="Registrar">
-                    </div>
-                </form>
 
             </div>
+            <div class="row btn-formulario">
+                <input type="submit" value="Registrar">
+            </div>
+            </form>
+
         </div>
     </div>
+    </div>
 
+    <!--FORMULARIO EDITAR-->
     <div class="form-lateral" id="editarForm">
         <div class="form-gestion">
             <div class="contenedor-formulario" id="contenedor-formulario">
@@ -316,26 +286,26 @@
                 <div class="row titulo-form">
                     <h1><i class='bx bx-cog'></i>Editar venta</h1>
                 </div>
-                <form action="">
+                <form th:action="@{/actualizarVenta}" th:object="${venta}" method="post">
                     <div class="row">
-                        <div class="col-6">                            
+                        <input type="hidden" id="idVentaEdit" th:field="*{idventa}">
+                        <div class="col-6">
                             <div class="campo-form">
                                 <label for="estadoVenta">Estado de la venta</label>
-                                <select id="estadoVenta" name="estadoVenta">
-                                    <option selected>Estado</option>
-                                    <option value="Pedido">Pedido</option>
-                                    <option value="Completada">Completada</option>
-                                    <option value="Cancelada">Cancelada</option>
+                                <select id="estadoVentaEdit" th:field="*{estadoIdestado}">
+                                    <th:block th:each="estado : ${estadosVenta}">
+                                        <option th:value="${estado.idestado}" th:text="${estado.nombre}"></option>
+                                    </th:block>
                                 </select>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="campo-form">
-                                <label for="destinoVenta">Destino venta</label>
-                                <input type="text" name="destinoVenta" id="destinoVenta">
+                                <label for="destinoVentaEdit">Destino venta</label>
+                                <input type="text" name="destinoVenta" id="destinoVentaEdit" th:field="*{destino}">
                             </div>
                         </div>
-                    </div>                    
+                    </div>
                     <div class="row btn-formulario">
                         <input type="submit" value="Editar">
                     </div>
@@ -345,58 +315,96 @@
         </div>
     </div>
 
-    <div class="datos-guardados">
-        <div class="row">
-            <div class="col-2 cont-alert">
-                <i class='bx bx-check'></i>
-            </div>
-            <div class="col-10 cont-alert">
-                <h5>Venta registrada.</h5>
-            </div>
-        </div>
+    <!--ALERTAS Y NOTIFICACIONES-->
+    <div th:if="${param.registroTrue}">
+        <script>
+            const Toast3 = Swal.mixin({
+                toast: true,
+                position: 'bottom-start',
+                showConfirmButton: false,
+                timer: 5000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
 
+            Toast3.fire({
+                icon: 'success',
+                title: 'Registro de venta exitoso'
+            })
+        </script>
     </div>
-    <div class="error-guardar">
-        <div class="row">
-            <div class="col-2 cont-alert">
-                <i class='bx bxs-error-circle' ></i>
-            </div>
-            <div class="col-10">
-                <h5>¡Error!</h5>
-                <p>No se pudo registrar la venta.</p>
-            </div>
-        </div>        
+    <div th:if="${param.registroFalse}">
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'bottom-start',
+                showConfirmButton: false,
+                timer: 5000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: 'error',
+                title: 'Error aal registrar la venta! <br> Verifique los datos.'
+            })
+        </script>
+    </div>
+    <div th:if="${param.actualizarTrue}">
+        <script>
+            const Toast4 = Swal.mixin({
+                toast: true,
+                position: 'bottom-start',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast4.fire({
+                icon: 'success',
+                title: 'Actualizacion exitosa.'
+            })
+        </script>
+    </div>
+    <div th:if="${param.actualizarFalse}">
+        <script>
+            const Toast2 = Swal.mixin({
+                toast: true,
+                position: 'bottom-start',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast2.fire({
+                icon: 'error',
+                title: 'Error al actualizar los datos de la venta! <br> verifique los datos.'
+            })
+        </script>
     </div>
 
-    <div class="datos-guardados">
-        <div class="row">
-            <div class="col-2 cont-alert">
-                <i class='bx bx-check'></i>
-            </div>
-            <div class="col-10 cont-alert">
-                <h5>Los cambios han sido guardados</h5>
-            </div>
-        </div>
-    </div>
-    <div class="error-guardar">
-        <div class="row">
-            <div class="col-2 cont-alert">
-                <i class='bx bxs-error-circle'></i>
-            </div>
-            <div class="col-10">
-                <h5>¡Error!</h5>
-                <p>No se guardaron cambios</p>
-            </div>
-        </div>
-    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 
-    <script src="../../JS.js"></script>
+    <script src="../../JS/JS.js"></script>
+    <script src="../../JS/ventasJS.js"></script>
 
-    
 
 </body>
 

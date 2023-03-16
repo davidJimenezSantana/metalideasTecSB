@@ -86,10 +86,8 @@ public class InventarioController {
                 byte[] bytesImagen = imagen.getBytes();
                 producto.setImg(bytesImagen);
             } catch (Exception e) {
-                url = "?error=img";
+                url = "?errorimg";
             }
-        } else {
-            producto.setImg(null);
         }
 
         try {
@@ -130,12 +128,9 @@ public class InventarioController {
                 byte[] bytesImagen = imagen.getBytes();
                 productoActualiza.setImg(bytesImagen);
             } catch (Exception e) {
-                url = "?error=img";
+                url = "?errorimg";
             }
-        } else {
-            productoActualiza.setImg(null);
         }
-        try {
         productoActualiza.setNombre(producto.getNombre());
         productoActualiza.setPrecioVenta(producto.getPrecioVenta());
         productoActualiza.setTipoIdtipo(producto.getTipoIdtipo());
@@ -143,7 +138,7 @@ public class InventarioController {
         productoActualiza.setPrecioCompra(producto.getPrecioCompra());
         productoActualiza.setMarcaIdmarca(producto.getMarcaIdmarca());
         productoActualiza.setDescripcion(producto.getDescripcion());
-        
+        try {
             productoServ.actualizar(productoActualiza);
             url = "?actualizarTrue";
         } catch (Exception e) {

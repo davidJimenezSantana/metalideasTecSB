@@ -12,8 +12,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -22,11 +20,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "producto_has_venta")
-@NamedQueries({
-    @NamedQuery(name = "ProductoHasVenta.findAll", query = "SELECT p FROM ProductoHasVenta p"),
-    @NamedQuery(name = "ProductoHasVenta.findByProductoCod", query = "SELECT p FROM ProductoHasVenta p WHERE p.productoHasVentaPK.productoCod = :productoCod"),
-    @NamedQuery(name = "ProductoHasVenta.findByVentaIdventa", query = "SELECT p FROM ProductoHasVenta p WHERE p.productoHasVentaPK.ventaIdventa = :ventaIdventa"),
-    @NamedQuery(name = "ProductoHasVenta.findByCantidad", query = "SELECT p FROM ProductoHasVenta p WHERE p.cantidad = :cantidad")})
+
 public class ProductoHasVenta implements Serializable {
 
     private static final long serialVersionUID = 1L;

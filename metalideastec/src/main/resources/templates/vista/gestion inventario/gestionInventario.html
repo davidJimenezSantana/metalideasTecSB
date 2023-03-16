@@ -97,7 +97,7 @@
                     <!-- SUBMENU -->
                     <li>
                         <div class="link-menu">
-                            <a href="#">
+                            <a th:href="@{/gestionVentas}">
                                 <i class='link-icon bx bx-spreadsheet'></i>
                                 <span class="link-nombre">VENTAS</span>
                             </a>
@@ -186,7 +186,7 @@
         <div class="row ">
             <div class="col-8">
                 <div class="contenedor-tabla">
-                    <table class="table" id="tabla_Inventario">
+                    <table class="table table-hover" id="tabla_Inventario">
                         <thead>
                             <tr>
                                 <th scope="col">Ref.</th>
@@ -534,7 +534,7 @@
         </div>
     </div>
 
-
+    <!--ALERTAS Y NOTIFICACIONES-->
     <div th:if="${param.agregarProductoFalse}">
         <script>
             const Toast = Swal.mixin({
@@ -553,8 +553,6 @@
                 icon: 'error',
                 title: 'Error al insertar el producto! <br> verifique los datos.'
             })
-        </script>
-
         </script>
     </div>
     <div th:if="${param.actualizarFalse}">
@@ -616,6 +614,26 @@
             Toast4.fire({
                 icon: 'success',
                 title: 'Actualizacion exitosa.'
+            })
+        </script>
+    </div>
+    <div th:if="${param.errorimg}">
+        <script>
+            const Toast5 = Swal.mixin({
+                toast: true,
+                position: 'bottom-start',
+                showConfirmButton: false,
+                timer: 5000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast5.fire({
+                icon: 'error',
+                title: 'La imagen no es valida! <br> intenta con una mas ligera'
             })
         </script>
     </div>

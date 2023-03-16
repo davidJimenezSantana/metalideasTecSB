@@ -5,7 +5,7 @@
 package com.metalideas.metalideastec.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -15,12 +15,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -28,12 +24,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "comprobante_de_pago")
-@NamedQueries({
-    @NamedQuery(name = "ComprobanteDePago.findAll", query = "SELECT c FROM ComprobanteDePago c"),
-    @NamedQuery(name = "ComprobanteDePago.findByIdcomprobanteDePago", query = "SELECT c FROM ComprobanteDePago c WHERE c.idcomprobanteDePago = :idcomprobanteDePago"),
-    @NamedQuery(name = "ComprobanteDePago.findByFecha", query = "SELECT c FROM ComprobanteDePago c WHERE c.fecha = :fecha"),
-    @NamedQuery(name = "ComprobanteDePago.findByHora", query = "SELECT c FROM ComprobanteDePago c WHERE c.hora = :hora"),
-    @NamedQuery(name = "ComprobanteDePago.findByTotal", query = "SELECT c FROM ComprobanteDePago c WHERE c.total = :total")})
+
 public class ComprobanteDePago implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,11 +35,7 @@ public class ComprobanteDePago implements Serializable {
     private Integer idcomprobanteDePago;
     @Basic(optional = false)
     @Column(name = "fecha")
-    @Temporal(TemporalType.DATE)
-    private Date fecha;
-    @Basic(optional = false)
-    @Column(name = "hora")
-    private String hora;
+    private Timestamp fecha;
     @Basic(optional = false)
     @Column(name = "total")
     private int total;
@@ -62,12 +49,17 @@ public class ComprobanteDePago implements Serializable {
         this.idcomprobanteDePago = idcomprobanteDePago;
     }
 
-    public ComprobanteDePago(Integer idcomprobanteDePago, Date fecha, String hora, int total) {
+    public ComprobanteDePago(Integer idcomprobanteDePago, Timestamp fecha, int total) {
         this.idcomprobanteDePago = idcomprobanteDePago;
         this.fecha = fecha;
-        this.hora = hora;
         this.total = total;
     }
+
+    public ComprobanteDePago(Timestamp fecha, int total) {
+        this.fecha = fecha;
+        this.total = total;
+    }
+
 
     public Integer getIdcomprobanteDePago() {
         return idcomprobanteDePago;
@@ -77,21 +69,11 @@ public class ComprobanteDePago implements Serializable {
         this.idcomprobanteDePago = idcomprobanteDePago;
     }
 
-    public Date getFecha() {
+    public Timestamp getFecha() {
         return fecha;
     }
+    
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    public String getHora() {
-        return hora;
-    }
-
-    public void setHora(String hora) {
-        this.hora = hora;
-    }
 
     public int getTotal() {
         return total;
@@ -132,6 +114,10 @@ public class ComprobanteDePago implements Serializable {
     @Override
     public String toString() {
         return "persistencia.entity.ComprobanteDePago[ idcomprobanteDePago=" + idcomprobanteDePago + " ]";
+    }
+
+    public void setFecha(Timestamp fecha) {
+        this.fecha = fecha;
     }
     
 }
