@@ -14,6 +14,17 @@ $(document).ready(function () {
     });
 });
 
+function cargar(idusuario, nombre, apellido, correo, direccion, rolId, estadoUsuario){
+    document.getElementById("idUsuarioEdit").value = idusuario; 
+    document.getElementById("nombreUsuarioEdit").value = nombre;
+    document.getElementById("apellidoUsuarioEdit").value = apellido;
+    document.getElementById("correoUsuarioEdit").value = correo;
+    document.getElementById("direccionUsuarioEdit").value = direccion;
+    document.getElementById("rolClienteEdit").value = rolId;
+    document.getElementById("tipoClienteEdit").value = estadoUsuario;
+}
+
+/* 
 async function cargarDatosTabla() {
     const rawResponse = await fetch('/verUsuarios', {
         method: 'GET',
@@ -46,12 +57,4 @@ async function cargarDatosTabla() {
 
     document.querySelector('#tabla_Usuarios tbody').outerHTML = tablaHTML;
 }
-
-function cargar(id, nombre, apellido, correo, rol, estado) {
-    /* document.getElementById("nombreUsuario").value = Number(id); */
-    document.getElementById("nombreUsuario").value = nombre;
-    document.getElementById("apellidoUsuario").value = apellido;
-    document.getElementById("correoUsuario").value = correo;
-    /* document.getElementById("formularioEditarUser:rol").value = rol; */
-    document.getElementById("tipoUsuario").value = estado;
-}
+ */

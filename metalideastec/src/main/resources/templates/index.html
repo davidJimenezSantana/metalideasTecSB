@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -36,12 +36,12 @@
                         <div class="row">
                             <div class="col-4 contenedor-form">
 
-                                <form class="form-entrar row g-3 needs-validation" novalidate method="post">
+                                <form th:action="@{/autenticar}" th:object="${usuario}" class="form-entrar row g-3 needs-validation" novalidate method="post">
                                     <h2>Inicio de sesión</h2>
                                     <div class="mb-3">
                                         <label for="correo" class="form-label">Correo*</label>
                                         <input type="email" class="form-control" id="correo" name="correo"
-                                            placeholder="name@correo.com" required>
+                                            placeholder="name@correo.com" th:field="*{correo}" required>
                                         <div class="valid-feedback">
                                             ¡Bien! Datos correctos.
                                         </div>
@@ -52,7 +52,7 @@
                                     <div class="mb-3">
                                         <label for="clave" class="form-label">Contraseña*</label>
                                         <input type="password" class="form-control" id="clave" name="clave"
-                                            placeholder="*******" required>
+                                            placeholder="*******" th:field="*{clave}" required>
                                         <div class="valid-feedback">
                                             ¡Bien! Datos correctos.
                                         </div>
@@ -67,13 +67,13 @@
 
                             <div class="col-8 contenedor-formRegistro">
                                 <div class="form-registrar">
-                                    <form action="" method="post" class="row g-3 needs-validation" novalidate>
+                                    <form  th:action="@{/registrarse}" th:object="${usuario}"  method="post" class="row g-3 needs-validation" novalidate>
                                         <h2>O registrate</h2>
                                         <div class="row">
                                             <div class="col-6" style="padding-right: 35px;">
                                                 <div class="mb-3">
                                                     <label for="nombre" class="form-label">Nombres*</label>
-                                                    <input type="text" class="form-control" id="nombre" name="nombre"
+                                                    <input type="text" class="form-control" id="nombre" name="nombre" th:field="*{nombre}"
                                                         required>
                                                     <div class="valid-feedback">
                                                         ¡Bien! Datos correctos.
@@ -86,7 +86,7 @@
                                                 <div class="mb-3">
                                                     <label for="correo" class="form-label">Correo*</label>
                                                     <input type="email" class="form-control" id="correo" name="correo"
-                                                        placeholder="name@correo.com" required>
+                                                        placeholder="name@correo.com" th:field="*{correo}" required>
                                                     <div class="valid-feedback">
                                                         ¡Bien! Datos correctos.
                                                     </div>
@@ -97,7 +97,7 @@
                                                 <div class="mb-3">
                                                     <label for="clave" class="form-label">Contraseña*</label>
                                                     <input type="password" class="form-control" id="clave" name="clave"
-                                                        placeholder="*******" required>
+                                                        placeholder="*******" th:field="*{clave}" required>
                                                     <div class="valid-feedback">
                                                         ¡Bien! Datos correctos.
                                                     </div>
@@ -110,11 +110,11 @@
                                                 <div class="mb-3">
                                                     <label for="apellido" class="form-label">Apellido</label>
                                                     <input type="text" class="form-control" id="apellido"
-                                                        name="apellido">
+                                                        name="apellido" th:field="*{apellido}">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="telefono" class="form-label">Tel/Cel: </label>
-                                                    <input type="text" class="form-control" id="telefono"
+                                                    <input type="number" class="form-control" id="telefono"
                                                         name="telefono">
                                                 </div>
                                                 <div class="mb-3">
@@ -537,11 +537,6 @@
         </div>
 
     </section>
-
-
-
-
-
 
 
 

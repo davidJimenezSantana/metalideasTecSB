@@ -555,6 +555,9 @@ footer .row {
 }
 
 
+
+
+
 .modal-header {
     border-bottom: none;
 }
@@ -600,7 +603,7 @@ footer .row {
     padding-left: 50px;
 }
 
-.modal-detalle-producto{
+.modal-detalle-producto {
     padding-top: 20px;
     padding-bottom: 20px;
     padding-left: 50px;
@@ -618,9 +621,14 @@ footer .row {
     height: 30px;
     display: flex;
     align-items: center;
-    margin: 15px 0px;
+    margin: 15px auto;
     justify-content: space-evenly;
 }
+
+.modal-body .btn .btn-add-carrito {
+    width: Auto !important;
+}
+
 
 .modal-body .btn:hover {
     color: snow;
@@ -665,15 +673,16 @@ footer .row {
 /*--------------------------------------------------------------
 # Mapa del sitio 
 --------------------------------------------------------------*/
-.cont-mapa-sitio{
+.cont-mapa-sitio {
     padding-top: 100px;
 }
 
-.cont-mapa-sitio h1{
+.cont-mapa-sitio h1 {
     margin-left: 10%;
     font-weight: bold;
 }
-.mapa-sitio{
+
+.mapa-sitio {
     border-radius: 20px;
     border: 3px solid #fedc00;
     box-shadow: 0px 0px 20px 5px black;
@@ -685,7 +694,7 @@ footer .row {
     font-size: 22px;
 }
 
-.mapa-sitio a{
+.mapa-sitio a {
     color: snow;
 }
 
@@ -918,12 +927,12 @@ footer .row {
     padding: 10px;
 }
 
-.mychart{
+.mychart {
     border: 1px solid black;
     border-radius: 20px;
 }
 
-.mychart:hover{
+.mychart:hover {
     box-shadow: 0px 0px 17px 2px black;
 }
 
@@ -986,7 +995,7 @@ footer .row {
     align-items: center;
 }
 
-.dt-buttons button{
+.dt-buttons button {
     height: 40px !important;
     padding: 0px 12px !important;
     border-radius: 22px !important;
@@ -1203,7 +1212,7 @@ footer .row {
 .btn-error-volver:hover {
     color: snow;
     background-color: #fcd306;
-    border: 3px solid #fcd306;   
+    border: 3px solid #fcd306;
 }
 
 /*--------------------------------------------------------------
@@ -1220,10 +1229,10 @@ footer .row {
     margin-bottom: 3%;
     display: flex;
     align-items: center;
-    justify-content: space-between;    
+    justify-content: space-between;
 }
 
-.ti-producto h1{
+.ti-producto h1 {
     font-weight: bold;
 }
 
@@ -1232,7 +1241,7 @@ footer .row {
     padding-left: 20px;
 }
 
-.buscaProducto button{
+.buscaProducto button {
     color: black;
     background-color: transparent;
     border-color: black;
@@ -1244,7 +1253,7 @@ footer .row {
     border-radius: 20px;
 }
 
-.buscaProducto button:hover{
+.buscaProducto button:hover {
     color: snow;
     background-color: #1a1a17;
     border-color: #1a1a17;
@@ -1444,25 +1453,25 @@ hr {
     transition: 0.5s all ease;
 }
 
-.seguir-comprando{
+.seguir-comprando {
     opacity: 0.5;
-    box-shadow: none;       
+    box-shadow: none;
 }
 
-.seguir-comprando a{
+.seguir-comprando a {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
 }
 
-.seguir-comprando h1{     
+.seguir-comprando h1 {
     color: snow;
     text-align: center;
 }
 
-.seguir-comprando:hover{
+.seguir-comprando:hover {
     opacity: 1;
-    box-shadow: 0px 0px 8px 3px black;    
+    box-shadow: 0px 0px 8px 3px black;
     text-align: center;
 }
 
@@ -1505,7 +1514,7 @@ hr {
 }
 
 
-.compra{    
+.compra {
     margin-top: 25px;
     color: snow;
     height: 150px;
@@ -1520,7 +1529,7 @@ hr {
 # Alertas
 --------------------------------------------------------------*/
 
-.datos-guardados{    
+.datos-guardados {
     opacity: 0;
     border: 3px solid #5dcc78;
     width: 300px;
@@ -1531,11 +1540,12 @@ hr {
 }
 
 
-.datos-guardados i, .error-guardar i{
+.datos-guardados i,
+.error-guardar i {
     font-size: 45px;
 }
 
-.error-guardar{
+.error-guardar {
     opacity: 0;
     border: 3px solid #e56f5b;
     width: 300px;
@@ -1545,11 +1555,11 @@ hr {
     margin: 15px 5px;
 }
 
-.error-guardar p{
+.error-guardar p {
     margin-bottom: 0px;
 }
 
-.cont-alert{
+.cont-alert {
     display: flex;
     align-items: center;
 }
@@ -1558,7 +1568,7 @@ hr {
 # Pedido
 --------------------------------------------------------------*/
 
-.titulo-p{
+.titulo-p {
     padding-top: 100px;
 }
 
@@ -1577,12 +1587,12 @@ hr {
     padding-left: 50px;
 }
 
-.cont-pago{
-    background: #fdcd0030; 
+.cont-pago {
+    background: #fdcd0030;
     border-radius: 20px;
 }
 
-.tipo-pago{
+.tipo-pago {
     margin: 40px 0px;
     padding: 0px 20px;
     color: #fdcd00;
@@ -1591,19 +1601,19 @@ hr {
     border-radius: 20px;
 }
 
-.tipo-pago:hover{
+.tipo-pago:hover {
     color: snow;
     background: #fdcd00;
 }
 
-.detalles{
-    background: #fdcd0030; 
+.detalles {
+    background: #fdcd0030;
     border-radius: 20px;
     padding: 20px;
     margin-bottom: 30px;
 }
 
-.item-detalle{
+.item-detalle {
     height: 80px;
     display: flex;
     align-items: center;
@@ -1613,36 +1623,86 @@ hr {
     box-shadow: 0px 0px 4px 1px black;
 }
 
-.item-detalle i{
+.item-detalle i {
     font-size: 30px;
 }
 
 /*--------------------------------------------------------------
 # Reportes
 --------------------------------------------------------------*/
-.contenedor-reportes{
+.contenedor-reportes {
     margin-top: 40px;
     padding: 30px;
     border: 1px solid black;
-    border-radius: 20px;   
-    box-shadow: 0px 0px 2px 1px black;    
-    transition: 0,5s all ease;
+    border-radius: 20px;
+    box-shadow: 0px 0px 2px 1px black;
+    transition: 0, 5s all ease;
 }
 
-.contenedor-reportes:hover{     
-    box-shadow: 0px 0px 9px 3px black;    
+.contenedor-reportes:hover {
+    box-shadow: 0px 0px 9px 3px black;
 }
 
-.contenedor-reportes hr{
-    margin: 3rem 0;
-}
-.contenedor-reportes canvas{
+.contenedor-reportes hr {
     margin: 3rem 0;
 }
 
-.img-modalProducto img{
+.contenedor-reportes canvas {
+    margin: 3rem 0;
+}
+
+.img-modalProducto img {
     max-width: 60%;
     border-radius: 8px;
     box-shadow: 0px 0px 10px 5px black;
     margin-top: 5px;
+}
+
+
+.dataTables_wrapper.no-footer div.dataTables_scrollHead table.dataTable,
+.dataTables_wrapper.no-footer div.dataTables_scrollHeadInner {
+    width: 100% !important;
+}
+
+.Carrito-modal-content {
+    background-color: rgb(26 26 23 / 74%) !important;
+}
+
+.dataTables_info,
+.dataTables_filter label {
+    color: snow !important;
+}
+
+.btn-carrito-inexistencias {
+    width: auto !important;
+    height: auto !important;
+}
+
+.btn-carrito-inexistencias p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.btn-remove-carrito{
+    color: #fecd01;
+    border-radius: 20px;
+    background-color: #1e1d12d6;
+    border: solid 2px #fecd01;
+    height: auto !important;
+    display: flex;
+    align-items: center;
+    margin: 15px auto;
+    justify-content: space-evenly;
+}
+
+.btn-remove-carrito:hover {
+    color: snow;
+    background-color: #fecd01;
+    border: solid 2px #fecd01;
+}
+
+.btn-volver button:hover{
+    color: snow;
+    background-color: #fecd01;
+    border: solid 2px #fecd01;
 }

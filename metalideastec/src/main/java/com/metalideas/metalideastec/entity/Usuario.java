@@ -41,14 +41,7 @@ public class Usuario implements Serializable {
     @Column(name = "direccion")
     private String direccion;
 
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
+    
     @ManyToOne()
     @JoinColumn(name = "estado_usuario_idestado_cliente")    
     private EstadoUsuario estadoUsuarioIdestadoCliente;
@@ -72,6 +65,15 @@ public class Usuario implements Serializable {
         this.correo = correo;
         this.direccion = direccion;
     }
+    
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
 
     public Integer getIdusuario() {
         return idusuario;

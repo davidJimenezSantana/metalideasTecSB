@@ -14,8 +14,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -24,10 +22,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "movil")
-@NamedQueries({
-    @NamedQuery(name = "Movil.findAll", query = "SELECT m FROM Movil m"),
-    @NamedQuery(name = "Movil.findByIdmovil", query = "SELECT m FROM Movil m WHERE m.idmovil = :idmovil"),
-    @NamedQuery(name = "Movil.findByNumero", query = "SELECT m FROM Movil m WHERE m.numero = :numero")})
+
 public class Movil implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,6 +42,11 @@ public class Movil implements Serializable {
 
     public Movil(Integer idmovil) {
         this.idmovil = idmovil;
+    }
+
+    public Movil(Integer numero, Usuario usuarioIdusuario) {
+        this.numero = numero;
+        this.usuarioIdusuario = usuarioIdusuario;
     }
 
     public Integer getIdmovil() {
@@ -96,6 +96,10 @@ public class Movil implements Serializable {
     @Override
     public String toString() {
         return "persistencia.entity.Movil[ idmovil=" + idmovil + " ]";
+    }
+
+    public static long getSerialversionuid() {
+        return serialVersionUID;
     }
     
 }

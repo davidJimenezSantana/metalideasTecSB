@@ -32,9 +32,7 @@ public class EstadoUsuario implements Serializable {
     private Integer idestadoCliente;
     @Basic(optional = false)
     @Column(name = "nombre_estado")
-    private String nombreEstado;
-    /* @OneToMany(cascade = CascadeType.ALL, mappedBy = "estadoUsuarioIdestadoCliente", fetch = FetchType.LAZY)
-    private List<Usuario> usuarioList; */
+    private String nombreEstado;    
 
     public EstadoUsuario() {
     }

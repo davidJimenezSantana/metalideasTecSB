@@ -23,6 +23,16 @@ public class UsuarioServImp implements UsuarioServ {
     public Usuario buscarUsuario(int id) {
         return usuarioDAO.findById(id).get();
     }
+
+    @Override
+    public Usuario guardar(Usuario usuario) {
+        return usuarioDAO.saveAndFlush(usuario);
+    }
+
+    @Override
+    public void actualizar(Usuario usuario) {
+        usuarioDAO.save(usuario);
+    }
     
     
 }

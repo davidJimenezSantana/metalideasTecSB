@@ -1,227 +1,56 @@
 <!DOCTYPE html>
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="../../../img/Logo/logo-removebg-preview.png" type="image/x-icon" />
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
-    <!-- Boxicons CSS -->
-    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-
-    <link rel="stylesheet" href="../../../style.css ">
-
-
-
-
-    <title>Metalideas</title>
-
-</head>
+<div th:replace="layouts/menuAdmin :: headerMenu">
+</div>
 
 <body id="body">
 
-    <header id="header-administrador">
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <div class="container">
-                <a class="navbar-brand" href="#inicio"><img class="logoMetalideas" src="../../../img/Metalideas.png"
-                        alt="Metalideas"></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav">
-                        <a class="nav-link close__sidebar" href="#">
-                            <i class='bx bx-menu'></i>
-                            Menu
-                        </a>
-                        <a class="nav-link" aria-current="page" href="../../bienvenida-administrador/inicio.html">
-                            <i class='bx bx-user'></i>
-                            Mi perfil
-                        </a>
-                        <a class="nav-link" href="../../../index.html">
-                            <i class='bx bx-exit'></i>
-                            Salir
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <!-- MENU HEADER -->
+    <div th:replace="layouts/menuAdmin :: navMenuAdmin">
+    </div>
 
-    <div class="sidebar " id="sidebar">
-        <div class="logo close__sidebar">
-            <i class='bx bx-menu'></i>
-            <span class="logo__nombre">Menú</span>
-        </div>
-
-        <div class="contenedor-menu">
-            <div class="nav-menu1">
-                <ul class="nav-links">
-                    <li>
-                        <a href="../../gestion de usuarios/gestionUsuarios.html">
-                            <i class='link-icon bx bx-user'></i>
-                            <span class="link-nombre">GESTIÓN DE USUARIOS</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="../../gestion inventario/gestionInventario.html">
-                            <i class='link-icon bx bx-package'></i>
-                            <span class="link-nombre">GESTIÓN INVENTARIO</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <div class="link-menu">
-                            <a href="../ventas.html">
-                                <i class='link-icon bx bx-spreadsheet'></i>
-                                <span class="link-nombre">VENTAS</span>
-                            </a>
-                            <i class='link-icon bx bxs-chevron-down flecha'></i>
-                        </div>
-
-                        <ul class="submenu">
-                            <li>
-                                <a class="link-nombre" href="#">Registrar</a>
-                            </li>
-
-                            <li>
-                                <a class="link-nombre icon-submenu" href="">
-                                    <i class='link-icon bx bx-cart-add'></i>
-                                    Carrito
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="nav-menu2">
-                <div class="sidebarUsuarios__titulo">
-                    <span>USUARIOS</span>
-                </div>
-                <ul class="nav-links">
-                    <li>
-                        <a href="../../bienvenida-administrador/inicio.html">
-                            <i class='link-icon bx bxs-user-account'></i>
-                            <span class="link-nombre">VER PERFIL</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#">
-                            <i class='link-icon bx bx-user'></i>
-                            <span class="link-nombre">CAMBIO DE CONTRASEÑA</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#">
-                            <i class='link-icon bx bx-exit'></i>
-                            <span class="link-nombre">SALIR</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
+    <!-- MENU SIDEBAR -->
+    <div th:replace="layouts/menuAdmin :: sidebar">
     </div>
 
     <div class="container">
 
         <div class="carrito">
             <div class="ti-carrito">
+                <div class="row">
+                    <div class="col btn-form btn-volver justify-content-start">   
+                        <a th:href="@{/gestionVentas}">
+                            <button href=""><i class='bx bxs-left-arrow-circle'></i> Volver a ventas</button>
+                        </a>
+                    </div>
+                </div> 
                 <h1><i class="bx bx-cart"></i> Carrito</h1>
             </div>
 
 
             <div class="row">
                 <div class="col-9">
-                    <div class="row producto-carrito">
-                        <div class="col-2 cont-prod">
-                            <img src="../../../img/Productos/Herramientas/producto/Brocas.PNG" alt="">
-                        </div>
-                        <div class="col-3 cont-prod">
-                            <h2>Set brocas</h2>
-                            <p>Precio Unidad: $21,141</p>
-                        </div>
-                        <div class="col-3 cont-prod">
-                            <div>
-                                <label for="cantidadProducto">Cantidad: </label>
-                                <input type="number" value="1" id="cantidadProducto">
-                            </div>
-                        </div>
-                        <div class="col-3 cont-prod">
-                            <div>
-                                <h2>Total: $21,141</h2>
-                            </div>
-                        </div>
+
+                    <div id="listaCarrito">
                     </div>
 
-                    <div class="row producto-carrito">
-                        <div class="col-2 cont-prod">
-                            <img src="../../../img/Productos/Herramientas/producto/caja herramienta.PNG" alt="">
-                        </div>
-                        <div class="col-3 cont-prod">
-                            <h2>Caja de herramientas</h2>
-                            <p>Precio Unidad: $72,990</p>
-                        </div>
-                        <div class="col-3 cont-prod">
-                            <div>
-                                <label for="cantidadProducto">Cantidad: </label>
-                                <input type="number" value="1" id="cantidadProducto">
-                            </div>
-                        </div>
-                        <div class="col-3 cont-prod">
-                            <div>
-                                <h2>Total: $72,990</h2>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row producto-carrito">
-                        <div class="col-2 cont-prod">
-                            <img src="../../../img/Productos/Herramientas/producto/compresor.PNG" alt="">
-                        </div>
-                        <div class="col-3 cont-prod">
-                            <h2>Compresor Aire Silencio</h2>
-                            <p>Precio Unidad: $534,643</p>
-                        </div>
-                        <div class="col-3 cont-prod">
-                            <div>
-                                <label for="cantidadProducto">Cantidad: </label>
-                                <input type="number" value="1" id="cantidadProducto">
-                            </div>
-                        </div>
-                        <div class="col-3 cont-prod">
-                            <div>
-                                <h2>Total: $534,643</h2>
-                            </div>
-                        </div>
+                    <div class="row producto-carrito seguir-comprando">
+                        <a data-bs-toggle="modal" data-bs-target="#modalCarrito">
+                            <h1 style="display: flex; align-items: center;">- <i class='bx bxs-cart-add'></i> Agregar
+                                producto-</h1>
+                        </a>
                     </div>
                 </div>
                 <div class="col-3">
                     <div class="row cont-pedido">
-                        <h1>Pedido</h1>
-                        <p>Cantidad de productos: 3 </p>
-                        <div>
-                            <label for="metodoPago">Método de pago:</label>
-                            <select name="metodoPago" id="metodoPago">
-                                <option value="Efectivo">Efectivo</option>
-                                <option value="Credito">Credito</option>
-                                <option value="Daviplata">Daviplata</option>
-                            </select>
-                            <i class="bx bx-cog iconos"></i>
-                        </div>
-                        <h2>Total: $628,774</h2>
-                        <input type="submit" value="Hacer venta">
+                        <h1>Hacer venta</h1>
+                        <h4 style="display: flex; align-items: center; justify-content: center;"><i
+                                class='bx bxs-hand-right bx-tada'></i> ¡Tener en cuenta!</h4>
+
+                        <h5>Para obtener mas de un item por producto <strong>se debe confirmar</strong> con el botón
+                            <strong> Aceptar<i class='bx bx-check'></i></strong>
+                        </h5>
                     </div>
                 </div>
             </div>
@@ -230,11 +59,180 @@
 
     </div>
 
+    <!--MODAL AGREGAR AL CARRITO-->
+    <div class="contenedor-modal">
+        <div class="modal" tabindex="-1" id="modalCarrito">
+            <div class="modal-dialog">
+                <div class="modal-content Carrito-modal-content" style="color:snow">
+                    <div class="modal-header">
+                        <i class="bx bx-x iconos btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            style="color:snow"></i>
+                    </div>
+                    <div class="modal-body" style="color:snow">
+                        <table class="table" id="tabla_Carrito_producto" style="color:snow">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Ref.</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Categoria</th>
+                                    <th scope="col">Existentes</th>
+                                    <th scope="col">Precio</th>
+                                    <!-- <th style="display:none;" scope="col">Imagen</th> -->
+                                    <!--<th scope="col">Marca</th> -->
+                                    <th scope="col">Opc</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="producto : ${Productos}">
+                                    <td th:text="${producto.idproducto}"></td>
+                                    <td th:text="${producto.nombre}"></td>
+                                    <td th:text="${producto.tipoIdtipo.nombre}"></td>
+                                    <td th:text="${producto.cantidad}"></td>
+                                    <td th:text="'$' + ${producto.precioVenta}"></td>
+                                    <div style="display:none;" th:if="${producto.img != null}"><img
+                                            th:src="@{/producto/imagen/{id}(id=${producto.idproducto})}" alt="">
+                                    </div>
+                                    <td valign="middle">
+                                        <button th:if="${producto.cantidad > 0}" class="btn btn-add-carrito"
+                                            data-bs-dismiss="modal" aria-label="Close"
+                                            th:onclick="agregarProductoAlCarrito([[${producto.idproducto}]], [[${producto.nombre}]], [[${producto.precioVenta}]], [[${producto.precioCompra}]], [[${producto.cantidad}]], [[${producto.descripcion}]],  [[${producto.imgProducto()}]], [[${producto.marcaIdmarca.nombre}]], [[${producto.tipoIdtipo.nombre}]], [[${producto.marcaIdmarca.idmarca}]], [[${producto.tipoIdtipo.idcategoria}]])">
+                                            + Carrito
+                                        </button>
+                                        <button th:if="${producto.cantidad == 0}"
+                                            class="btn btn-add-carrito btn-carrito-inexistencias" disabled>
+                                            <p>No hay productos disponibles</p>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--MODAL REALIZAR VENTA-->
+    <div class="contenedor-modal">
+        <div class="modal" tabindex="-1" id="modalVenta">
+            <div class="modal-dialog">
+                <div class="modal-content Carrito-modal-content" style="color:snow">
+                    <div class="modal-header">
+                        <i class="bx bx-x iconos btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            style="color:snow"></i>
+                    </div>
+                    <div class="modal-body" style="color:snow">
+                        <div class="row">
+                            <div class="col-3"></div>
+                            <div class="col-6">
+                                <!--FORMULARIO AGREGAR-->
+                                <div class="row titulo-form">
+                                    <h1><i class='bx bxs-shopping-bag'></i>Registrar venta</h1>
+                                </div>
+                                <form th:action="@{/registrarVenta}" th:object="${venta}" class="needs-validation"
+                                    method="post" novalidate>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="campo-form">
+                                                <label for="destinoVenta">Destino venta</label>
+                                                <input type="text" name="destinoVenta" id="destinoVenta"
+                                                    th:field="*{destino}">
+                                            </div>
+                                            <div class="campo-form">
+                                                <label for="estadoVenta">Estado de la venta*</label>
+                                                <select th:field="*{estadoIdestado}">
+                                                    <th:block th:each="estado : ${estadosVenta}">
+                                                        <option th:value="${estado.idestado}"
+                                                            th:text="${estado.nombre}">
+                                                        </option>
+                                                    </th:block>
+                                                </select>
+                                            </div>
+                                            <div class="valid-feedback">
+                                                ¡Bien! Datos correctos.
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                ¡Error! Verifica los datos.
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="campo-form">
+                                                <label for="totalVenta">Total*</label>
+                                                $<input type="number" name="totalVenta" id="inputTotal" readonly
+                                                    th:field="*{total}" required>
+                                                <div class="valid-feedback">
+                                                    ¡Bien! Datos correctos.
+                                                </div>
+                                                <div class="invalid-feedback">
+                                                    ¡Error! Verifica los datos.
+                                                </div>
+                                            </div>
+                                            <div class="campo-form">
+                                                <label for="estadoVenta">Metodo de pago*</label>
+                                                <select th:field="*{metodoPagoIdmetodoPago}">
+                                                    <th:block th:each="metodo : ${metodosPago}">
+                                                        <option th:value="${metodo.idmetodoPago}"
+                                                            th:text="${metodo.nombre}">
+                                                        </option>
+                                                    </th:block>
+                                                </select>
+                                            </div>
+                                            <div class="valid-feedback">
+                                                ¡Bien! Datos correctos.
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                ¡Error! Verifica los datos.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <table class="table" id="tabla_Carrito_producto" style="color:snow">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Ref.</th>
+                                                    <th scope="col">Nombre</th>
+                                                    <th scope="col">Precio/unid</th>
+                                                    <th scope="col">cant</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="listadoProductos">                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-8"></div>
+                                        <div class="col-4">
+                                            <div class="row btn-formulario">
+                                                <button type="submit" class="btn-remove-carrito"> Completar <i
+                                                        class='bx bx-check'></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                            <div class="col-3"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 
-    <script src="../../../JS.js"></script>
+    <script th:inline="javascript">
+        var productos = /*[[${listaCarrito}]]*/[];
+        let miArreglo = [];
+        let itemArreglo;
+    </script>
+
+    <script src="JS/JS.js"></script>
+    <script src="JS/carritoAdminJS.js"></script>
 
 </body>
 

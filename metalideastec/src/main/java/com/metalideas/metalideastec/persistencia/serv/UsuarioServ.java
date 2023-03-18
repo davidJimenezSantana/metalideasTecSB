@@ -8,5 +8,7 @@ public interface UsuarioServ {
 
     public List<Usuario> listarUsuarios();
     public Usuario buscarUsuario(int id);
+    public Usuario guardar(Usuario usuario);
+    public void actualizar(Usuario usuario);
     
 }
