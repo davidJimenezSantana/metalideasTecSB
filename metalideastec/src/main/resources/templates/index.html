@@ -14,6 +14,8 @@
     <!-- Boxicons CSS -->
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 
     <link rel="stylesheet" href="style.css">
@@ -23,7 +25,7 @@
 </head>
 
 <body class="body-bienvenida">
-
+    <!--MODAL LOGIN -->
     <div class="contenedor-modal">
         <div class="modal" tabindex="-1" id="modalEntrar">
             <div class="modal-dialog">
@@ -36,12 +38,13 @@
                         <div class="row">
                             <div class="col-4 contenedor-form">
 
-                                <form th:action="@{/autenticar}" th:object="${usuario}" class="form-entrar row g-3 needs-validation" novalidate method="post">
+                                <form th:action="@{/autenticarUsuario}" class="form-entrar row g-3 needs-validation" novalidate
+                                    method="post">
                                     <h2>Inicio de sesión</h2>
                                     <div class="mb-3">
-                                        <label for="correo" class="form-label">Correo*</label>
-                                        <input type="email" class="form-control" id="correo" name="correo"
-                                            placeholder="name@correo.com" th:field="*{correo}" required>
+                                        <label for="username" class="form-label">Correo*</label>
+                                        <input type="text" class="form-control" id="username" name="username"
+                                            placeholder="name@correo.com" required>
                                         <div class="valid-feedback">
                                             ¡Bien! Datos correctos.
                                         </div>
@@ -50,9 +53,9 @@
                                         </div>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="clave" class="form-label">Contraseña*</label>
-                                        <input type="password" class="form-control" id="clave" name="clave"
-                                            placeholder="*******" th:field="*{clave}" required>
+                                        <label for="password" class="form-label">Contraseña*</label>
+                                        <input type="password" class="form-control" id="password" name="password"
+                                            placeholder="*******" required>
                                         <div class="valid-feedback">
                                             ¡Bien! Datos correctos.
                                         </div>
@@ -67,14 +70,15 @@
 
                             <div class="col-8 contenedor-formRegistro">
                                 <div class="form-registrar">
-                                    <form  th:action="@{/registrarse}" th:object="${usuario}"  method="post" class="row g-3 needs-validation" novalidate>
+                                    <form th:action="@{/registrarse}" th:object="${usuario}" method="post"
+                                        class="row g-3 needs-validation" novalidate>
                                         <h2>O registrate</h2>
                                         <div class="row">
                                             <div class="col-6" style="padding-right: 35px;">
                                                 <div class="mb-3">
                                                     <label for="nombre" class="form-label">Nombres*</label>
-                                                    <input type="text" class="form-control" id="nombre" name="nombre" th:field="*{nombre}"
-                                                        required>
+                                                    <input type="text" class="form-control" id="nombre" name="nombre"
+                                                        th:field="*{nombre}" required>
                                                     <div class="valid-feedback">
                                                         ¡Bien! Datos correctos.
                                                     </div>
@@ -84,9 +88,10 @@
                                                 </div>
 
                                                 <div class="mb-3">
-                                                    <label for="correo" class="form-label">Correo*</label>
-                                                    <input type="email" class="form-control" id="correo" name="correo"
-                                                        placeholder="name@correo.com" th:field="*{correo}" required>
+                                                    <label for="correoNuevo" class="form-label">Correo*</label>
+                                                    <input type="email" class="form-control" id="correoNuevo"
+                                                        name="correoNuevo" placeholder="name@correo.com"
+                                                        th:field="*{correo}" required>
                                                     <div class="valid-feedback">
                                                         ¡Bien! Datos correctos.
                                                     </div>
@@ -95,9 +100,10 @@
                                                     </div>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="clave" class="form-label">Contraseña*</label>
-                                                    <input type="password" class="form-control" id="clave" name="clave"
-                                                        placeholder="*******" th:field="*{clave}" required>
+                                                    <label for="claveNueva" class="form-label">Contraseña*</label>
+                                                    <input type="password" class="form-control" id="claveNueva"
+                                                        name="claveNueva" placeholder="*******" th:field="*{clave}"
+                                                        required>
                                                     <div class="valid-feedback">
                                                         ¡Bien! Datos correctos.
                                                     </div>
@@ -194,11 +200,11 @@
                             movimiento seguro de personas
                             y material.
                         </p>
-                        <div id="social">
+                        <!-- <div id="social">
                             <img src="img/redes_sociales/intro-instagram.png" alt="Instagram">
                             <img src="img/redes_sociales/intro-messenger.png" alt="Messenger">
                             <img src="img/redes_sociales/intro-whatsapp.png" alt="WhatsApp">
-                        </div>
+                        </div> -->
                     </div>
 
                 </div>
@@ -226,8 +232,8 @@
                     <div class="item-body">
                         <h5 class="item-title">Herramientas</h5>
                         <p class="item-text">Todas las herramientas necesarias para su hogar.</p>
-                        <a href="vista/productos/productos.html" class="btn btn-primary"><i
-                                class='bx bx-plus-medical'></i>Ver más</a>
+                        <!-- <a href="vista/productos/productos.html" class="btn btn-primary"><i
+                                class='bx bx-plus-medical'></i>Ver más</a> -->
                     </div>
                 </div>
 
@@ -237,7 +243,7 @@
                     <div class="item-body">
                         <h5 class="item-title">Protección y vestuario</h5>
                         <p class="item-text">La mejor seguridad para su personal de trabajo</p>
-                        <a href="#" class="btn btn-primary"><i class='bx bx-plus-medical'></i>Ver más</a>
+                        <!-- <a href="#" class="btn btn-primary"><i class='bx bx-plus-medical'></i>Ver más</a> -->
                     </div>
                 </div>
 
@@ -246,7 +252,7 @@
                     <div class="item-body">
                         <h5 class="item-title">Baño y fontaneria</h5>
                         <p class="item-text">Materiales y servicios de mantenimiento</p>
-                        <a href="#" class="btn btn-primary"><i class='bx bx-plus-medical'></i>Ver más</a>
+                        <!-- <a href="#" class="btn btn-primary"><i class='bx bx-plus-medical'></i>Ver más</a> -->
                     </div>
                 </div>
 
@@ -255,7 +261,7 @@
                     <div class="item-body">
                         <h5 class="item-title">Iluminación / Alumbrado</h5>
                         <p class="item-text">Productos y servicios de alta calidad</p>
-                        <a href="#" class="btn btn-primary"><i class='bx bx-plus-medical'></i>Ver más</a>
+                        <!-- <a href="#" class="btn btn-primary"><i class='bx bx-plus-medical'></i>Ver más</a> -->
                     </div>
                 </div>
 
@@ -264,16 +270,16 @@
                     <div class="item-body">
                         <h5 class="item-title">Tornilleria</h5>
                         <p class="item-text">Multiplies productos de tornillerias y amplia gama de calibres</p>
-                        <a href="#" class="btn btn-primary"><i class='bx bx-plus-medical'></i>Ver más</a>
+                        <!-- <a href="#" class="btn btn-primary"><i class='bx bx-plus-medical'></i>Ver más</a> -->
                     </div>
                 </div>
 
                 <div class="item-producto" style="width: 18rem;">
-                    <img src="img/Productos//Tuberias/steel-pipelines-and-cables-in-plant.jpg" alt="Herramientas">
+                    <img src="img/Productos/Tuberias/steel-pipelines-and-cables-in-plant.jpg" alt="Herramientas">
                     <div class="item-body">
                         <h5 class="item-title">Tuberias</h5>
                         <p class="item-text">La mejor tuberia del mejor material con alta calidad</p>
-                        <a href="#" class="btn btn-primary"><i class='bx bx-plus-medical'></i>Ver más</a>
+                        <!-- <a href="#" class="btn btn-primary"><i class='bx bx-plus-medical'></i>Ver más</a> -->
                     </div>
                 </div>
 
@@ -311,7 +317,7 @@
                         </div>
                     </div>
                     <div class="btn-ver">
-                        <a href="vista/servicio/servicios.html#CarpinteriaMetálica">Ver más</a>
+                        <a th:href="@{/Servicios#CarpinteriaMetálica}">Ver más</a>
                     </div>
                 </div>
             </div>
@@ -336,7 +342,7 @@
                         </div>
                     </div>
                     <div class="btn-ver">
-                        <a href="vista/servicio/servicios.html#ServicioElectrico">Ver más</a>
+                        <a th:href="@{/Servicios#ServicioElectrico}">Ver más</a>
                     </div>
                 </div>
             </div>
@@ -354,14 +360,14 @@
                         </div>
                         <div class="col-10">
                             <p>
-                                Talleres de Ornamentación, fabricación de ornamentación, toda clase de ventanas, puertas
+                                Taller de Ornamentación, fabricación de ornamentación, toda clase de ventanas, puertas
                                 estructuras, muebles metálicos para oficina, vidrios, escaleras metálicas y reparación
                                 de escaleras.
                             </p>
                         </div>
                     </div>
                     <div class="btn-ver">
-                        <a href="vista/servicio/servicios.html#Ornamentación">Ver más</a>
+                        <a th:href="@{/Servicios#Ornamentación}">Ver más</a>
                     </div>
                 </div>
             </div>
@@ -387,7 +393,7 @@
                         </div>
                     </div>
                     <div class="btn-ver">
-                        <a href="vista/servicio/servicios.html#AlquilerAndamios">Ver más</a>
+                        <a th:href="@{/Servicios#AlquilerAndamios}">Ver más</a>
                     </div>
                 </div>
             </div>
@@ -457,18 +463,14 @@
                                 <div class="col-3">
                                     <div class="row item-foot">
                                         <div class="col-6">
-                                            <a href="vista/mapa del sitio/mapaSitio.html">Mapa del sistio</a><br>
-                                            <a href="vista/bienvenida-administrador/inicio.html">Inicio
-                                                administrador</a>
-                                            <a href="vista/bienvenida_usuario/index.html">Inicio Cliente</a>
 
                                         </div>
-                                        <div class="col-3">
+                                        <!-- <div class="col-3">
                                             <i class='bx bxl-messenger'></i>
                                         </div>
                                         <div class="col-3">
                                             <i class='bx bxl-instagram'></i>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -480,7 +482,7 @@
             <div class="col-3">
                 <div class="cont-env-correo">
                     <div id="form-contactenos">
-                        <form action="" class="row g-3 needs-validation" novalidate>
+                        <!-- <form action="" class="row g-3 needs-validation" novalidate>
                             <div>
                                 <label>Tu nombre:</label><br>
                                 <input type="text">
@@ -496,9 +498,9 @@
                                 </div>
                             </div>
                             <div>
-                                <label for="mensaje-contactenos">Tu mensaje*:</label>
-                                <textarea cols="10" rows="10" id="mensaje-contactenos"
-                                    name="mensaje-contactenos" required></textarea>
+                                <label for="mensaje-contactenos">Tu mensaje*:</label><br>
+                                <textarea rows="3" id="mensaje-contactenos" name="mensaje-contactenos"
+                                    required></textarea>
                                 <div class="valid-feedback">
                                     ¡Bien! Datos correctos.
                                 </div>
@@ -530,7 +532,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        </form> -->
                     </div>
                 </div>
             </div>
@@ -538,6 +540,35 @@
 
     </section>
 
+    <div th:if="${param.error}">
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Usuario no encontrado',
+                text: 'Correo o contraseña incorrectos.',
+            })
+        </script>
+    </div>
+    <div th:if="${param.logout}">
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-start',
+                showConfirmButton: false,
+                timer: 4000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: 'success',
+                title: 'Se cerro la sesion exitosamente!'
+            })
+        </script>
+    </div>
 
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
@@ -546,7 +577,7 @@
         crossorigin="anonymous"></script>
 
 
-    
+
     <script src="JS/IndexJS.js"></script>
     <script src="JS/JS.js"></script>
 

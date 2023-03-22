@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="es">
+
+<div th:replace="layouts/menuAdmin :: headerMenu">
+</div>
+
+<body id="body">
+    <div sec:authorize="hasAuthority('Administrador')">
+        <!-- Menú para el rol de "administrador" -->
+        <div th:replace="layouts/menuAdmin :: navMenuAdmin"></div>
+        <div th:replace="layouts/menuAdmin :: sidebar"></div>
+    </div>
+    <div sec:authorize="hasAuthority('Cliente')">
+        <!-- Menú para el rol de "usuario" -->
+        <div th:replace="layouts/menuUsuario :: navMenuUsuario"></div>
+    </div>
+
+    <div class="container" sec:authorize="hasAuthority('Administrador')">
+        <div class="row">
+            <div class="col-5">
+                <div class="container-perfil">
+                    <div class="contenido-perfil">
+                        <h1 th:text="'Bienvenido ' + ${usuario.nombre}"></h1>
+                        <img src="../../img/perfil-admin/perfil en blanco.png" alt="perfil en blanco">
+                        <p>
+                            Nombre: <span th:text="${usuario.nombre} + ' ' + ${usuario.apellido}"></span><br>
+                            Correo: <span sec:authentication="name"></span><br>
+                            Rol: <span th:text="${usuario.rolIdrol.nombre}"></span><br>
+                        </p>
+                        <div class="opc-perfil">
+                            <div class="row" style="display: flex; align-items: center;">
+                                <div class="col-6">
+                                    <form th:action="@{/logout}" method="post">
+                                        <button type="submit" class="nav-link"
+                                            style="border: none; background: transparent; color: snow; padding: 0px 10px;">
+                                            <i class='bx bx-exit'></i>Salir
+                                        </button>
+                                    </form>
+                                </div>
+                                <!-- <div class="col-6">
+                                    <a href="" data-bs-toggle="modal" data-bs-target="#modalModificarPerfil"
+                                        th:onclick="cargar([[${usuario.idusuario}]], [[${usuario.nombre}]], [[${usuario.apellido}]], [[${usuario.correo}]])"><i
+                                            class='link-icon bx bxs-cog'></i></a>
+                                </div> -->
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-7">
+                <div class="row">
+                    <div class="col-2">
+
+                    </div>
+                    <div class="col-8 contenedor-reportes ">
+                        <div class="row">
+                            <h1>Ventas</h1>
+                            Reporte de la cantidad de unidades vendidas por la empresa en el primer semestre del año.
+                            <canvas id="myChartVenta" class="mychart" width="300" height="300"></canvas>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <h1>Inventario</h1>
+                            Reporte de la cantidad de articulos existentes en cada categoría del inventario.
+                            <canvas id="myChartInventario" class="mychart" width="300" height="300"></canvas>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <h1>Usuarios</h1>
+                            Reporte de los usuarios registrados y su estado.
+                            <canvas id="myChartUsuario" class="mychart" width="300" height="300"></canvas>
+                        </div>
+
+                    </div>
+                    <div class="col-2">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div sec:authorize="hasAuthority('Cliente')">
+
+
+        <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="2000">
+                    <img src="../../img/bienvenida_usuarios/5303219.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img src="../../img/bienvenida_usuarios/6385365.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img src="../../img/bienvenida_usuarios/mantenimiento-845x321.jpg" class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+        <section id="productos">
+            <div class="row">
+                <div class="ti-producto" style="border-bottom: 3px solid #fddf00;">
+                    <h1>
+                        Nuestros productos
+                    </h1>
+                </div>
+            </div>
+            <div class="slider_hor">
+                <button class="btn-scroll" id="btn-scroll-izq"><i class='bx bx-chevrons-left'></i></button>
+                <button class="btn-scroll" id="btn-scroll-der"><i class='bx bx-chevrons-right'></i></button>
+                <div class="contenedor-item">
+                    <div class="item-producto" style="width: 18rem;">
+                        <img src="../../img/Productos/Herramientas/tools-on-the-table2.jpg" alt="Herramientas">
+                        <div class="item-body">
+                            <h5 class="item-title">Herramientas</h5>
+                            <p class="item-text">Todas las herramientas necesarias para su hogar.</p>
+                            <!-- <a href="producto/producto.html" class="btn btn-primary"><i
+                                    class='bx bx-plus-medical'></i>Ver
+                                más</a> -->
+                        </div>
+                    </div>
+
+                    <div class="item-producto" style="width: 18rem;">
+                        <img src="../../img/Productos/Seguridad/top-view-safety-construction-helmet-and-medical-mas.jpg"
+                            alt="proteccion">
+                        <div class="item-body">
+                            <h5 class="item-title">Protección y vestuario</h5>
+                            <p class="item-text">La mejor seguridad para su personal de trabajo</p>
+                            <!-- <a href="productos/productos.html" class="btn btn-primary"><i
+                                    class='bx bx-plus-medical'></i>Ver
+                                más</a> -->
+                        </div>
+                    </div>
+
+                    <div class="item-producto" style="width: 18rem;">
+                        <img src="../../img/Productos/Fontaneria/plumbing-repair-service.jpg" alt="Herramientas">
+                        <div class="item-body">
+                            <h5 class="item-title">Baño y fontaneria</h5>
+                            <p class="item-text">Materiales y servicios de mantenimiento</p>
+                            <!-- <a href="productos/productos.html" class="btn btn-primary"><i
+                                    class='bx bx-plus-medical'></i>Ver
+                                más</a> -->
+                        </div>
+                    </div>
+
+                    <div class="item-producto" style="width: 18rem;">
+                        <img src="../../img/Productos/Iluminación/lightbulbs-hanging-on-the-ceilin.jpg"
+                            alt="Herramientas">
+                        <div class="item-body">
+                            <h5 class="item-title">Iluminación / Alumbrado</h5>
+                            <p class="item-text">Productos y servicios de alta calidad</p>
+                            <!-- <a href="productos/productos.html" class="btn btn-primary"><i
+                                    class='bx bx-plus-medical'></i>Ver
+                                más</a> -->
+                        </div>
+                    </div>
+
+                    <div class="item-producto" style="width: 18rem;">
+                        <img src="../../img/Productos/Tornilleria/bolts-and-nuts.jpg" alt="Herramientas">
+                        <div class="item-body">
+                            <h5 class="item-title">Tornilleria</h5>
+                            <p class="item-text">Multiplies productos de tornillerias y amplia gama de calibres</p>
+                            <!-- <a href="productos/productos.html" class="btn btn-primary"><i
+                                    class='bx bx-plus-medical'></i>Ver
+                                más</a> -->
+                        </div>
+                    </div>
+
+                    <div class="item-producto" style="width: 18rem;">
+                        <img src="../../img/Productos/Tuberias/steel-pipelines-and-cables-in-plant.jpg"
+                            alt="Herramientas">
+                        <div class="item-body">
+                            <h5 class="item-title">Tuberias</h5>
+                            <p class="item-text">La mejor tuberia del mejor material con alta calidad</p>
+                            <!-- <a href="productos/productos.html" class="btn btn-primary"><i
+                                    class='bx bx-plus-medical'></i>Ver
+                                más</a> -->
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <section id="servicios">
+
+            <div id="ti-servicios">
+                <h1>Nuestros Servicios</h1>
+                <div id="lin-hor">
+                </div>
+            </div>
+
+            <div id="cont-serv">
+
+                <div class="item_serv">
+                    <div class="cont-item-serv">
+                        <div class="titulo-serv">
+                            <h2>Carpinteria metálica</h2>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">
+                                <div id="linea">
+                                </div>
+                            </div>
+                            <div class="col-10">
+                                <p>
+                                    Trabajo en metales para fabricar muebles, puertas, rejas, ventanas, separadores de
+                                    ambientes e infinidad de accesorios. se utiliza todo tipo de metales, desde cobre,
+                                    bronce y aluminio hasta hierro.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="btn-ver">
+                            <a th:href="@{/Servicios#CarpinteriaMetálica}">Ver más</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item_serv">
+                    <div class="cont-item-serv">
+                        <div class="titulo-serv">
+                            <h2>Servicio electrico</h2>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-2">
+                                <div id="linea">
+                                </div>
+                            </div>
+                            <div class="col-10">
+                                <p>
+                                    Contamos con un equipo de electricistas profesionales altamente cualificados para
+                                    instalaciones y reparaciones eléctricas. Mantención; reemplazo o reparación de
+                                    enchufes,
+                                    interruptores, cables y otros del sistema eléctrico.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="btn-ver">
+                            <a th:href="@{/Servicios#ServicioElectrico}">Ver más</a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="item_serv">
+                    <div class="cont-item-serv">
+                        <div class="titulo-serv">
+                            <h2>Ornamentación</h2>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">
+                                <div id="linea">
+                                </div>
+                            </div>
+                            <div class="col-10">
+                                <p>
+                                    Taller de Ornamentación, fabricación de ornamentación, toda clase de ventanas,
+                                    puertas
+                                    estructuras, muebles metálicos para oficina, vidrios, escaleras metálicas y
+                                    reparación
+                                    de escaleras.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="btn-ver">
+                            <a th:href="@{/Servicios#Ornamentación}">Ver más</a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="item_serv">
+                    <div class="cont-item-serv">
+                        <div class="titulo-serv">
+                            <h2>Alquiler andamios</h2>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-2">
+                                <div id="linea">
+                                </div>
+                            </div>
+                            <div class="col-10">
+                                <p>
+                                    Ofrecemos andamios certificados de la mejor calidad, así como personal experto en
+                                    montajes de estos sistemas y asesoría para el montaje y diseño de estructuras en
+                                    andamios certificados.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="btn-ver">
+                            <a th:href="@{/Servicios#AlquilerAndamios}">Ver más</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="contactenos">
+            <div class="row">
+                <div class="col-9">
+                    <div class="cont-inf-emp">
+
+                        <div class="inf-emp">
+                            <div class="row" id="titulo-contac">
+
+                                <h1>Escríbenos a nuestro <br> WhatsApp o correo!</h1>
+
+                                <div id="linea-hor">
+                                </div>
+                            </div>
+                            <div class="row" id="escribenos">
+                                <img src="../../img/redes_sociales/Icon-whatsapp2.png" alt="WhatsApp">
+                                <p>3212087493</p>
+                            </div>
+                        </div>
+
+                        <div class="cont-footer">
+                            <footer>
+
+                                <div class="row foot">
+
+                                    <div class="col-3">
+                                        <div class="row item-foot">
+                                            <div class="col-2">
+                                                <i class='bx bx-map'></i>
+                                            </div>
+                                            <div class="col-10">
+                                                Puedes encontrarnos en <br>
+                                                <strong>Carrera 25a sur #44-93 Claret</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-3">
+                                        <div class="row item-foot">
+                                            <div class="col-2">
+                                                <i class='bx bxs-phone'></i>
+                                            </div>
+                                            <div class="col-10">
+                                                Tenemos otro cel <br>
+                                                <strong>320 473 3151</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-3">
+                                        <div class="row item-foot">
+                                            <div class="col-2">
+                                                <i class='bx bx-envelope'></i>
+                                            </div>
+                                            <div class="col-10">
+                                                Nuestro correo es <br>
+                                                <strong>ferremetalideas.comercial@gmail.com</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="row item-foot">
+                                            <div class="col-4">
+                                            </div>
+                                            <!-- <div class="col-3">
+                                            <i class='bx bxl-messenger'></i>
+                                        </div>
+                                        <div class="col-3">
+                                            <i class='bx bxl-instagram'></i>
+                                        </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </footer>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-3">
+                    <div class="cont-env-correo">
+                        <div id="form-contactenos">
+                            <!-- <form action="">
+                            <label>Tu nombre:</label>
+                            <input type="text">
+                            <label>Tu correo:</label>
+                            <input type="email">
+                            <label>Tu mensaje:</label>
+                            <textarea name="mensaje" id="mensaje" cols="10" rows="10"></textarea>
+                            <input class="btn-enviar" type="button" value="¡Enviar!">
+                        </form> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+
+        <script>
+            let btnScrollIzq = document.getElementById("btn-scroll-izq");
+            let btnScrollDer = document.getElementById("btn-scroll-der");
+            let posicionActualScroll = 0;
+            let desplazamiento = 350;
+            const contenedoritem = document.querySelector(".contenedor-item");
+            const sliderHor = document.querySelector(".slider_hor");
+            let maxScroll = -contenedoritem.offsetWidth + sliderHor.offsetWidth;
+
+
+            //movimiento scroll productos
+
+            function scrollHorizontal(val) {
+
+                if (posicionActualScroll >= 0) {
+                    posicionActualScroll = 0;
+                    btnScrollIzq.style.opacity = "0";
+                } else {
+                    btnScrollIzq.style.opacity = "1";
+                }
+                if (posicionActualScroll <= maxScroll) {
+                    posicionActualScroll = maxScroll;
+                    btnScrollDer.style.opacity = "0";
+                } else {
+                    btnScrollDer.style.opacity = "1";
+                }
+
+                posicionActualScroll += (val * desplazamiento);
+                contenedoritem.style.left = posicionActualScroll + "px";
+            }
+
+            //Movimiento scroller producto
+
+            btnScrollIzq.addEventListener("click", function () {
+                scrollHorizontal(1)
+            });
+            btnScrollDer.addEventListener("click", function () {
+                scrollHorizontal(-1)
+            });
+        </script>
+
+    </div>
+
+
+    <div class="contenedor-modal" sec:authorize="hasAuthority('Administrador')">
+      <!--   <div class="modal" tabindex="-1" id="modalModificarPerfil">
+            <div class="modal-dialog editperfil">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <i class="bx bx-x iconos btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            style="color:snow"></i>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <form th:action="@{/editarAdmin}" th:object="${editUsuario}" method="post"
+                                class="needs-validation" novalidate>
+                                <h2><i class='link-icon bx bxs-cog'></i></a>Modificar perfil</h2>
+                                <div class="row">
+                                    <input type="hidden" id="idAdmin" name="idAdmin" th:field="*{idusuario}">
+                                    <div class="col-6">
+                                        <div class="mb-3">
+                                            <label for="nombreAdministradorr" class="form-label">Nombre</label>
+                                            <input type="text" class="form-control" id="nombreAdministrador"
+                                                name="nombreAdministrador" placeholder="Nombre Administrador"
+                                                th:field="*{nombre}">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="apellidoAdministradorr" class="form-label">Apellido</label>
+                                            <input type="text" class="form-control" id="apellidoAdministrador"
+                                                name="apellidoAdministrador" placeholder="Apellido Administrador"
+                                                th:field="*{apellido}">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="telefonoAdministrador" class="form-label">Teléfono</label>
+                                            <input type="number" class="form-control" id="telefonoAdministrador"
+                                                name="telefonoAdministrador" placeholder="###-###-####">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="correoAdministradorr" class="form-label">Correo</label>
+                                            <input type="email" class="form-control" id="correoAdministrador"
+                                                name="correoAdministrador" placeholder="name@correo.com"
+                                                th:field="*{correo}">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="mb-3">
+                                            <label for="claveActual" class="form-label">Clave actual*</label>
+                                            <input type="password" class="form-control" id="claveActual"
+                                                name="claveActual" placeholder="***********" required>
+                                            <div class="valid-feedback">
+                                                ¡Bien! Datos correctos.
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                ¡Error! Verifica los datos.
+                                            </div>
+                                        </div>
+                                        <div class="cambiar-clase">
+                                            <div class="mb-3">
+                                                <label for="claveoAdministrador" class="form-label">Nueva clave</label>
+                                                <input type="password" class="form-control" id="claveoAdministrador"
+                                                    name="claveoAdministrador" placeholder="***********"
+                                                    th:field="*{clave}">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="nuevaClave" class="form-label">Confirma nueva
+                                                    clave</label>
+                                                <input type="password" class="form-control" id="nuevaClave"
+                                                    name="nuevaClave" placeholder="***********">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="reg-siguiente">
+                                    <button type="submit" class="btn">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>-->
+    </div> 
+
+    <!--ALERTAS Y NOTIFICACIONES-->
+    <div th:if="${param.inicioSession}">
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-start',
+                showConfirmButton: false,
+                timer: 5000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: 'success',
+                title: 'Inicio de sesion exitoso'
+            })
+        </script>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+    <script src="JS/JS.js"></script>
+    <script src="JS/inicioAdminJS.js"></script>
+
+    <div sec:authorize="hasAuthority('Administrador')">
+        <script>
+            const ctxventa = document.getElementById('myChartVenta').getContext('2d');
+            const myChartventa = new Chart(ctxventa, {
+                type: 'bar',
+                data: {
+                    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
+                    datasets: [{
+                        label: '# de Ventas',
+                        data: [120, 300, 180, 200, 350, 280],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
+
+        <script>
+            const ctxInventario = document.getElementById('myChartInventario').getContext('2d');
+            const myChartInventario = new Chart(ctxInventario, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Herramientas', 'Protección y vestuario', 'Baño y fontaneria', 'iluminaciónh y alumbrado', 'Tornilleria', 'Tuberias'],
+                    datasets: [{
+                        label: 'Cantidad de articulos',
+                        data: [500, 750, 624, 564, 584, 702],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
+
+        <script>
+            const ctxUsuario = document.getElementById('myChartUsuario').getContext('2d');
+            const myChartUsuario = new Chart(ctxUsuario, {
+                type: 'polarArea',
+                data: {
+                    labels: ['Usuario', 'Validado', 'Invalidado'],
+                    datasets: [{
+                        label: '# de Ventas',
+                        data: [120, 38, 13,],
+                        backgroundColor: [
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
+    </div>
+
+
+</body>
+
+</html>

@@ -6,4 +6,5 @@ import com.metalideas.metalideastec.entity.Rol;
 
 public interface RolServ {
     public List<Rol> verRoles();
+    public Rol buscarRol(int id);
 }

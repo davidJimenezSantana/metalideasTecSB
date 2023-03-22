@@ -18,5 +18,10 @@ public class RolServImp implements RolServ{
     public List<Rol> verRoles() {
         return rolDAO.findAll();
     }
+
+    @Override
+    public Rol buscarRol(int id) {
+        return rolDAO.findById(id).get();
+    }
     
 }

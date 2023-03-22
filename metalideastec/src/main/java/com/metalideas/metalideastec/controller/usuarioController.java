@@ -3,6 +3,8 @@ package com.metalideas.metalideastec.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,8 @@ import com.metalideas.metalideastec.entity.Usuario;
 @Controller
 public class usuarioController {
 
+    @Autowired
+    private BCryptPasswordEncoder encoder;
     @Autowired
     private UsuarioServ usuarioServ;
     @Autowired
@@ -51,7 +55,7 @@ public class usuarioController {
     // Agregar usuario
     @PostMapping(value = "/agregarUsuario")
     public String agregarUsuarios(@ModelAttribute("nuevoUsuario") Usuario usuario,
-            @RequestParam("NumMovil") Integer numMovil,
+            @RequestParam("NumMovil") Long numMovil,
             @RequestParam("confirmaClaveCliente") String confirmaClave) {
 
         String url = "";
@@ -71,7 +75,7 @@ public class usuarioController {
         return "redirect:/verUsuarios" + url;
     }
 
-    // Agregar usuario
+    // Editar usuario
     @PostMapping(value = "/editarUsuario")
     public String editarUsuario(@ModelAttribute("nuevoUsuario") Usuario usuario) {
 
@@ -91,6 +95,68 @@ public class usuarioController {
         }
 
         return "redirect:/verUsuarios" + url;
+    }
+
+    @GetMapping(value = "/Inicio")
+    public String verInicio(Authentication authentication, Model model) {
+        String username = authentication.getName();
+        Usuario user = usuarioServ.buscarUserName(username);
+        /* Usuario editUsuario = new Usuario();
+        model.addAttribute("editUsuario", editUsuario); */
+        model.addAttribute("usuario", user);
+        return "inicio";
+    }
+
+    @GetMapping(value = "/Servicios")
+    public String verServicios() {
+        return "vista/servicio/servicios";
+    }
+
+    @PostMapping(value = "/editarAdmin")
+    public String editarAdmin(@ModelAttribute("editUsuario") Usuario editUsuario,
+            @RequestParam("claveActual") String claveActual,
+            @RequestParam("nuevaClave") String nuevaClave) {
+
+        String url = "";
+        Usuario usuario = usuarioServ.buscarUsuario(editUsuario.getIdusuario());
+        usuario.setNombre(editUsuario.getNombre());
+        usuario.setApellido(editUsuario.getApellido());
+        usuario.setCorreo(editUsuario.getCorreo());
+
+        String clave = encoder.encode(editUsuario.getClave());
+
+        if (!usuario.getClave().equals(clave)) {
+            url = "?claveFalse";
+        }
+        if (!editUsuario.getClave().equals(nuevaClave)) {
+            url = "?claveNoConinciden";
+        }
+
+        try {
+            if (!usuario.getClave().equals(clave)) {
+                url = "?claveFalse";
+            } else if (!editUsuario.getClave().equals(nuevaClave)) {
+                url = "?claveNoConinciden";
+            } else {
+                usuario.setClave(editUsuario.getClave());
+                usuarioServ.actualizar(usuario);
+                url = "?actualizacionTrue";
+            }
+        } catch (Exception e) {
+            url = "?actualizacionFalse";
+        }
+
+        return "redirect: /Inicio" + url;
+    }
+
+    @GetMapping(value = "/perfilCliente")
+    public String perfilCliente(Authentication authentication, Model model) {
+        String username = authentication.getName();
+        Usuario user = usuarioServ.buscarUserName(username);
+        /* Usuario editUsuario = new Usuario();
+        model.addAttribute("editUsuario", editUsuario); */
+        model.addAttribute("usuario", user);
+        return "vista/bienvenida_usuario/perfil";
     }
 
 }

@@ -32,7 +32,7 @@ public class Movil implements Serializable {
     @Column(name = "idmovil")
     private Integer idmovil;
     @Column(name = "numero")
-    private Integer numero;
+    private Long numero;
     @JoinColumn(name = "usuario_idusuario", referencedColumnName = "idusuario")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Usuario usuarioIdusuario;
@@ -44,7 +44,7 @@ public class Movil implements Serializable {
         this.idmovil = idmovil;
     }
 
-    public Movil(Integer numero, Usuario usuarioIdusuario) {
+    public Movil(Long  numero, Usuario usuarioIdusuario) {
         this.numero = numero;
         this.usuarioIdusuario = usuarioIdusuario;
     }
@@ -57,11 +57,11 @@ public class Movil implements Serializable {
         this.idmovil = idmovil;
     }
 
-    public Integer getNumero() {
+    public Long  getNumero() {
         return numero;
     }
 
-    public void setNumero(Integer numero) {
+    public void setNumero(Long  numero) {
         this.numero = numero;
     }
 

@@ -350,3 +350,4 @@ ALTER TABLE `producto` CHANGE `img` `img` MEDIUMBLOB NULL DEFAULT NULL;
 ALTER TABLE `venta` CHANGE `fecha` `fecha` TIMESTAMP NULL DEFAULT NULL;
 ALTER TABLE `comprobante_de_pago` DROP `hora`;
 ALTER TABLE `comprobante_de_pago` CHANGE `fecha` `fecha` TIMESTAMP NOT NULL;
+ALTER TABLE `movil` CHANGE `numero` `numero` BIGINT(11) NULL DEFAULT NULL;

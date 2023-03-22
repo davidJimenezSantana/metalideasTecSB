@@ -10,6 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -76,9 +77,13 @@ public class InventarioController {
     // agregar producto
     @PostMapping(value = "/agregarProducto")
     public String agregarProducto(@ModelAttribute("Producto") Producto producto,
+            Authentication authentication,
             @RequestParam("proveedorId") Integer proveedorId,
             @RequestParam("obsProducto") String obsRegistro,
             @RequestParam("imagenProducto") MultipartFile imagen) {
+
+        String username = authentication.getName();
+        Usuario userAuth = usuarioServ.buscarUserName(username);
 
         String url = "";
         if (!imagen.isEmpty()) {
@@ -103,10 +108,8 @@ public class InventarioController {
             Date fechaActual = new Date();
             Timestamp timestamp = new Timestamp(fechaActual.getTime());
 
-            Usuario usuario = usuarioServ.buscarUsuario(3);// usuario temporal
-
             RegistroMovimientos registro = new RegistroMovimientos(obsRegistro, timestamp,
-                    productoNuevo.getCantidad(), tipoMovimiento, usuario, productoNuevo);
+                    productoNuevo.getCantidad(), tipoMovimiento, userAuth, productoNuevo);
             registroMovimientosServ.agregarRegistroMovimientos(registro);
             url = "?agregarProductoTrue";
         } catch (Exception e) {
@@ -147,7 +150,6 @@ public class InventarioController {
 
         return "redirect:/VerInventario" + url;
     }
-   
 
     @GetMapping("/producto/imagen/{id}")
     public ResponseEntity<byte[]> getImage(@PathVariable Integer id) {

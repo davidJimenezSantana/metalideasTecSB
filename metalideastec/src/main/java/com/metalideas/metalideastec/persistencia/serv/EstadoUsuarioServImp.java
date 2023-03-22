@@ -18,4 +18,9 @@ public class EstadoUsuarioServImp implements EstadoUsuarioServ{
     public List<EstadoUsuario> verEstadosUsuario() {
         return estadoUsuarioDAO.findAll();
     }
+
+    @Override
+    public EstadoUsuario buscarEstadosUsuario(int id) {
+        return estadoUsuarioDAO.findById(id).get();
+    }
 }

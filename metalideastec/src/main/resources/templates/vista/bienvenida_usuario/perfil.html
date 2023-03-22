@@ -1,0 +1,55 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<div th:replace="layouts/menuAdmin :: headerMenu">
+</div>
+
+<body>
+    <div th:replace="layouts/menuUsuario :: navMenuUsuario"></div>
+    <div class="row">  
+        <div class="col-3"></div>
+        <div class="col-6" style="display: flex; justify-content: center;">
+            <div class="container-perfil">
+                <div class="contenido-perfil">
+                    <h1 th:text="'Bienvenido ' + ${usuario.nombre}"></h1>
+                    <img src="../../img/perfil-admin/perfil en blanco.png" alt="perfil en blanco">
+                    <p>
+                        Nombre: <span th:text="${usuario.nombre} + ' ' + ${usuario.apellido}"></span><br>
+                        Correo: <span sec:authentication="name"></span><br>
+                        Direccion: <span th:text="${usuario.direccion}"></span><br>
+                        Rol: <span th:text="${usuario.rolIdrol.nombre}"></span><br>
+                    </p>
+                    <div class="opc-perfil">
+                        <div class="row" style="display: flex; align-items: center;">
+                            <div class="col-6">
+                                <form th:action="@{/logout}" method="post">
+                                    <button type="submit" class="nav-link"
+                                        style="border: none; background: transparent; color: snow; padding: 0px 10px;">
+                                        <i class='bx bx-exit'></i>Salir
+                                    </button>
+                                </form>
+                            </div>
+                            <!-- <div class="col-6">
+                            <a href="" data-bs-toggle="modal" data-bs-target="#modalModificarPerfil"
+                                th:onclick="cargar([[${usuario.idusuario}]], [[${usuario.nombre}]], [[${usuario.apellido}]], [[${usuario.correo}]])"><i
+                                    class='link-icon bx bxs-cog'></i></a>
+                        </div> -->
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-3"></div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>

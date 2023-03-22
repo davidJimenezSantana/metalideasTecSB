@@ -33,6 +33,9 @@
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <title>Metalideas</title>
 
 </head>
@@ -40,7 +43,7 @@
 <body id="body">
 
     <!-- MENU HEADER -->
-    <header id="header-administrador"  th:fragment="navMenuAdmin">
+    <header id="header-administrador" th:fragment="navMenuAdmin">
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container">
                 <a class="navbar-brand" href=""><img class="logoMetalideas" src="../../img/Metalideas.png"
@@ -56,14 +59,19 @@
                             <i class='bx bx-menu'></i>
                             Menu
                         </a>
-                        <a class="nav-link" aria-current="page" href="#">
+                        <a class="nav-link" aria-current="page" th:href="@{/Inicio}">
                             <i class='bx bx-user'></i>
                             Mi perfil
                         </a>
-                        <a class="nav-link" href="../../index.html">
+                        <form th:action="@{/logout}" method="post">
+                            <button type="submit" class="nav-link btn-logout">
+                                <i class='bx bx-exit'></i>Salir
+                            </button>
+                        </form><!-- 
+                        <a class="nav-link" th:href="@{/logout}">
                             <i class='bx bx-exit'></i>
                             Salir
-                        </a>
+                        </a> -->
                     </div>
                 </div>
             </div>
@@ -114,29 +122,32 @@
             </div>
 
             <div class="nav-menu2">
-                <div class="sidebarUsuarios__titulo">
+                <!-- <div class="sidebarUsuarios__titulo">
                     <span>USUARIOS</span>
-                </div>
+                </div> -->
                 <ul class="nav-links">
                     <li>
-                        <a href="#">
+                        <a th:href="@{/Inicio}">
                             <i class='link-icon bx bxs-user-account'></i>
                             <span class="link-nombre">VER PERFIL</span>
                         </a>
                     </li>
 
-                    <li>
+                    <!-- <li>
                         <a href="#">
                             <i class='link-icon bx bx-user'></i>
                             <span class="link-nombre">CAMBIO DE CONTRASEÑA</span>
                         </a>
-                    </li>
+                    </li> -->
 
                     <li>
-                        <a href="#">
-                            <i class='link-icon bx bx-exit'></i>
-                            <span class="link-nombre">SALIR</span>
-                        </a>
+                        <form th:action="@{/logout}" method="post">
+                            <button type="submit" class="btn-logout">
+                                <i class='link-icon bx bx-exit'></i>
+                                <span class="link-nombre">SALIR</span>
+                            </button>
+                        </form>
+
                     </li>
                 </ul>
             </div>
