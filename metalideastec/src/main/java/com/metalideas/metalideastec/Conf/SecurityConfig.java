@@ -45,7 +45,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/error.html",
                         "/errorPermiso.html",
                         "/Servicios",
-                        "/registrarse")
+                        "/registrarse",
+                        "/index.html")
                 .permitAll()
                 .antMatchers("/verUsuarios", "/verRegistro", "/Proveedores",
                         "/VerInventario", "/gestionVentas")

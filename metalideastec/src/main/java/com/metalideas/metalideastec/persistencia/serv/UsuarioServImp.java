@@ -50,7 +50,6 @@ public class UsuarioServImp implements UsuarioServ {
         if(usuario == null){ 
             throw new UsernameNotFoundException("Correo o contraseña incorrecta.");
         }
-        System.out.println(usuario.getRolIdrol().getNombre());
         return new User(usuario.getCorreo(), usuario.getClave(), Collections.singletonList(new SimpleGrantedAuthority(usuario.getRolIdrol().getNombre())));
     }
 

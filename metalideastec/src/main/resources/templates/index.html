@@ -43,7 +43,7 @@
                                     <h2>Inicio de sesión</h2>
                                     <div class="mb-3">
                                         <label for="username" class="form-label">Correo*</label>
-                                        <input type="text" class="form-control" id="username" name="username"
+                                        <input type="email" class="form-control" id="username" name="username"
                                             placeholder="name@correo.com" required>
                                         <div class="valid-feedback">
                                             ¡Bien! Datos correctos.
@@ -100,6 +100,24 @@
                                                     </div>
                                                 </div>
                                                 <div class="mb-3">
+                                                    <label for="nombre" class="form-label">Direccion*</label>
+                                                    <input type="text" class="form-control" id="nombre" name="nombre"
+                                                        th:field="*{direccion}">
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="mb-3">
+                                                    <label for="apellido" class="form-label">Apellido</label>
+                                                    <input type="text" class="form-control" id="apellido"
+                                                        name="apellido" th:field="*{apellido}">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="telefono" class="form-label">Tel/Cel: </label>
+                                                    <input type="number" class="form-control" id="NumMovil"
+                                                        name="NumMovil">
+                                                </div>
+                                                <div class="mb-3">
                                                     <label for="claveNueva" class="form-label">Contraseña*</label>
                                                     <input type="password" class="form-control" id="claveNueva"
                                                         name="claveNueva" placeholder="*******" th:field="*{clave}"
@@ -111,23 +129,11 @@
                                                         ¡Error! Verifica los datos.
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-6">
                                                 <div class="mb-3">
-                                                    <label for="apellido" class="form-label">Apellido</label>
-                                                    <input type="text" class="form-control" id="apellido"
-                                                        name="apellido" th:field="*{apellido}">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="telefono" class="form-label">Tel/Cel: </label>
-                                                    <input type="number" class="form-control" id="telefono"
-                                                        name="telefono">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="confirmaClave" class="form-label">Confirma
+                                                    <label for="confirmaClaveCliente" class="form-label">Confirma
                                                         contraseña*</label>
-                                                    <input type="password" class="form-control" id="confirmaClave"
-                                                        name="confirmaClave" placeholder="*******" required>
+                                                    <input type="password" class="form-control" id="confirmaClaveCliente"
+                                                        name="confirmaClaveCliente" placeholder="*******" required>
                                                     <div class="valid-feedback">
                                                         ¡Bien! Datos correctos.
                                                     </div>
@@ -567,6 +573,33 @@
                 icon: 'success',
                 title: 'Se cerro la sesion exitosamente!'
             })
+        </script>
+    </div>
+    <div th:if="${param.agregarTrue}">
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Registro exitoso!',
+                text: 'Ya puedes iniciar sesión.',
+            })            
+        </script>
+    </div>
+    <div th:if="${param.agregarFalse}">
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Registro rechazado',
+                text: 'Verifica los datos.',
+            })            
+        </script>
+    </div>
+    <div th:if="${param.invalidClave}">
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Las claves no coinciden!',
+                text: 'Verifica los datos.',
+            })            
         </script>
     </div>
 
