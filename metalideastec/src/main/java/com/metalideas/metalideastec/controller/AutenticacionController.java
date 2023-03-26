@@ -51,11 +51,11 @@ public class AutenticacionController {
                 Usuario nuevoUsuario = usuarioServ.guardar(usuario);
                 Movil movil = new Movil(numMovil, nuevoUsuario);
                 movilServ.guardar(movil);
-                
+
                 return "registroTrue";
             } catch (Exception e) {
                 System.out.println(e);
-                return"registroFalse";
+                return "registroFalse";
             }
         } else {
             return "registroFalse";

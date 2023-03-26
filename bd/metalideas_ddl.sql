@@ -7,7 +7,7 @@ USE `dbmetalideas` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dbmetalideas`.`categoria` (
   `idcategoria` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(15) NOT NULL,
+  `nombre` VARCHAR(40) NOT NULL,
   PRIMARY KEY (`idcategoria`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 7
@@ -20,7 +20,7 @@ DEFAULT CHARACTER SET = utf8mb3;
 CREATE TABLE IF NOT EXISTS `dbmetalideas`.`comprobante_de_pago` (
   `idcomprobante_de_pago` INT NOT NULL AUTO_INCREMENT,
   `fecha` DATE NOT NULL,
-  `hora` VARCHAR(10) NOT NULL,
+  `hora` VARCHAR(40) NOT NULL,
   `total` INT NOT NULL,
   PRIMARY KEY (`idcomprobante_de_pago`))
 ENGINE = InnoDB
@@ -57,7 +57,7 @@ DEFAULT CHARACTER SET = utf8mb3;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dbmetalideas`.`marca` (
   `idmarca` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(15) NOT NULL,
+  `nombre` VARCHAR(40) NOT NULL,
   PRIMARY KEY (`idmarca`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 33
@@ -92,8 +92,8 @@ DEFAULT CHARACTER SET = utf8mb3;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dbmetalideas`.`usuario` (
   `idusuario` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(10) NOT NULL,
-  `apellido` VARCHAR(10) NOT NULL,
+  `nombre` VARCHAR(40) NOT NULL,
+  `apellido` VARCHAR(40) NOT NULL,
   `clave` VARCHAR(300) NOT NULL,
   `rol_idrol` INT NOT NULL,
   `estado_usuario_idestado_cliente` INT NOT NULL,
@@ -160,7 +160,7 @@ DEFAULT CHARACTER SET = utf8mb3;
 CREATE TABLE IF NOT EXISTS `dbmetalideas`.`venta` (
   `idventa` INT NOT NULL AUTO_INCREMENT,
   `total` INT NOT NULL,
-  `destino` VARCHAR(25) NULL DEFAULT NULL,
+  `destino` VARCHAR(40) NULL DEFAULT NULL,
   `comprobante_de_pago_idcomprobante_de_pago` INT NOT NULL,
   `estado_idestado` INT NOT NULL,
   `fecha` DATE NULL DEFAULT NULL,
@@ -259,7 +259,7 @@ DEFAULT CHARACTER SET = utf8mb3;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dbmetalideas`.`registro_movimientos` (
   `idregistro_movimientos` INT NOT NULL AUTO_INCREMENT,
-  `detalle` VARCHAR(30) NOT NULL,
+  `detalle` VARCHAR(300) NOT NULL,
   `tipo_movimiento_idtipo_movimiento` INT NOT NULL,
   `fecha_movimiento` INT NOT NULL,
   `cantidad_prod` INT NOT NULL,
@@ -345,9 +345,9 @@ DEFAULT CHARACTER SET = utf8mb3;
 
 ALTER TABLE `producto` ADD `img` VARCHAR(40) NULL AFTER `descripcion`;
 ALTER TABLE `registro_movimientos` CHANGE `fecha_movimiento` `fecha_movimiento` TIMESTAMP NOT NULL;
-ALTER TABLE `proveedor` CHANGE `correo` `correo` VARCHAR(35) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+ALTER TABLE `proveedor` CHANGE `correo` `correo` VARCHAR(45) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
 ALTER TABLE `producto` CHANGE `img` `img` MEDIUMBLOB NULL DEFAULT NULL;
 ALTER TABLE `venta` CHANGE `fecha` `fecha` TIMESTAMP NULL DEFAULT NULL;
 ALTER TABLE `comprobante_de_pago` DROP `hora`;
 ALTER TABLE `comprobante_de_pago` CHANGE `fecha` `fecha` TIMESTAMP NOT NULL;
-ALTER TABLE `movil` CHANGE `numero` `numero` BIGINT(11) NULL DEFAULT NULL;
+ALTER TABLE `movil` CHANGE `numero` `numero` BIGINT(30) NULL DEFAULT NULL;

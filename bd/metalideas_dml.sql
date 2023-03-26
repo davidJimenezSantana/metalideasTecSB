@@ -63,6 +63,7 @@ INSERT INTO `usuario` VALUES
  (9,'Miguel Áng','Bustamante','$2a$10$/55eLNWpT/SZQhyaDKHR8OuDDcuaV.UXhwNJmYhBdRPZcLmdR4wKW',2,2,'miguel.angel.dos@correo.com','Transversal 9 a No. 29 - 29 Barrio Maldonado'),
  (10,'Fredy Fran','Alarcón Li','$2a$10$/55eLNWpT/SZQhyaDKHR8OuDDcuaV.UXhwNJmYhBdRPZcLmdR4wKW',2,3,'fredy.francisco@correo.com','Carrera 20 B # 29-18. Barrio Pie de la Popa.'),
  (11,'SalomónAla','López Gera','$2a$10$/55eLNWpT/SZQhyaDKHR8OuDDcuaV.UXhwNJmYhBdRPZcLmdR4wKW',2,1,'salomon.alarcon@correo.com','Calle 7 # 19-35'),
+ (13,'David','Jimenez','$2a$10$Nlev0tbJbD59xkcP/RO1UOd6PRReC6KZutvxlzJJB9CngjnkRzyoi',1,1,'davidjimenez199701@gmail.com','Carrera 123 #12-12 '),
  (12,'Socorro','Arias Rodr','$2a$10$/55eLNWpT/SZQhyaDKHR8OuDDcuaV.UXhwNJmYhBdRPZcLmdR4wKW',2,2,'socorro@correo.com','Calle 4 norte # 10B-66 Barrio Modelo'),
  (14,'Enrique','Acevedo Me','$2a$10$/55eLNWpT/SZQhyaDKHR8OuDDcuaV.UXhwNJmYhBdRPZcLmdR4wKW',2,1,'enrique@correo.com','Calle 19 # 80A-40. Barrio Belén La Nubia '),
  (15,'Carolina','Acevedo Ru','$2a$10$/55eLNWpT/SZQhyaDKHR8OuDDcuaV.UXhwNJmYhBdRPZcLmdR4wKW',2,2,'carolina@correo.com','Calle 10 # 5-51 '),
@@ -81,8 +82,7 @@ INSERT INTO `usuario` VALUES
  (28,'Daniel','Lopez','$2a$10$/55eLNWpT/SZQhyaDKHR8OuDDcuaV.UXhwNJmYhBdRPZcLmdR4wKW',2,2,'daniel.lopez@correo.com','Calle 35 # 50 - 62 '),
  (29,'Leopoldo','Jimenez','$2a$10$/55eLNWpT/SZQhyaDKHR8OuDDcuaV.UXhwNJmYhBdRPZcLmdR4wKW',2,1,'leopoldo.jimenez@correo.com', 'carrera 17 # 25-41 '),
  (30,'Miguel','Miranda','$2a$10$/55eLNWpT/SZQhyaDKHR8OuDDcuaV.UXhwNJmYhBdRPZcLmdR4wKW',2,1,'miguel.miranda@correo.com','Calle 78 # 14-40 '),
- (31,'Aristobulo','caÃ±isarez','$2a$10$/55eLNWpT/SZQhyaDKHR8OuDDcuaV.UXhwNJmYhBdRPZcLmdR4wKW',2,1,'aristobulo@correo.com','Carrera 17 # 52-47 '),
-(32,'David','Jimenez','$2a$10$Nlev0tbJbD59xkcP/RO1UOd6PRReC6KZutvxlzJJB9CngjnkRzyoi',1,1,'davidjimenez199701@gmail.com','Carrera 123 #12-12 ');
+ (31,'Aristobulo','caÃ±isarez','$2a$10$/55eLNWpT/SZQhyaDKHR8OuDDcuaV.UXhwNJmYhBdRPZcLmdR4wKW',2,1,'aristobulo@correo.com','Carrera 17 # 52-47 ');
 
 --
 -- Volcado de datos para la tabla `estad_venta`
@@ -189,12 +189,13 @@ VALUES (1,'Ingreso'),
 
 
 INSERT INTO `registro_movimientos` VALUES
- (1,'Venta del producto(prueba)',2,2022,10,1,2),
- (2,'Venta del producto(prueba)',2,2022,15,3,5),
- (3,'Venta del producto(prueba)',2,2022,20,1,7),
- (4,'Venta del producto(prueba)',2,2022,30,3,12),
- (5,'Venta del producto(prueba)',2,2022,35,1,1);
+ (1,'Venta del producto(prueba)',2,'2017-03-23 19:01:14',10,1,2),
+ (2,'Venta del producto(prueba)',2,'2014-03-19 20:14:50',15,3,5),
+ (3,'Venta del producto(prueba)',2,'2015-12-22 20:20:39',20,1,7),
+ (4,'Venta del producto(prueba)',2,'2019-12-18 20:21:06',30,3,12),
+ (5,'Venta del producto(prueba)',2,'2020-08-13 19:03:13',35,1,1);
 
+ 
 
 
 INSERT INTO `venta` VALUES
@@ -279,10 +280,3 @@ INSERT INTO `usuario_has_metodo_pago` VALUES
 (19,2);
 
 
-UPDATE `registro_movimientos` SET `fecha_movimiento` = '2017-03-23 19:01:14' WHERE `registro_movimientos`.`idregistro_movimientos` = 1;
-UPDATE `registro_movimientos` SET `fecha_movimiento` = '2014-03-19 20:14:50' WHERE `registro_movimientos`.`idregistro_movimientos` = 2;
-UPDATE `registro_movimientos` SET `fecha_movimiento` = '2015-12-22 20:20:39' WHERE `registro_movimientos`.`idregistro_movimientos` = 3;
-UPDATE `registro_movimientos` SET `fecha_movimiento` = '2019-12-18 20:21:06' WHERE `registro_movimientos`.`idregistro_movimientos` = 4;
-UPDATE `registro_movimientos` SET `fecha_movimiento` = '2020-08-13 19:03:13' WHERE `registro_movimientos`.`idregistro_movimientos` = 5;
-UPDATE `registro_movimientos` SET `fecha_movimiento` = '2020-12-17 19:04:27' WHERE `registro_movimientos`.`idregistro_movimientos` = 6;
-UPDATE `registro_movimientos` SET `fecha_movimiento` = '2018-12-20 12:04:44' WHERE `registro_movimientos`.`idregistro_movimientos` = 7;
